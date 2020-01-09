@@ -1,0 +1,15 @@
+#container{
+    display: flex;
+    margin-top: 10%;
+    justify-content: center; /* align items horizontally (in this case) */
+    height: 100%;
+}
+
+
+#upload {   
+}
+
+#chapitre {
+    text-align: center;
+    margin-top:5%;
+}
