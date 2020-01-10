@@ -7,10 +7,10 @@ class manipulationPdf_model extends CI_Model {
     {
         parent::__construct();
     }
-    //lien du pdf a mettre en variable pour la commande shell
+
     public static function addSummaryToPdfBookmark($titreDesChapitres){
-        shell_exec('pdftk /var/www/html/IntegrSupCours/uploads/GKAG01_FR.pdf dump_data output /var/www/html/IntegrSupCours/uploads/bookmark.txt');
-        $file = "/var/www/html/IntegrSupCours/uploads/bookmark.txt";
+        shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/GKAG01_FR.pdf dump_data output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/bookmark.txt');
+        $file = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/bookmark.txt';
         $txt="";
         $i = 1;
 
@@ -24,7 +24,11 @@ class manipulationPdf_model extends CI_Model {
 
     public static function addSummaryToPdf($titreDesChapitres) {
         self::addSummaryToPdfBookmark($titreDesChapitres);
-        shell_exec('pdftk /var/www/html/IntegrSupCours/uploads/GKAG01_FR.pdf update_info /var/www/html/IntegrSupCours/uploads/bookmark.txt output /var/www/html/IntegrSupCours/uploads/bookmarked.pdf');
+        shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/GKAG01_FR.pdf update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/bookmark.txt output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/bookmarked.pdf');
+    }
+
+    public static function addPdgToPdf($pdg){
+        
     }
 
 }
