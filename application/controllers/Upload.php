@@ -9,7 +9,6 @@ class Upload extends CI_Controller {
 
         public function index()
         {
-                $this->load->model('manipulationPdf_model');
                 $this->load->view('upload_form');
                 
         }
@@ -33,15 +32,17 @@ class Upload extends CI_Controller {
                                                         $filtre ='pdf';
                                                         break;
                                                 case 1:
-                                                        $dest="./uploads/csv";
-                                                        $filtre ='txt';
-                                                        break;
-                                                case 2:
                                                         $dest="./uploads/sourceSlide";
                                                         $filtre ='zip';
                                                         break;
-                                        }
+                                                case 2:
+                                                        $dest="./uploads/csv";
+                                                        $filtre ='csv';
+                                                        break;
+                                                default :
+                                                        break;
 
+                                         }
                                         //on copie les variables de l'élément courant dans le tableau $_FILES avec comme nom arbitraire "file_temp". Cela permettra à codeigniter de le traiter comme un champ file simple.
                                         $_FILES['file_temp']['name'] = $_FILES[$fieldName]['name'][$key];
                                         $_FILES['file_temp']['type'] = $_FILES[$fieldName]['type'][$key];
@@ -52,30 +53,49 @@ class Upload extends CI_Controller {
                                         //on met en place la configuration pour l'upload du fichier, comme on l'aurait pour n'importe quel input file sous codeigniter
                                         $config = [];
                                         $config['upload_path'] = $dest;//dossier d'upload
-                                        $config['allowed_types'] = [$filtre];//types de fichiers autorisé
+                                        $config['allowed_types'] = $filtre;//types de fichiers autorisé
                                         //$config['file_name'] = 'nom_unique_' . date('YmdHis') . '_' . rand(1000, 9999);//renommage du fichier
 
                                         //ligne les plus importantes : ne fonctionnera pas avec l'habituel "$this->load->library('upload', $config);"
                                         $this->load->library('upload');
                                         $this->upload->initialize($config);
                                         //on traite notre fichier dans "file_temp" et on vérifie si il y'a des erreurs.
-                                        if (!$this->upload->do_upload('file_temp')) {    
-                                                $msg_error = $this->upload->display_errors();
-                                                //traiter le message d'erreur comme il vous convient
+                                        if (!$this->upload->do_upload('file_temp')) {
+                                                //$error = array('error' => $this->upload->display_errors());
+                                                //$error = $this->upload->display_errors();
+                                                //$this->load->view('upload_form', $error);
+                                                
                                         } 
                                         else {
                                                 //tout c'est bien passé vous pouvez récupérer les informations du fichiers de cette façon
                                                 $fichier = $this->upload->data();
-                                                //echo $fichier['file_name'];
+                                                echo $fichier['file_name'];
                                                 //$fichier['client_name'] -> nom d'origine du fichier
                                                 //traiter la réussite pour ce fichier comme il vous convient.
+
+                                                switch ($fichier['file_type']) 
+                                                {
+                                                        case 'text/plain':
+                                                                $currentCsvName = $fichier['file_name'];
+                                                                break;
+                                                        case 'application/pdf':
+                                                                $currentPdfName = $fichier['file_name'];
+                                                                break;
+                                                        default:
+                                                                break;
+                                                }
+
                                         }
-                                }   
-                                $i++;
-                        }                          //   echo $_FILES['fichiers']['name'][0];
-                }
+                                }
+                        $i++;
+                        }   
+                        
+                } 
+                $this->load->model("manipulationPdf_model");
+                $this->manipulationPdf_model->csvToPdfSummary($currentCsvName, $currentPdfName);                         
         }
 }
+
 
       
 
