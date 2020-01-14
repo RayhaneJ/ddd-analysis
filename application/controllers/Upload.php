@@ -41,8 +41,7 @@ class Upload extends CI_Controller {
                                                         break;
                                                 default :
                                                         break;
-
-                                         }
+                                        }
                                         //on copie les variables de l'élément courant dans le tableau $_FILES avec comme nom arbitraire "file_temp". Cela permettra à codeigniter de le traiter comme un champ file simple.
                                         $_FILES['file_temp']['name'] = $_FILES[$fieldName]['name'][$key];
                                         $_FILES['file_temp']['type'] = $_FILES[$fieldName]['type'][$key];
