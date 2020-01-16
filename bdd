@@ -1,0 +1,110 @@
+drop database integrationweb;
+Create database integrationweb;
+
+use integrationweb;
+
+Create table cours (
+id int auto_increment,
+libelle varchar(256) not null, 
+primary key (id) 
+)
+ENGINE=InnoDB;
+
+Create table pageDeGarde (
+id int auto_increment,
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null,
+libellePdg varchar(256) not null,
+derniereModification timestamp not null default current_timestamp on update current_timestamp, 
+numVersion int default 1, 
+primary key (id)
+)
+ENGINE=InnoDB;
+
+
+Create table supportCoursGen ( 
+id int auto_increment, 
+dateGeneration timestamp not null default current_timestamp,
+emplacement varchar(256) not null, 
+derniereModification timestamp not null default current_timestamp on update current_timestamp,  
+numVersion int default 1,
+libelle varchar(256) not null, 
+idSupportCoursSource int, 
+idCodeBaps varchar(256) not null, 
+primary key (id), 
+foreign key (idSupportCoursSource) references supportcourssource (id),
+foreign key (idCodeBaps) references codeBaps(id)
+)
+ENGINE=InnoDB;
+
+create table pdglier ( 
+idPageDeGarde int unsigned, 
+idSupportCoursGen int,  
+primary key(idPageDeGarde, idSupportCoursGen),
+foreign key (idPageDeGarde) references pagedegarde (id), 
+foreign key (idSupportCoursGen) references SupportCoursGen (id) 
+)
+ENGINE=InnoDB;
+
+
+create table codeBaps ( 
+id int auto_increment, 
+codeBaps varchar(256) not null, 
+idCours int, 
+primary key (id), 
+foreign key (idCours) references cours(id)
+) 
+ENGINE=InnoDB;
+
+create table sourceSlide ( 
+id int auto_increment, 
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null, 
+dateDerniereModification timestamp not null default current_timestamp on update current_timestamp, 
+libelle varchar(256) not null,
+numVersion int default 1,
+idSupportCours int, 
+codeBaps varchar(256) not null, 
+primary key (id),
+foreign key (idSupportCours) references supportcourssource(id), 
+foreign key (codeBaps) references codeBaps (codeBaps)
+)
+ENGINE=InnoDB;
+
+create table supportCoursSource (
+id int auto_increment, 
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null,
+derniereModification timestamp not null default current_timestamp on update current_timestamp,  
+numVersion int default 1, 
+libellePdf varchar(256) not null, 
+cours varchar(256) not null, 
+codeBaps varchar(256) not null, 
+idSlide int, 
+primary key (id), 
+foreign key (codeBaps) references codebaps (codeBaps), 
+foreign key (idSlide) references sourceslide (id)
+) 
+ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
