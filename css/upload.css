@@ -2,16 +2,23 @@ body {
     background-color: #5a5a5a !important;
 }
 
+header {
+    font-size: xx-large;
+}
+
+.navbar {
+    padding: 1.0rem 1rem;
+    padding-left: 2%;
+    padding-right: 4.0%;
+}
+
+
 .col-12 {
     max-width: 55%;
     /* background-color:#e9ecef; */
     padding : 3%;
 }
 
-.bg-light {
-    padding-left:2%;
-    padding-right:2%;
-}
 
 
 .navbar-expand-lg .navbar-collapse {

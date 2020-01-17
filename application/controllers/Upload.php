@@ -93,6 +93,9 @@ class Upload extends CI_Controller {
                 $this->load->model("manipulationPdf_model");
                 $this->manipulationPdf_model->csvToPdfSummary($currentCsvName, $currentPdfName);                         
         }
+        public function GestionPdg(){
+                $this->load->view('gestionPdg');
+        }
 }
 
 
