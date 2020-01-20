@@ -31,13 +31,12 @@
 </header>
 
 <main>
-<p id="demo"></p>
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <form action="http://localhost/IntegrSupCours/upload/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="col-12">
       <div class="custom-file mb-3">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
-      <label class="custom-file-label" for="customFile">Choose file</label>
+      <label class="custom-file-label" for="customFile">Ins</label>
     </div>
     <div class="custom-file mb-3 ">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
@@ -49,10 +48,10 @@
     </div>
     <div class="form-row mb-4">
       <div class="col">
-        <input type="text" class="form-control" placeholder="First name">
+        <input type="text" class="form-control" placeholder="First name" name='libelleCours'>
       </div>
       <div class="col">
-        <input type="text" class="form-control" placeholder="Last name">
+        <input type="text" class="form-control" placeholder="Last name" name='codeBaps'>
       </div>
     </div>
     <select class="custom-select custom-select-lg mb-4">

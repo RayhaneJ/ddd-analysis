@@ -1,0 +1,59 @@
+delimiter |
+
+create procedure supportCoursSourceInsert (emplacement varchar(256),  libellePdf varchar(256), idCours int, idCodeBaps int, idSlide int)  
+begin 
+	insert into supportCoursSource(emplacement, libellePdf, idCours, idCodeBaps, idSlide) values (emplacement, libellePdf, idCours, idCodeBaps, idSlide);
+end |
+delimiter ;
+
+
+
+	 
+delimiter | 
+create procedure coursInsert (libelle varchar(256))
+begin 
+	insert ignore into cours(libelle) values(libelle);
+end |
+delimiter ;
+
+
+
+
+
+delimiter |
+create procedure slideInsert (emplacement varchar(256), libelle varchar(256), idSupportCours varchar(256), idCodeBaps varchar(256))
+begin 
+	insert into sourceSlide (emplacement, libelle, idSupportCours, idCodeBaps) values (emplacement, libelle, idSupportCours, idCodeBaps);
+end | 
+delimiter ;
+
+
+ 
+
+
+delimiter | 
+create procedure codeBapsInsert (libCodeBaps varchar(256), idCours int) 
+begin 
+	insert ignore into codeBaps(libCodeBaps, idCours) values(libCodeBaps, idCours);
+end |
+delimiter ; 
+
+
+
+
+delimiter | 
+create procedure getidCoursByLib (lib varchar(256))
+begin 
+	select id from cours where libelle = lib ;
+end | 
+delimiter ; 
+
+
+
+
+delimiter | 
+create procedure getidCodeBapsByLib (lib varchar(256))
+begin 
+	select id from codeBaps where libCodeBaps = lib;
+end | 
+delimiter ; 

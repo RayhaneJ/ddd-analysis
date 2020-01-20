@@ -4,13 +4,13 @@ class Upload extends CI_Controller {
         {
                 parent::__construct();
                 $this->load->helper(array('form', 'url'));
+                $this->load->database();
                 
         }
 
         public function index()
         {
                 $this->load->view('upload_form');
-                
         }
 
         public function do_upload(){
@@ -53,7 +53,8 @@ class Upload extends CI_Controller {
                                         $config = [];
                                         $config['upload_path'] = $dest;//dossier d'upload
                                         $config['allowed_types'] = $filtre;//types de fichiers autorisé
-                                        //$config['file_name'] = 'nom_unique_' . date('YmdHis') . '_' . rand(1000, 9999);//renommage du fichier
+                                        $fileName = $_FILES[$fieldName]['name'][$key];
+                                        $config['file_name'] =  date('YmdHis') . '_' . rand(1, 1000) . $fileName;//renommage du fichier
 
                                         //ligne les plus importantes : ne fonctionnera pas avec l'habituel "$this->load->library('upload', $config);"
                                         $this->load->library('upload');
@@ -69,6 +70,7 @@ class Upload extends CI_Controller {
                                                 //tout c'est bien passé vous pouvez récupérer les informations du fichiers de cette façon
                                                 $fichier = $this->upload->data();
                                                 echo $fichier['file_name'];
+                                                echo $fichier['full_path'];
                                                 //$fichier['client_name'] -> nom d'origine du fichier
                                                 //traiter la réussite pour ce fichier comme il vous convient.
 
@@ -90,9 +92,15 @@ class Upload extends CI_Controller {
                         }   
                         
                 } 
-                $this->load->model("manipulationPdf_model");
-                $this->manipulationPdf_model->csvToPdfSummary($currentCsvName, $currentPdfName);                         
+                $this->load->library('manipulationpdf');
+                $this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
+                
+                $this->load->library('dataaccess');
+                $libelleCours = $this->input->post('libelleCours');
+                $this->dataaccess::coursInsert($libelleCours);
+                
         }
+
         public function GestionPdg(){
                 $this->load->view('gestionPdg');
         }

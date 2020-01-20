@@ -71,7 +71,7 @@ emplacement varchar(256) not null,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
 numVersion int default 1, 
 libellePdf varchar(256) not null, 
-cours varchar(256) not null, 
+idCours int not null, 
 idCodeBaps int not null, 
 idSlide int, 
 primary key (id) 
@@ -122,6 +122,9 @@ add constraint fk_supportCoursSource_codeBaps foreign key (idCodeBaps) reference
 
 alter table supportCoursSource 
 add constraint fk_supportCoursSource_idSlide foreign key (idSlide) references sourceSlide(id);
+
+alter table supportCoursSource 
+add constraint fk_supportCoursSource_idCours foreign key (idCours) references cours(id);
 
 foreign key (codeBaps) references codeBaps (codeBaps), 
 foreign key (idSlide) references sourceSlide (id)
