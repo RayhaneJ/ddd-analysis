@@ -42,9 +42,9 @@ delimiter ;
 
 
 delimiter | 
-create procedure getidCoursByLib (lib varchar(256))
+create procedure getIdCoursByLib (lib varchar(256), out idCours int)
 begin 
-	select id from cours where libelle = lib ;
+	select id into idCours from cours where libelle = lib ;
 end | 
 delimiter ; 
 
@@ -57,3 +57,13 @@ begin
 	select id from codeBaps where libCodeBaps = lib;
 end | 
 delimiter ; 
+
+
+//non utliser
+
+delimiter | 
+create procedure getAllPdg (out libelle varchar(256))
+begin 
+	select libellePdg into libelle from  pageDeGarde order by dateInjection ASC;
+end |
+delimiter ;

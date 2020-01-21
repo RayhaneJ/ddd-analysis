@@ -5,6 +5,9 @@ class Upload extends CI_Controller {
                 parent::__construct();
                 $this->load->helper(array('form', 'url'));
                 $this->load->database();
+                $this->load->library('dataaccess');
+                $this->load->library('manipulationpdf');
+
                 
         }
 
@@ -59,12 +62,11 @@ class Upload extends CI_Controller {
                                         //ligne les plus importantes : ne fonctionnera pas avec l'habituel "$this->load->library('upload', $config);"
                                         $this->load->library('upload');
                                         $this->upload->initialize($config);
+
                                         //on traite notre fichier dans "file_temp" et on vérifie si il y'a des erreurs.
                                         if (!$this->upload->do_upload('file_temp')) {
-                                                //$error = array('error' => $this->upload->display_errors());
-                                                //$error = $this->upload->display_errors();
-                                                //$this->load->view('upload_form', $error);
-                                                
+                                                $error = array('error' => $this->upload->display_errors());
+                                                $this->load->view('upload_form', $error);
                                         } 
                                         else {
                                                 //tout c'est bien passé vous pouvez récupérer les informations du fichiers de cette façon
@@ -92,18 +94,24 @@ class Upload extends CI_Controller {
                         }   
                         
                 } 
-                $this->load->library('manipulationpdf');
+
                 $this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
                 
-                $this->load->library('dataaccess');
                 $libelleCours = $this->input->post('libelleCours');
                 $this->dataaccess::coursInsert($libelleCours);
-                
+
+                $codeBaps = $this->input->post('codeBaps');
+                $this->dataaccess::codeBapsInsert($codeBaps, $libelleCours);
+
         }
 
         public function GestionPdg(){
-                $this->load->view('gestionPdg');
+                $data['libelle'] = $this->dataaccess::getAllPdg();
+                $this->load->view('gestionPdg', $data);
         }
+
+
+
 }
 
 

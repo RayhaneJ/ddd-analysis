@@ -7,7 +7,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="<?php echo base_url();?>css/gestionPdg.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
-<title>Upload Form</title>
+<title>gestionPageDeGarde</title>
 
 </head>
 
@@ -35,57 +35,51 @@
 </div>
 
 <div class="container">
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
 
 <div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
+  <div class = "logo">
+    <i class="fas fa-file-pdf fa-10x"></i>
+    <div class="libelle">pagedegarde11</div>
+  </div>
+  <i class="fas fa-cog"></i>
+  
 </div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-<div class="pdf">
-<i class="fas fa-file-pdf fa-10x"></i>
-<i class="fas fa-cog"></i>
-</div>
-
-
 
 </div>
 
+<script>
 
+function addPdfLogo(libelle) {
+  var container = document.getElementsByClassName('container')[0];
+
+  var div1 = document.createElement("div");
+  div1.className = 'pdf';
+  var div2 = document.createElement("div");
+  div2.className="logo";
+
+  var i1 = document.createElement("i");
+  i1.className = 'fas fa-file-pdf fa-10x';
+  div2.appendChild(i1);
+
+  div3 = document.createElement('div');
+  div3.className="libelle";
+  div2.appendChild(div3);
+
+  var i2 = document.createElement("i");
+  i2.className='fas fa-cog';
+
+  div1.appendChild(div2);
+  div1.appendChild(i2);
+
+  container.appendChild(div1);
+
+  div3.innerHTML += libelle;
+}
+
+var libellePdfTab = <?php echo json_encode($libelle); ?>;
+
+libellePdfTab.forEach(element => addPdfLogo(element));
+
+</script>
 </body>
 </html>

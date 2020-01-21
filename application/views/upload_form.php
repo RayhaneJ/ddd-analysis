@@ -31,6 +31,8 @@
 </header>
 
 <main>
+
+
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <form action="http://localhost/IntegrSupCours/upload/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="col-12">
