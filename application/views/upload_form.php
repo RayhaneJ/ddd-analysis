@@ -14,60 +14,52 @@
 <body>
 
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
-
+<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-sm">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
-      <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>">Intégration</a></li>
-      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>">Gestion</a></li>
-      <li> <a class="nav-item nav-link" href="#">Visualisation</a></li>
+      <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
+      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>"><div class="textwhite">Gestion</div></a></li>
+      <li> <a class="nav-item nav-link" href="#"><div class="textwhite">Visualisation</div></a></li>
     </ul>
   </div>
 </nav>
 </header>
 
-<main>
 
-
-<div class="container h-100">
-  <div class="row h-100 justify-content-center align-items-center">
-    <form action="http://localhost/IntegrSupCours/upload/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="col-12">
+<div class="container-fluid vertical-align">
+<form action="http://localhost/IntegrSupCours/upload/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+    <div class="text">
+      Veuillez remplir le formulaire : 
+    </div>
       <div class="custom-file mb-3">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
-      <label class="custom-file-label" for="customFile">Ins</label>
+      <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>
     </div>
-    <div class="custom-file mb-3 ">
+    <div class="custom-file mb-3">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
-      <label class="custom-file-label" for="customFile">Choose file</label>
+      <label class="custom-file-label" for="customFile">Insérez le fichier zip</label>
     </div>
     <div class="custom-file mb-4 ">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
-      <label class="custom-file-label" for="customFile">Choose file</label>
+      <label class="custom-file-label" for="customFile">Insérez le fichier CSV</label>
     </div>
-    <div class="form-row mb-4">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="First name" name='libelleCours'>
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Last name" name='codeBaps'>
-      </div>
-    </div>
+    <input type="text" class="form-control mb-3" placeholder="Libelle du cours" name='libelleCours'>
+    <input type="text" class="form-control mb-3" placeholder="Code Baps" name='codeBaps'>
     <select class="custom-select custom-select-lg mb-4">
-      <option selected>Open this select menu</option>
+      <option selected>Pages de garde</option>
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
     </select>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Block level button</button>
-    
-    </form>   
-  </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
+</form>
 </div>
-</main>
+
+    
+
 
 <script type="text/javascript" src="js/upload.js"></script>
 </body>
