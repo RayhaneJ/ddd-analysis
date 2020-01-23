@@ -12,20 +12,20 @@
 </head>
 
 <body>
+  
 
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
-
+<nav class="navbar  navbar-expand-lg navbar-light bg-dark shadow-sm ">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <a class="nav-link"><img src="<?php echo base_url();?>css/RGB-LogoGK.gif" width="145" height="70" alt=""></i></a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
-      <li><a class="nav-item nav-link" href="<?php echo base_url()?>">Intégration</a></li>
-      <li><a class="nav-item nav-link active" href="<?php echo base_url('Upload/GestionPdg')?>">Gestion</a></li>
-      <li><a class="nav-item nav-link" href="">Visualisation</a></li>
-  </ul>
+      <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
+      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>"><div class="textwhite">Gestion</div></a></li>
+      <li> <a class="nav-item nav-link" href="#"><div class="textwhite">Visualisation</div></a></li>
+    </ul>
   </div>
 </nav>
 </header>
@@ -34,23 +34,24 @@
 <i class="fas fa-plus-circle fa-4x"></i>
 </div>
 
-<div class="container">
+<div class="container-fluid vertical-align">
 
 <div class="pdf">
   <div class = "logo">
-    <i class="fas fa-file-pdf fa-10x"></i>
+    <i class="fas fa-file-pdf fa-9x"></i>
     <div class="libelle">pagedegarde11</div>
   </div>
   <i class="fas fa-cog"></i>
-  
 </div>
 
-</div>
+
+
+
 
 <script>
 
 function addPdfLogo(libelle) {
-  var container = document.getElementsByClassName('container')[0];
+  var container = document.getElementsByClassName('container-fluid vertical-align')[0];
 
   var div1 = document.createElement("div");
   div1.className = 'pdf';
@@ -58,7 +59,7 @@ function addPdfLogo(libelle) {
   div2.className="logo";
 
   var i1 = document.createElement("i");
-  i1.className = 'fas fa-file-pdf fa-10x';
+  i1.className = 'fas fa-file-pdf fa-9x';
   div2.appendChild(i1);
 
   div3 = document.createElement('div');

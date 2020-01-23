@@ -13,11 +13,14 @@
 
 <body>
 
+
+
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow-sm">
+<nav class="navbar  navbar-expand-lg navbar-light bg-dark shadow-sm ">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <a class="nav-link"><img src="<?php echo base_url();?>css/RGB-LogoGK.gif" width="145" height="70" alt=""></i></a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
       <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
@@ -30,10 +33,17 @@
 
 
 <div class="container-fluid vertical-align">
-<form action="http://localhost/IntegrSupCours/upload/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form action="http://localhost/IntegrSupCours/upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
     <div class="text">
       Veuillez remplir le formulaire : 
     </div>
+    <?php if(empty($error)) {
+        return;
+    }
+        else {
+          echo $error;
+        }    
+    ?>
       <div class="custom-file mb-3">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
       <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>

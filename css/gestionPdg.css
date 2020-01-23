@@ -1,26 +1,81 @@
+@font-face {
+    font-family: 'gothambold';
+    src: url('ufonts.com_gotham-bold-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-bold-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gotham_lightregular';
+    src: url('ufonts.com_gotham-light-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothamregular';
+    src: url('ufonts.com_gotham-light-1-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-1-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothammedium';
+    src: url('ufonts.com_gotham-medium-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-medium-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
 body {
     background-color: #5a5a5a !important;
 }
 
 
-.navbar {
-    padding: 1.0rem 1rem;
-    padding-left: 2%;
-    padding-right: 4.0%;
-}
 
 header {
     font-size: xx-large;
+}
+
+.navbar {
+    padding: 1.0rem 1rem;
 }
 
 .navbar-expand-lg .navbar-collapse {
     justify-content: space-around;
 }
 
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,1) !important;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    margin-right:173;
+}
+
 .pdf {
     display:flex;
     flex-direction: row;
     margin:5%;
+    font-size:24px;
 }
 
 .pdf:hover{
@@ -28,15 +83,10 @@ header {
     display:flex;
     justify-content: center;
     margin:5%;
+    font-size:24px;
 }
 
 
-.container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top:6%;
-}
 
 .add {
    position: fixed;
@@ -64,4 +114,28 @@ header {
 .logo {
     display:flex;
     flex-direction: column;
+}
+
+.textwhite {
+    color:white;
+    font-family: 'gothambold';
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color:#e6e6e6 ;
+    background-size: auto;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-bottom: 6%;
+    padding-top:2%;
+    margin-bottom: 7%;
 }

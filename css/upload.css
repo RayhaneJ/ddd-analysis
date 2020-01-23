@@ -72,7 +72,7 @@ header {
     text-align: center;
     margin-bottom: 4%;
     color:#343a40;
-    font-size:35px;
+    font-size:40px;
     font-family: 'gotham_lightregular';
 }
 
@@ -89,7 +89,7 @@ header {
     background-size: auto;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    padding-bottom: 3%;
+    padding-bottom: 4%;
     padding-top:2%;
     margin-bottom: 2%;
 }
@@ -102,6 +102,7 @@ header {
     box-shadow: 0 .125rem .25rem rgba(0,0,0,1) !important;
 }
 
-img {
-    left:0;
+.navbar-expand-lg .navbar-collapse {
+    margin-right:173;
 }
+
