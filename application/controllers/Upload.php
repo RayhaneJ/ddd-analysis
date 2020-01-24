@@ -19,10 +19,11 @@ class Upload extends CI_Controller {
                         $this->load->view('upload_form');
                 }
 
-                else {
+                else {                
+
                                 $fieldName = 'fichiers';//nom du champ input file
                                 //ce champs doit exister et avoir un élément "name" sous forme de tableau
-                                if ($_FILES && isset($_FILES[$fieldName]) && is_array($_FILES[$fieldName]['name'])  ) {
+                                if ($_FILES && isset($_FILES[$fieldName]) && is_array($_FILES[$fieldName]['name']) && count($_FILES[$fieldName]['name']) == 3) {
                                         $i=0;
                                         //dans ce cas on boucle sur chaque élément du tableau qui ne peut contenir que 3 élément
                                         foreach ($_FILES[$fieldName]['name'] as $key => $name) {
@@ -94,14 +95,25 @@ class Upload extends CI_Controller {
                                                                 // }
                 
                                                         }
+                                                        
                                                 }
                                         $i++;
-                                        }   
+                                        }
+                                        $this->load->view('upload_form', $error);
+   
                                         
                                 }
-                                $this->load->view('upload_form', $error);
-                        }
+                                else {
+                                        if(count($_FILES['fichiers']) != 3) {
+
+                                                $erreur = array('erreur'=> 'test');
+                                                $this->load->view('upload_form', $erreur);
+                                        }
+
+                                }
+                                
                 }
+        }
                 
                                 //$this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
                                 
@@ -123,11 +135,3 @@ class Upload extends CI_Controller {
 
 
 }
-
-
-      
-
-
-
-                
-

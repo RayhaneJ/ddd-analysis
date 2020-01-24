@@ -13,6 +13,15 @@
 
 <body>
 
+<?php if(!empty($error)) {
+  echo $error;
+}  ?>
+
+<?php if(!empty($erreur)) {
+  echo $erreur;
+}  ?>
+
+<?php echo validation_errors() ?>
 
 
 <header>
@@ -37,13 +46,7 @@
     <div class="text">
       Veuillez remplir le formulaire : 
     </div>
-    <?php if(empty($error)) {
-        return;
-    }
-        else {
-          echo $error;
-        }    
-    ?>
+
       <div class="custom-file mb-3">
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
       <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>
@@ -68,10 +71,26 @@
 </form>
 </div>
 
-    
+   
 
 
 <script type="text/javascript" src="js/upload.js"></script>
+
+<?php 
+
+$erreurCodeBaps = form_error('codeBaps');
+$erreurLibelleCours = form_error('libelleCours');
+
+if(empty($erreurCodeBaps) == FALSE) {
+  echo "<script> erreurCodeBaps(); </script>";
+}
+
+if(empty($erreurLibelleCours) == FALSE) {
+  echo "<script> erreurLibelleCours(); </script>";
+}
+
+?> 
+
 </body>
 
 </html>

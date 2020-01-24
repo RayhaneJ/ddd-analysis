@@ -47,6 +47,10 @@ class Dataaccess {
         return $tableauPdg;
     }
 
+    public static function insertPdgInDb(){
+        
+    }
+
     // public static function codeBapsInsert($codeBaps, $libCours) {
     //     $sql = 'call codeBapsInsert(?, ?)';
     // }

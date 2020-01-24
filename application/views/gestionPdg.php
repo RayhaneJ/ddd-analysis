@@ -36,16 +36,6 @@
 
 <div class="container-fluid vertical-align">
 
-<div class="pdf">
-  <div class = "logo">
-    <i class="fas fa-file-pdf fa-9x"></i>
-    <div class="libelle">pagedegarde11</div>
-  </div>
-  <i class="fas fa-cog"></i>
-</div>
-
-
-
 
 
 <script>
