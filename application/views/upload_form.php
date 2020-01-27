@@ -13,16 +13,6 @@
 
 <body>
 
-<?php if(!empty($error)) {
-  echo $error;
-}  ?>
-
-<?php if(!empty($erreur)) {
-  echo $erreur;
-}  ?>
-
-<?php echo validation_errors() ?>
-
 
 <header>
 <nav class="navbar  navbar-expand-lg navbar-light bg-dark shadow-sm ">
@@ -40,33 +30,57 @@
 </nav>
 </header>
 
-
 <div class="container-fluid vertical-align">
-<form action="http://localhost/IntegrSupCours/upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form action="http://localhost/IntegrSupCours/upload/doUpload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
     <div class="text">
       Veuillez remplir le formulaire : 
     </div>
-
-      <div class="custom-file mb-3">
-      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
+    <div class="custom-file mb-3">
+      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value = "<?php echo set_value('fichiers[0]');?>"> 
       <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>
     </div>
     <div class="custom-file mb-3">
-      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
+      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value ="<?php echo set_value('fichiers[1]');?>"> 
       <label class="custom-file-label" for="customFile">Insérez le fichier zip</label>
     </div>
     <div class="custom-file mb-4 ">
-      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile"> 
+      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value="<?php echo set_value('fichiers[2]');?>"> 
       <label class="custom-file-label" for="customFile">Insérez le fichier CSV</label>
     </div>
-    <input type="text" class="form-control mb-3" placeholder="Libelle du cours" name='libelleCours'>
-    <input type="text" class="form-control mb-3" placeholder="Code Baps" name='codeBaps'>
-    <select class="custom-select custom-select-lg mb-4">
-      <option selected>Pages de garde</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+    <div class = "form-row mb-2">
+    <div class = "form-group col-md-6">
+      <input type="text" class="form-control" placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
+    </div>
+    <div class = "form-group col-md-6">
+      <input type="text" class="form-control" placeholder="Code Baps" name='codeBaps' value ="<?php echo set_value('codeBaps');?>">
+    </div>
+    </div>
+    <div class = "form-row">
+      <div class = "form-group col-md-4">
+        <select class="custom-select custom-select mb-4">
+          <option selected>Pages de garde</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class = "form-group col-md-4">
+        <select class="custom-select custom-select mb-4" >
+          <option name="custom1" selected>Modèle de la page de garde</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class = "form-group col-md-4">
+        <select class="custom-select custom-select mb-4">
+          <option selected>Type de support</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+  </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
 </form>
 </div>
@@ -74,7 +88,8 @@
    
 
 
-<script type="text/javascript" src="js/upload.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/upload.js"></script>
+
 
 <?php 
 
@@ -89,7 +104,23 @@ if(empty($erreurLibelleCours) == FALSE) {
   echo "<script> erreurLibelleCours(); </script>";
 }
 
-?> 
+if(empty($isMissing)==FALSE){
+  foreach($isMissing as $key => $value) {
+    if($value==TRUE) {
+        echo "<script type='text/javascript'>MissingInputInView('$key');</script>";
+    }
+  }
+}
+
+if(empty($errorFile) == FALSE) {
+  foreach($errorFile as $key => $value) {
+    if($value == TRUE) {
+      echo "<script> type='text/javascript'> InputErrorInView('$key');</script>";
+    }
+  }
+}
+
+?>
 
 </body>
 

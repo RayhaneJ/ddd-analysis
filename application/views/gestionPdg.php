@@ -39,7 +39,7 @@
 
 
 <script>
-
+//placer dans le fichiers
 function addPdfLogo(libelle) {
   var container = document.getElementsByClassName('container-fluid vertical-align')[0];
 

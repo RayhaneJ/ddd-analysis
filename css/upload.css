@@ -106,3 +106,15 @@ header {
     margin-right:180;
 }
 
+.t {
+    width: 100%;
+    font-size: 100%;
+    color:#dc3545;
+    padding-left: 0.2%;
+    margin-bottom: 0.4%;
+}
+
+.custom {
+    display:flex;
+    flex-direction: row;
+}
