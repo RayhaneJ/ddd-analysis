@@ -49,8 +49,6 @@ body {
     background-color: #5a5a5a !important;
 }
 
-
-
 header {
     font-size: xx-large;
 }
@@ -78,15 +76,22 @@ header {
     font-size:24px;
 }
 
-.pdf:hover{
+
+/* .pdf:hover{
     color:dodgerblue;
     display:flex;
     justify-content: center;
     margin:5%;
     font-size:24px;
+} */
+
+i.fas.fa-file-pdf.fa-9x:hover {
+    color:dodgerblue;
 }
 
-
+i.fas.fa-cog:hover {
+    color:dodgerblue;
+}
 
 .add {
    position: fixed;

@@ -7,6 +7,8 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link href="<?php echo base_url();?>css/upload.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<input type="hidden" id='base_url' value="<?php echo base_url();?>" >
   <title>Upload Form</title>
 
 </head>
@@ -49,32 +51,35 @@
     </div>
     <div class = "form-row mb-2">
     <div class = "form-group col-md-6">
-      <input type="text" class="form-control" placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
+      <input type="text" class="form-control"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
     </div>
     <div class = "form-group col-md-6">
       <input type="text" class="form-control" placeholder="Code Baps" name='codeBaps' value ="<?php echo set_value('codeBaps');?>">
     </div>
     </div>
     <div class = "form-row">
-      <div class = "form-group col-md-4">
-        <select class="custom-select custom-select mb-4">
+      <div class = "form-group col-md-3">
+        <select id ="pdgSelect" class="custom-select custom-select mb-4">
           <option selected>Pages de garde</option>
+        </select>
+      </div>
+      <div class = "form-group col-md-3">
+        <select id="versionSelect" class="custom-select custom-select mb-4" disabled>
+          <option selected>Version</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div class = "form-group col-md-4">
-        <select class="custom-select custom-select mb-4" >
-          <option name="custom1" selected>Modèle de la page de garde</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+      <div class = "form-group col-md-3">
+        <select class="custom-select custom-select mb-4" disabled>
+          <option selected>Modèle de la page de garde</option>
+          <option value="1">Vert</option>
         </select>
       </div>
-      <div class = "form-group col-md-4">
-        <select class="custom-select custom-select mb-4">
-          <option selected>Type de support</option>
+      <div class = "form-group col-md-3">
+        <select class="custom-select custom-select mb-4" disabled>
+          <option name="custom1" selected>Type du support</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -119,8 +124,40 @@ if(empty($errorFile) == FALSE) {
     }
   }
 }
-
 ?>
+
+<script>
+
+var dataPdfTab = <?php echo json_encode($libelle); ?>;
+
+var numLibelle = 0;
+
+dataPdfTab.forEach(element => {
+  addPdgToList(element, numLibelle); 
+  numLibelle++;
+})
+
+var base_url = $('#base_url').val();
+var selectVersion = document.getElementById('pdgSelect');
+
+selectVersion.addEventListener("change", function() {
+  var selectAttribute = selectVersion.options[selectVersion.selectedIndex].text;
+  var version = document.getElementById('versionSelect');
+  if(selectAttribute != 'Pages de garde') {
+    $.ajax({
+      method:'POST',
+      contentType:'application/json',
+      url: base_url,
+      data: JSON.stringify({"id": "1", "type": "new", "data": "testabcd"}),
+      success:function(response, data, status){
+        alert( "Data Loaded: " + status );
+      }
+
+   });
+  }
+})
+
+</script>
 
 </body>
 

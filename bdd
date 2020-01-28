@@ -12,14 +12,42 @@ ENGINE=InnoDB;
 
 Create table pageDeGarde (
 id int auto_increment,
-dateInjection timestamp not null default current_timestamp,
-emplacement varchar(256) not null,
-libellePdg varchar(256) not null,
-derniereModification timestamp not null default current_timestamp on update current_timestamp, 
-numVersion int default 1, 
-primary key (id)
+libellePdg varchar(256) not null unique,
+primary key (id),
+version int
 )
 ENGINE=InnoDB;
+
+
+Create table version ( 
+id int auto_increment, 
+numVersion int unique, 
+primary key (id)
+)
+ENGINE=InnoDB;	
+
+
+
+Create table style (
+id int auto_increment, 
+libelleCouleur varchar(256) unique,
+primary key(id)
+)
+ENGINE = InnoDB;
+
+
+Create table stockerPageDeGarde (
+id int auto_increment, 
+emplacement varchar(256) not null, 
+style varchar(256),
+libellePdg varchar(256) not null, 
+version int default 1,
+dateInjection timestamp not null default current_timestamp,
+derniereModification timestamp not null default current_timestamp on update current_timestamp, 
+primary key(id)
+) 
+ENGINE = InnoDb;
+
 
 
 Create table supportCoursGen ( 
@@ -132,6 +160,18 @@ foreign key (idSlide) references sourceSlide (id)
 
 
 
+alter table stockerPageDeGarde
+add constraint fk_stockerPageDeGarde_style foreign key (style) references style(libelleCouleur);
+
+alter table stockerPageDeGarde 
+add constraint fk_stockerPageDeGarde__pdg foreign key(libellePdg) references pageDeGarde(libellePdg);
+
+alter table stockerPageDeGarde
+add constraint fk_stockerPageDeGarde_version foreign key(version) references pageDeGarde(version);
+
+
+alter table pageDeGarde
+add constraint fk_pageDeGarde_version foreign key(version) references version(numVersion);
 
 
 

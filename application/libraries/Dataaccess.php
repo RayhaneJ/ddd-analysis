@@ -33,17 +33,18 @@ class Dataaccess {
 
     public static function getAllPdg() {
         $CI =& get_instance();
-        $sql = 'select libellePdg from pageDeGarde';
+        $sql = 'select libellePdg, version, style from stockerPageDeGarde';
         $query = $CI->db->query($sql);
         $result = $query->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
+        $i = 0;
         foreach($result as $libellePdg => $value) {
-            foreach($value as $key => $row) {
-                $tableauPdg[] = $row;
-            }
+                $tableauPdg[$i]['libellePdg'] = $value['libellePdg'];
+                $tableauPdg[$i]['version'] = $value['version'];
+                $tableauPdg[$i]['couleur'] = $value['style'];
+                $i++;
         }
-        
         return $tableauPdg;
     }
 

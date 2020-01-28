@@ -4,6 +4,21 @@ $('.custom-file-input').on('change', function() {
 });
 
 
+
+// var selectVersion = document.getElementById('pdgSelect');
+
+// selectVersion.addEventListener("change", function() {
+//   var selectAttribute = selectVersion.options[selectVersion.selectedIndex].text;
+//   var version = document.getElementById('versionSelect');
+//   if(selectAttribute != 'Pages de garde') {
+//     $.post(base_url + "views/upload_form", { func: "getNameAndTime" }, function( data ) {
+//       console.log('bonjour' ); // John
+//     }, "json");
+//     version.removeAttribute('disabled');
+//   }
+// })
+
+
 function erreurCodeBaps() {
   var input = document.getElementsByName('codeBaps')[0];
   input.classList.add('is-invalid');
@@ -64,7 +79,13 @@ function InputErrorInView(numKey) {
   input.parentElement.insertBefore(div, label.nextSibling);
 }
 
-function addPdgToList($libelleArray) {
-  list = getElementsByClassName('custom1');
-
+function addPdgToList(libelle, numLibelle) {
+  var customSelect = document.getElementsByClassName('custom-select')[0];
+  var option = document.createElement('option');
+  option.value = numLibelle;
+  option.innerHTML += libelle['libellePdg'];
+  customSelect.appendChild(option);
 }
+
+
+
