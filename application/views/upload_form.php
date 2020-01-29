@@ -64,15 +64,12 @@
         </select>
       </div>
       <div class = "form-group col-md-3">
-        <select id="versionSelect" class="custom-select custom-select mb-4" disabled>
+        <select id="versionSelect" class="custom-select custom-select mb-4" onchange="" disabled>
           <option selected>Version</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
         </select>
       </div>
       <div class = "form-group col-md-3">
-        <select class="custom-select custom-select mb-4" disabled>
+        <select id="modeleSelect" class="custom-select custom-select mb-4" disabled>
           <option selected>Modèle de la page de garde</option>
           <option value="1">Vert</option>
         </select>
@@ -89,9 +86,6 @@
     <button type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
 </form>
 </div>
-
-   
-
 
 <script type="text/javascript" src="<?php echo base_url();?>js/upload.js"></script>
 
@@ -124,6 +118,7 @@ if(empty($errorFile) == FALSE) {
     }
   }
 }
+
 ?>
 
 <script>
@@ -137,25 +132,6 @@ dataPdfTab.forEach(element => {
   numLibelle++;
 })
 
-var base_url = $('#base_url').val();
-var selectVersion = document.getElementById('pdgSelect');
-
-selectVersion.addEventListener("change", function() {
-  var selectAttribute = selectVersion.options[selectVersion.selectedIndex].text;
-  var version = document.getElementById('versionSelect');
-  if(selectAttribute != 'Pages de garde') {
-    $.ajax({
-      method:'POST',
-      contentType:'application/json',
-      url: base_url,
-      data: JSON.stringify({"id": "1", "type": "new", "data": "testabcd"}),
-      success:function(response, data, status){
-        alert( "Data Loaded: " + status );
-      }
-
-   });
-  }
-})
 
 </script>
 

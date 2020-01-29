@@ -12,9 +12,10 @@ ENGINE=InnoDB;
 
 Create table pageDeGarde (
 id int auto_increment,
-libellePdg varchar(256) not null unique,
+libellePdg varchar(256) not null,
 primary key (id),
-version int
+version int,
+unique key pageDeGarde_idx (libellePdg, version)
 )
 ENGINE=InnoDB;
 
@@ -114,8 +115,6 @@ REFERENCES supportCoursSource(id);
 ALTER TABLE supportCoursGen
 ADD CONSTRAINT fk_supportCoursGen_libCodeBaps FOREIGN KEY (idCodeBaps) REFERENCES codeBaps (id); 
 
-foreign key (idSupportCoursSource) references supportCoursSource(id),
-foreign key (codeBaps) references codeBaps(codeBaps)
 
 
 
@@ -125,15 +124,11 @@ add constraint fk_pdgLier_idPageDeGarde foreign key (idPageDeGarde) references p
 alter table pdgLier
 add constraint fk_pdgLier_idSupportCoursGen foreign key (idSupportCoursGen) references supportCoursGen(id);
 
-foreign key (idPageDeGarde) references pageDeGarde(id), 
-foreign key (idSupportCoursGen) references supportCoursGen(id) 
 
 
 
 alter table codeBaps 
 add constraint fk_codeBaps_idCours foreign key (idCours) references cours(id);
-
-foreign key (idCours) references cours(id)
 
 
 alter table sourceSlide 
@@ -142,8 +137,6 @@ add constraint fk_sourceSlide_idSupportCours foreign key (idSupportCours) refere
 alter table sourceSlide
 add constraint fk_sourceSlide_idCodeBaps foreign key (idCodeBaps) references codeBaps(id);
 
-foreign key (idSupportCours) references supportCoursSource(id), 
-foreign key (codeBaps) references codeBaps (codeBaps)
 
 alter table supportCoursSource
 add constraint fk_supportCoursSource_codeBaps foreign key (idCodeBaps) references codeBaps(id);
@@ -153,10 +146,6 @@ add constraint fk_supportCoursSource_idSlide foreign key (idSlide) references so
 
 alter table supportCoursSource 
 add constraint fk_supportCoursSource_idCours foreign key (idCours) references cours(id);
-
-foreign key (codeBaps) references codeBaps (codeBaps), 
-foreign key (idSlide) references sourceSlide (id)
-
 
 
 
@@ -172,6 +161,16 @@ add constraint fk_stockerPageDeGarde_version foreign key(version) references pag
 
 alter table pageDeGarde
 add constraint fk_pageDeGarde_version foreign key(version) references version(numVersion);
+
+
+insert into version(numVersion) values(1);
+insert into version(numVersion) values(2);
+insert into version(numVersion) values(3);
+
+insert into libelleCouleur(libelleCouleur) values ('vert');
+insert into libelleCouleur(libelleCouleur) values ('rouge');
+insert into libelleCouleur(libelleCouleur) values ('violet');
+
 
 
 

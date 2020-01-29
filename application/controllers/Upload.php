@@ -6,17 +6,17 @@ class Upload extends CI_Controller {
                 $this->load->helper(array('form', 'url'));
                 $this->load->database();
                 $this->load->library('dataaccess');
-                $this->load->library('manipulationpdf');                
+                $this->load->library('manipulationpdf');    
+                           
         }
 
         public function index()
         {
-                $data['libelle'] = $this->dataaccess::getAllPdg();
+                $data['libelle'] = $this->dataaccess::getAllPdg(); 
                 $this->load->view('upload_form', $data);
         }
         
         public function doUpload() {
-                
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('codeBaps', 'CodeBaps', 'required');
                 $this->form_validation->set_rules('libelleCours', 'LibelleCours', 'required');
@@ -24,11 +24,12 @@ class Upload extends CI_Controller {
                 $fileName = "fichiers";
 
                 if($this->form_validation->run() == FALSE || $this->UploadArrayIsValid($fileName) == FALSE) {
+                        $data['libelle'] = $this->dataaccess::getAllPdg(); 
                         $data['isMissing'] = $this->FormInputFileMissing($fileName);
                         $this->load->view('upload_form', $data);
                 }
 
-                else {                   
+                else {  
                         $errorFile = array();
                         $inputFileName = array();
                         //dans ce cas on boucle sur chaque élément du tableau qui ne peut contenir que 3 élément
@@ -103,6 +104,7 @@ class Upload extends CI_Controller {
 
                         }
                         else {
+                                $data['libelle'] = $this->dataaccess::getAllPdg(); 
                                 $data['errorFile'] = $errorFile;
                                 $this->load->view('upload_form', $data);
                         }                                         
@@ -149,6 +151,17 @@ class Upload extends CI_Controller {
                 }
                 return $isMissing; 
         }
+
+        public function AddItemToVersionList($libellePdg) {
+                echo json_encode($this->dataaccess::GetVersionForPdg($libellePdg));
+        }
+
+        public function AddItemToModeleList($libellePdg = 0, $numVersion = 0){
+                print_r(json_encode($this->dataaccess::GetModeleForPdg($libellePdg, $numVersion)));
+        }
+
+
+
 
 
 

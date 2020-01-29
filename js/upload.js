@@ -1,23 +1,9 @@
+var base_url = $('#base_url').val();
+
 $('.custom-file-input').on('change', function() { 
   let fileName = $(this).val().split('\\').pop(); 
   $(this).next('.custom-file-label').addClass("selected").html(fileName); 
 });
-
-
-
-// var selectVersion = document.getElementById('pdgSelect');
-
-// selectVersion.addEventListener("change", function() {
-//   var selectAttribute = selectVersion.options[selectVersion.selectedIndex].text;
-//   var version = document.getElementById('versionSelect');
-//   if(selectAttribute != 'Pages de garde') {
-//     $.post(base_url + "views/upload_form", { func: "getNameAndTime" }, function( data ) {
-//       console.log('bonjour' ); // John
-//     }, "json");
-//     version.removeAttribute('disabled');
-//   }
-// })
-
 
 function erreurCodeBaps() {
   var input = document.getElementsByName('codeBaps')[0];
@@ -29,7 +15,6 @@ function erreurCodeBaps() {
   div.innerHTML = 'Code Baps manquant !';
 
   input.parentNode.insertBefore(div, input.nextSibling);
-
 }
 
 function erreurLibelleCours() {
@@ -83,9 +68,99 @@ function addPdgToList(libelle, numLibelle) {
   var customSelect = document.getElementsByClassName('custom-select')[0];
   var option = document.createElement('option');
   option.value = numLibelle;
-  option.innerHTML += libelle['libellePdg'];
+  option.innerHTML += libelle;
   customSelect.appendChild(option);
 }
+
+var selectedPdg = document.getElementById('pdgSelect');
+
+selectedPdg.addEventListener("change", function() {
+
+  var selectAttribute = selectedPdg.options[selectedPdg.selectedIndex].text;
+  var version = document.getElementById('versionSelect');
+
+  while(version.firstChild) {
+
+    version.removeChild(version.firstChild);
+  }
+
+  if(selectAttribute != 'Pages de garde') {
+    jQuery.ajax({
+                type: "POST",
+                url: base_url + "upload/AddItemToVersionList/" + selectAttribute,
+                dataType: "JSON",
+                success: function(data) {
+                  addVersionToList(data);
+                }
+    });
+    }
+    else {
+      version.setAttribute('disabled', "");
+      var defaultOption = document.createElement('option');
+      defaultOption.innerHTML = "Version";
+      version.appendChild(defaultOption)
+    }
+});
+
+// var selectedVersion = document.getElementById('versionSelect');
+
+// selectedVersion.addEventListener("change", function() {
+//   var selectAttributePdg = selectedPdg.options[selectedPdg.selectedIndex].text;
+//   var selectAttributeVersion = selectedVersion.options[selectedVersion.selectedIndex].text;
+//   var selectAttributeVersion = selectAttributeVersion.replace(/Version /, "");
+//   var modele = document.getElementById('modeleSelect');
+//   var selectAttributeModele = modele.options[modele.selectedIndex].text;
+
+//   if(selectAttributeVersion != 'Modèle de la page de garde'){
+//   jQuery.ajax({
+//     type:"POST",
+//     url: base_url + "upload/AddItemToModeleList/" + selectAttributePdg + "/" + selectAttributeVersion,
+//     dataType : "JSON",
+//     success: function(data) {
+//       addModeleToList(data);
+//     }
+//   })
+//   }
+//   else {
+//     modele.setAttribute('disabled', "");
+//     var defaultOption = document.createElement('option');
+//     defaultOption.innerHTML = "Version";
+//     modele.appendChild(defaultOption)
+//   }
+  
+// });
+
+function addVersionToList(tableauVersion) {
+  Array.from(tableauVersion).forEach(element => { 
+  select = document.getElementById('versionSelect');
+  option = document.createElement('option');
+  option.innerHTML = 'Version ' + element;
+  select.appendChild(option);
+  });
+  var version = document.getElementById('versionSelect');
+  version.removeAttribute('disabled');
+}
+
+function addModeleToList(tableauVersion) {
+  Array.from(tableauVersion).forEach(element => { 
+  select = document.getElementById('modeleSelect');
+  option = document.createElement('option');
+  option.innerHTML = 'Modèle ' + element;
+  select.appendChild(option);
+  });
+  var modele = document.getElementById('modeleSelect');
+  modele.removeAttribute('disabled');
+}
+
+
+
+window.addEventListener('load', (event)=> {
+  var version = document.getElementById('versionSelect');
+  version.setAttribute('disabled', "");
+})
+
+
+
 
 
 

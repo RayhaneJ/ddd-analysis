@@ -67,3 +67,5 @@ begin
 	select libellePdg into libelle from  pageDeGarde order by dateInjection ASC;
 end |
 delimiter ;
+
+

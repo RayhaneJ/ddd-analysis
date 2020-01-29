@@ -31,7 +31,7 @@ class Dataaccess {
         $CI->db->query($sql2,array($codeBaps, $idCours));
     }
 
-    public static function getAllPdg() {
+    public static function getAllPdgInDb() {
         $CI =& get_instance();
         $sql = 'select libellePdg, version, style from stockerPageDeGarde';
         $query = $CI->db->query($sql);
@@ -48,13 +48,60 @@ class Dataaccess {
         return $tableauPdg;
     }
 
-    public static function insertPdgInDb(){
-        
+    public static function getAllPdg() {
+        $CI =& get_instance();
+        $sql = 'select distinct libellePdg from pageDeGarde;';
+        $query = $CI->db->query($sql);
+        $result = $query->result_array();
+        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
+        $tableauPdg = array();
+        $i = 0;
+        foreach($result as $libellePdg => $value) {
+            foreach($value as $key) {
+                $tableauPdg[$i] = $key;
+                $i++;
+            }
+        }
+        return $tableauPdg;
     }
 
-    // public static function codeBapsInsert($codeBaps, $libCours) {
-    //     $sql = 'call codeBapsInsert(?, ?)';
-    // }
+    public static function GetVersionForPdg($libellePdg) {
+        $CI =& get_instance();
+        $sql ="select version from pageDeGarde where libellePdg = ?" ;
+        $query = $CI->db->query($sql, $libellePdg);
+        $result = $query->result_array();
+        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
+        $tableauPdg = array();
+        $i = 0;
+        foreach($result as $libellePdg => $value) {
+            foreach($value as $key){
+                $tableauPdg[$i] =$key;
+                $i++; 
+            }
+        }       
+        return $tableauPdg;
+    }
+
+    public static function GetModeleForPdg($libellePdg, $numVersion) {
+        $CI =& get_instance();
+        $CI->db->select('style');
+        $CI->db->from('stockerPageDeGarde');
+        $CI->db->where('libellePdg', $libellePdg);
+        $CI->db->where('version', $numVersion);
+        $result = $CI->db->get()->result_array();
+        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
+        $tableauPdg = array();
+        $i = 0;
+        foreach($result as $libellePdg => $value) {
+            foreach($value as $key)
+            $tableauPdg[] = $key;
+            $i++;
+        }
+        return $tableauPdg;
+    }
+
+    
+
 
 
     
