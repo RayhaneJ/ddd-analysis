@@ -1,5 +1,3 @@
-var base_url = $('#base_url').val();
-
 $('.custom-file-input').on('change', function() { 
   let fileName = $(this).val().split('\\').pop(); 
   $(this).next('.custom-file-label').addClass("selected").html(fileName); 
@@ -79,10 +77,7 @@ selectedPdg.addEventListener("change", function() {
   var selectAttribute = selectedPdg.options[selectedPdg.selectedIndex].text;
   var version = document.getElementById('versionSelect');
 
-  while(version.firstChild) {
-
-    version.removeChild(version.firstChild);
-  }
+  $('#versionSelect').find('option').not(':nth-child(1)').remove();
 
   if(selectAttribute != 'Pages de garde') {
     jQuery.ajax({
@@ -96,48 +91,52 @@ selectedPdg.addEventListener("change", function() {
     }
     else {
       version.setAttribute('disabled', "");
-      var defaultOption = document.createElement('option');
-      defaultOption.innerHTML = "Version";
-      version.appendChild(defaultOption)
+      var modele = document.getElementById('modeleSelect');
+      modele.setAttribute('disabled', "");
+      var support = document.getElementById('typeSupportSelect');
+      support.setAttribute('disabled', "");
     }
 });
 
-// var selectedVersion = document.getElementById('versionSelect');
+var selectedVersion = document.getElementById('versionSelect');
 
-// selectedVersion.addEventListener("change", function() {
-//   var selectAttributePdg = selectedPdg.options[selectedPdg.selectedIndex].text;
-//   var selectAttributeVersion = selectedVersion.options[selectedVersion.selectedIndex].text;
-//   var selectAttributeVersion = selectAttributeVersion.replace(/Version /, "");
-//   var modele = document.getElementById('modeleSelect');
-//   var selectAttributeModele = modele.options[modele.selectedIndex].text;
+selectedVersion.addEventListener("change", function() {
+  var selectAttributePdg = selectedPdg.options[selectedPdg.selectedIndex].text;
+  var selectAttributeVersion = selectedVersion.options[selectedVersion.selectedIndex].text;
+  var selectAttributeVersion = selectAttributeVersion.replace(/Version /, "");
+  var modele = document.getElementById('modeleSelect');
+  var selectAttributeModele = modele.options[modele.selectedIndex].text;
 
-//   if(selectAttributeVersion != 'Modèle de la page de garde'){
-//   jQuery.ajax({
-//     type:"POST",
-//     url: base_url + "upload/AddItemToModeleList/" + selectAttributePdg + "/" + selectAttributeVersion,
-//     dataType : "JSON",
-//     success: function(data) {
-//       addModeleToList(data);
-//     }
-//   })
-//   }
-//   else {
-//     modele.setAttribute('disabled', "");
-//     var defaultOption = document.createElement('option');
-//     defaultOption.innerHTML = "Version";
-//     modele.appendChild(defaultOption)
-//   }
+  $('#modeleSelect').find('option').not(':nth-child(1)').remove();
+
+  if(selectAttributeVersion != 'Version'){
+  jQuery.ajax({
+    type:"POST",
+    url: base_url + "upload/AddItemToModeleList/" + selectAttributePdg + "/" + selectAttributeVersion,
+    dataType : "JSON",
+    success: function(data) {
+      addModeleToList(data);
+    }
+  })
+  }
+  else {
+    modele.setAttribute('disabled', "");
+    var support = document.getElementById('typeSupportSelect');
+    support.setAttribute('disabled', "")
+  }
   
-// });
+});
 
 function addVersionToList(tableauVersion) {
+  var version = document.getElementById('versionSelect');
+
   Array.from(tableauVersion).forEach(element => { 
-  select = document.getElementById('versionSelect');
+      select = document.getElementById('versionSelect');
   option = document.createElement('option');
   option.innerHTML = 'Version ' + element;
   select.appendChild(option);
   });
-  var version = document.getElementById('versionSelect');
+  
   version.removeAttribute('disabled');
 }
 
@@ -150,13 +149,22 @@ function addModeleToList(tableauVersion) {
   });
   var modele = document.getElementById('modeleSelect');
   modele.removeAttribute('disabled');
-}
 
+  var support = document.getElementById('typeSupportSelect');
+  support.removeAttribute('disabled');
+}
 
 
 window.addEventListener('load', (event)=> {
   var version = document.getElementById('versionSelect');
   version.setAttribute('disabled', "");
+})
+
+window.addEventListener('load', (event)=> {
+  var modele = document.getElementById('modeleSelect');
+  modele.setAttribute('disabled', "");
+  var support = document.getElementById('typeSupportSelect');
+  support.setAttribute('disabled', "");
 })
 
 

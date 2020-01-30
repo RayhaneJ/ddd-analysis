@@ -69,83 +69,8 @@ header {
     margin-right:172;
 }
 
-.pdf {
-    display:flex;
-    flex-direction: row;
-    margin:5%;
-    font-size:24px;
-}
-
-
-/* .pdf:hover{
-    color:dodgerblue;
-    display:flex;
-    justify-content: center;
-    margin:5%;
-    font-size:24px;
-} */
-
-a{
-    color:#212529
-}
-
-a:hover {
-    color:dodgerblue;
-}
-
-i.fas.fa-cog:hover {
-    color:dodgerblue;
-}
-
-.add {
-   position: fixed;
-   bottom:0;
-   right:0;
-   margin-right:4.5%;
-   margin-bottom: 2%;
-}
-
-.add:hover {
-    position: fixed;
-    color:dodgerblue;
-    bottom:0;
-    right:0;
-    margin-right:4.5%;
-    margin-bottom: 2%;
-}
-
-.libelle {
-    margin-top: 5%;
-    text-align: center;
-    font-size:14px;
-}
-
-.logo {
-    display:flex;
-    flex-direction: column;
-}
-
 .textwhite {
     color:white;
     font-family: 'gothambold';
 }
 
-.vertical-align {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container-fluid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color:#e6e6e6 ;
-    background-size: auto;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding-bottom: 6%;
-    padding-top:2%;
-    margin-bottom: 7%;
-    width: 95%;
-}

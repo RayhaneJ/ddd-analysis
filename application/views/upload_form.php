@@ -8,7 +8,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link href="<?php echo base_url();?>css/upload.css" rel="stylesheet">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<input type="hidden" id='base_url' value="<?php echo base_url();?>" >
+  <script>var base_url = '<?php echo base_url() ?>';</script>
   <title>Upload Form</title>
 
 </head>
@@ -49,7 +49,7 @@
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value="<?php echo set_value('fichiers[2]');?>"> 
       <label class="custom-file-label" for="customFile">Insérez le fichier CSV</label>
     </div>
-    <div class = "form-row mb-2">
+    <div class = "form-row mb-3">
     <div class = "form-group col-md-6">
       <input type="text" class="form-control"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
     </div>
@@ -58,34 +58,33 @@
     </div>
     </div>
     <div class = "form-row">
-      <div class = "form-group col-md-3">
-        <select id ="pdgSelect" class="custom-select custom-select mb-4">
+      <div class = "form-group col-md-3 ">
+        <select id ="pdgSelect" class="custom-select custom-select mb-1">
           <option selected>Pages de garde</option>
         </select>
       </div>
       <div class = "form-group col-md-3">
-        <select id="versionSelect" class="custom-select custom-select mb-4" onchange="" disabled>
+        <select id="versionSelect" class="custom-select custom-select mb-1" onchange="" disabled>
           <option selected>Version</option>
         </select>
       </div>
       <div class = "form-group col-md-3">
-        <select id="modeleSelect" class="custom-select custom-select mb-4" disabled>
+        <select id="modeleSelect" class="custom-select custom-select mb-1" disabled>
           <option selected>Modèle de la page de garde</option>
-          <option value="1">Vert</option>
         </select>
       </div>
       <div class = "form-group col-md-3">
-        <select class="custom-select custom-select mb-4" disabled>
-          <option name="custom1" selected>Type du support</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select id="typeSupportSelect" class="custom-select custom-select mb-4" disabled>
+          <option selected>Type du support</option>
+          <option value="1">Support de cours</option>
+          <option value="2">Cachier d'exercice</option>
         </select>
       </div>
   </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
 </form>
 </div>
+
 
 <script type="text/javascript" src="<?php echo base_url();?>js/upload.js"></script>
 

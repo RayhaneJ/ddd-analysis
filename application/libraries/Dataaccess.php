@@ -33,9 +33,11 @@ class Dataaccess {
 
     public static function getAllPdgInDb() {
         $CI =& get_instance();
-        $sql = 'select libellePdg, version, style from stockerPageDeGarde';
-        $query = $CI->db->query($sql);
-        $result = $query->result_array();
+        $CI->db->select('libellePdg');
+        $CI->db->select('version');
+        $CI->db->select('style');
+        $CI->db->from('stockerPageDeGarde');
+        $result =$CI->db->get()->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
         $i = 0;
@@ -50,16 +52,15 @@ class Dataaccess {
 
     public static function getAllPdg() {
         $CI =& get_instance();
-        $sql = 'select distinct libellePdg from pageDeGarde;';
-        $query = $CI->db->query($sql);
-        $result = $query->result_array();
+        $CI->db->select('libellePdg');
+        $CI->db->distinct();
+        $CI->db->from('pageDeGarde');
+        $result = $CI->db->get()->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
-        $i = 0;
         foreach($result as $libellePdg => $value) {
             foreach($value as $key) {
-                $tableauPdg[$i] = $key;
-                $i++;
+                $tableauPdg[] = $key;
             }
         }
         return $tableauPdg;
@@ -67,16 +68,15 @@ class Dataaccess {
 
     public static function GetVersionForPdg($libellePdg) {
         $CI =& get_instance();
-        $sql ="select version from pageDeGarde where libellePdg = ?" ;
-        $query = $CI->db->query($sql, $libellePdg);
-        $result = $query->result_array();
+        $CI->db->select('version');
+        $CI->db->from('pageDeGarde');
+        $CI->db->where('libellePdg', $libellePdg);
+        $result = $CI->db->get()->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
-        $i = 0;
         foreach($result as $libellePdg => $value) {
             foreach($value as $key){
-                $tableauPdg[$i] =$key;
-                $i++; 
+                $tableauPdg[] =$key;
             }
         }       
         return $tableauPdg;
@@ -91,13 +91,27 @@ class Dataaccess {
         $result = $CI->db->get()->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
-        $i = 0;
         foreach($result as $libellePdg => $value) {
             foreach($value as $key)
             $tableauPdg[] = $key;
-            $i++;
         }
         return $tableauPdg;
+    }
+
+    public static function GetPageDeGardeToView($style, $libellePdg, $version){
+        $CI = & get_instance();
+        $CI->db->select('emplacement');
+        $CI->db->from('stockerPageDeGarde');
+        $CI->db->where('style', $style);
+        $CI->db->where('libellePdg', $libellePdg);
+        $CI->db->where('version', $version);
+        $result = $CI->db->get()->result_array();
+        foreach($result as $libellePdg =>$value) {
+            foreach($value as $key) {
+                $emplacement = $key;
+            }
+        }
+        return $emplacement;
     }
 
     

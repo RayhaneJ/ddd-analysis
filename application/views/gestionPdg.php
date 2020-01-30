@@ -7,6 +7,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="<?php echo base_url();?>css/gestionPdg.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
+<script>var base_url = '<?php echo base_url() ?>';</script>
 <title>gestionPageDeGarde</title>
 
 </head>

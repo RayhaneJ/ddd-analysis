@@ -44,9 +44,7 @@
 }
 
 body {
-    background-color: #343a40 !important;
-    height:100%;
-    width: 100%;
+    background-color: #5a5a5a !important;
 }
 
 header {
@@ -70,10 +68,11 @@ header {
 
 .text {
     text-align: center;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
     color:#343a40;
     font-size:40px;
     font-family: 'gotham_lightregular';
+
 }
 
 .vertical-align {
@@ -92,6 +91,7 @@ header {
     padding-bottom: 4%;
     padding-top:2%;
     margin-bottom: 2%;
+    width:95%;
 }
 
 .texteButton {
@@ -103,7 +103,7 @@ header {
 }
 
 .navbar-expand-lg .navbar-collapse {
-    margin-right:180;
+    margin-right:172;
 }
 
 .t {

@@ -124,8 +124,13 @@ class Upload extends CI_Controller {
         
 
         public function GestionPdg(){
-                $data['libelle'] = $this->dataaccess::getAllPdg();
+                $data['libelle'] = $this->dataaccess::getAllPdgInDb();
                 $this->load->view('gestionPdg', $data);
+        }
+
+        public function LoadPdfPage($style=0, $libellePdg=0, $version=0){
+                $data['emplacementPdf'] = $this->dataaccess::getPageDeGardeToView($style, $libellePdg, $version);
+                $this->load->view('pdfView', $data);
         }
 
         public function UploadArrayIsValid($fileName) {
@@ -157,7 +162,7 @@ class Upload extends CI_Controller {
         }
 
         public function AddItemToModeleList($libellePdg = 0, $numVersion = 0){
-                print_r(json_encode($this->dataaccess::GetModeleForPdg($libellePdg, $numVersion)));
+                echo json_encode($this->dataaccess::GetModeleForPdg($libellePdg, $numVersion));
         }
 
 

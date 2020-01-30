@@ -1,15 +1,18 @@
 function addPdfLogo(libelle) {
-    console.log(libelle);
     var container = document.getElementsByClassName('container-fluid vertical-align')[0];
   
     var div1 = document.createElement("div");
     div1.className = 'pdf';
     var div2 = document.createElement("div");
     div2.className="logo";
-  
+
+
+    var a = document.createElement("a");
+    a.setAttribute("href", base_url + "upload/LoadPdfPage/"+libelle['couleur']+"/"+libelle['libellePdg']+"/"+libelle['version']);
     var i1 = document.createElement("i");
     i1.className = 'fas fa-file-pdf fa-9x';
-    div2.appendChild(i1);
+    a.appendChild(i1);
+    div2.appendChild(a);
   
     div3 = document.createElement('div');
     div3.className="libelle";
