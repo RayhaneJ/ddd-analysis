@@ -33,78 +33,25 @@ class Dataaccess {
 
     public static function getAllPdgInDb() {
         $CI =& get_instance();
-        $CI->db->select('libellePdg');
-        $CI->db->select('version');
-        $CI->db->select('style');
+        $CI->db->select('libelle');
         $CI->db->from('stockerPageDeGarde');
         $result =$CI->db->get()->result_array();
         //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
         $tableauPdg = array();
-        $i = 0;
         foreach($result as $libellePdg => $value) {
-                $tableauPdg[$i]['libellePdg'] = $value['libellePdg'];
-                $tableauPdg[$i]['version'] = $value['version'];
-                $tableauPdg[$i]['couleur'] = $value['style'];
-                $i++;
-        }
-        return $tableauPdg;
-    }
-
-    public static function getAllPdg() {
-        $CI =& get_instance();
-        $CI->db->select('libellePdg');
-        $CI->db->distinct();
-        $CI->db->from('pageDeGarde');
-        $result = $CI->db->get()->result_array();
-        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
-        $tableauPdg = array();
-        foreach($result as $libellePdg => $value) {
-            foreach($value as $key) {
+            foreach($value as $key){
                 $tableauPdg[] = $key;
             }
         }
         return $tableauPdg;
     }
 
-    public static function GetVersionForPdg($libellePdg) {
-        $CI =& get_instance();
-        $CI->db->select('version');
-        $CI->db->from('pageDeGarde');
-        $CI->db->where('libellePdg', $libellePdg);
-        $result = $CI->db->get()->result_array();
-        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
-        $tableauPdg = array();
-        foreach($result as $libellePdg => $value) {
-            foreach($value as $key){
-                $tableauPdg[] =$key;
-            }
-        }       
-        return $tableauPdg;
-    }
 
-    public static function GetModeleForPdg($libellePdg, $numVersion) {
-        $CI =& get_instance();
-        $CI->db->select('style');
-        $CI->db->from('stockerPageDeGarde');
-        $CI->db->where('libellePdg', $libellePdg);
-        $CI->db->where('version', $numVersion);
-        $result = $CI->db->get()->result_array();
-        //on recupere les elements de la requete dans un tableau sans les clés array['libellePdg']
-        $tableauPdg = array();
-        foreach($result as $libellePdg => $value) {
-            foreach($value as $key)
-            $tableauPdg[] = $key;
-        }
-        return $tableauPdg;
-    }
-
-    public static function GetPageDeGardeToView($style, $libellePdg, $version){
+    public static function GetPageDeGardeToView($libellePdg){
         $CI = & get_instance();
         $CI->db->select('emplacement');
         $CI->db->from('stockerPageDeGarde');
-        $CI->db->where('style', $style);
-        $CI->db->where('libellePdg', $libellePdg);
-        $CI->db->where('version', $version);
+        $CI->db->where('libelle', $libellePdg);
         $result = $CI->db->get()->result_array();
         foreach($result as $libellePdg =>$value) {
             foreach($value as $key) {

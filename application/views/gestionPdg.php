@@ -7,7 +7,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="<?php echo base_url();?>css/gestionPdg.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>var base_url = '<?php echo base_url() ?>';</script>
+
 <title>gestionPageDeGarde</title>
 
 </head>
@@ -37,6 +39,31 @@
 
 
 <div class="container-fluid vertical-align">
+ 
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewPageDeGarde" tabindex="-1" role="dialog" aria-labelledby="viewPageDeGarde" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermez">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9" id="modal">
+          <iframe class="embed-responsive-item" src=<?php echo base_url($emplacementPdf)?> ></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript" src="<?php echo base_url();?>js/gestionPdg.js"></script>
 

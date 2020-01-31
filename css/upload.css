@@ -103,7 +103,7 @@ header {
 }
 
 .navbar-expand-lg .navbar-collapse {
-    margin-right:172;
+    margin-right:175;
 }
 
 .t {
@@ -117,4 +117,18 @@ header {
 .custom {
     display:flex;
     flex-direction: row;
+}
+
+.border {
+    border: 2px solid #5a5a5a !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+.margin-bottom {
+
+    padding-bottom: -2rem;
+
 }

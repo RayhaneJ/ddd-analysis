@@ -9,6 +9,7 @@
   <link href="<?php echo base_url();?>css/upload.css" rel="stylesheet">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>var base_url = '<?php echo base_url() ?>';</script>
+  
   <title>Upload Form</title>
 
 </head>
@@ -38,7 +39,7 @@
       Veuillez remplir le formulaire : 
     </div>
     <div class="custom-file mb-3">
-      <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value = "<?php echo set_value('fichiers[0]');?>"> 
+      <input type="file" name="fichiers[]" class="custom-file-input " id="customFileLang" value = "<?php echo set_value('fichiers[0]');?>" lang="fr"> 
       <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>
     </div>
     <div class="custom-file mb-3">
@@ -49,39 +50,32 @@
       <input type="file" name="fichiers[]" class="custom-file-input" id="customFile" value="<?php echo set_value('fichiers[2]');?>"> 
       <label class="custom-file-label" for="customFile">Insérez le fichier CSV</label>
     </div>
-    <div class = "form-row mb-3">
-    <div class = "form-group col-md-6">
-      <input type="text" class="form-control"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
+    <div class = "form-row mb-4  border border-top-0 rounded-bottom">
+    <div class = "form-group col-md-4 ">
+      <input id="libelleCours" type="text" class="form-control form-control-lg"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
     </div>
-    <div class = "form-group col-md-6">
-      <input type="text" class="form-control" placeholder="Code Baps" name='codeBaps' value ="<?php echo set_value('codeBaps');?>">
+    <div class = "form-group col-md-4">
+      <input oninput="ActivateCodeRayhaneInput();" id="codeBaps"type="text" class="form-control form-control-lg" placeholder="Code Baps" name='codeBaps' value ="<?php echo set_value('codeBaps');?>">
+    </div>
+    <div class = "form-group col-md-4">
+      <input id="codeRayhane" type="text" class="form-control form-control-lg" placeholder="Code Rayhane (Optionnel) " name='CodeRayhane' value ="<?php echo set_value('codeBaps');?>" disabled>
     </div>
     </div>
-    <div class = "form-row">
-      <div class = "form-group col-md-3 ">
-        <select id ="pdgSelect" class="custom-select custom-select mb-1">
+    <div class = "form-row mb-4 border border-top-0 rounded-bottom">
+      <div class = "form-group col-md-6 ">
+        <select id ="pdgSelect" class="custom-select custom-select-lg ">
           <option selected>Pages de garde</option>
         </select>
       </div>
-      <div class = "form-group col-md-3">
-        <select id="versionSelect" class="custom-select custom-select mb-1" onchange="" disabled>
-          <option selected>Version</option>
-        </select>
-      </div>
-      <div class = "form-group col-md-3">
-        <select id="modeleSelect" class="custom-select custom-select mb-1" disabled>
-          <option selected>Modèle de la page de garde</option>
-        </select>
-      </div>
-      <div class = "form-group col-md-3">
-        <select id="typeSupportSelect" class="custom-select custom-select mb-4" disabled>
+      <div class = "form-group col-md-6">
+        <select id="typeSupportSelect" class="custom-select custom-select-lg " disabled>
           <option selected>Type du support</option>
           <option value="1">Support de cours</option>
           <option value="2">Cachier d'exercice</option>
         </select>
       </div>
   </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
+    <button id="submit" type="submit" class="btn btn-primary btn-lg btn-block"><div class="texteButton">Commencer l'intégration</div></button>
 </form>
 </div>
 
@@ -124,11 +118,9 @@ if(empty($errorFile) == FALSE) {
 
 var dataPdfTab = <?php echo json_encode($libelle); ?>;
 
-var numLibelle = 0;
 
 dataPdfTab.forEach(element => {
-  addPdgToList(element, numLibelle); 
-  numLibelle++;
+  addPdgToList(element); 
 })
 
 

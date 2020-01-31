@@ -8,7 +8,10 @@ function addPdfLogo(libelle) {
 
 
     var a = document.createElement("a");
-    a.setAttribute("href", base_url + "upload/LoadPdfPage/"+libelle['couleur']+"/"+libelle['libellePdg']+"/"+libelle['version']);
+    a.setAttribute("href", "#viewPageDeGarde");
+    a.setAttribute("data-toggle", "modal");
+    a.setAttribute("onclick", "createPdfView(this);");
+    a.id = libelle;
     var i1 = document.createElement("i");
     i1.className = 'fas fa-file-pdf fa-9x';
     a.appendChild(i1);
@@ -26,5 +29,34 @@ function addPdfLogo(libelle) {
   
     container.appendChild(div1);
   
-    div3.innerHTML += new String(libelle['libellePdg'] +' - V'+ libelle['version'] + ' ' +'['+libelle['couleur'])+']';
+    div3.innerHTML += libelle;
   }
+
+function createPdfView(htmlElement){
+  $.ajax({
+    type: "POST",
+    url: base_url + "upload/LoadPdfPage/"+htmlElement.id,
+    dataType: "JSON",
+    success: function (data) {
+      AddIframeToModal(data, htmlElement.id);
+    },
+    error: function(){
+    console.log('erreur');
+    }
+  });
+}
+
+function AddIframeToModal($emplacement, libelle){
+
+  var modal = document.getElementById('modal');
+
+  var modaltile = document.getElementById('ModalCenterTitle');
+  modaltile.innerHTML = libelle;
+
+  var iframe = document.createElement('iframe');
+  iframe.className = "embed-responsive-item";
+  iframe.setAttribute("src", base_url + $emplacement);
+
+  modal.appendChild(iframe);
+}
+

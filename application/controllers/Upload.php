@@ -12,7 +12,7 @@ class Upload extends CI_Controller {
 
         public function index()
         {
-                $data['libelle'] = $this->dataaccess::getAllPdg(); 
+                $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
                 $this->load->view('upload_form', $data);
         }
         
@@ -24,7 +24,7 @@ class Upload extends CI_Controller {
                 $fileName = "fichiers";
 
                 if($this->form_validation->run() == FALSE || $this->UploadArrayIsValid($fileName) == FALSE) {
-                        $data['libelle'] = $this->dataaccess::getAllPdg(); 
+                        $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
                         $data['isMissing'] = $this->FormInputFileMissing($fileName);
                         $this->load->view('upload_form', $data);
                 }
@@ -104,7 +104,7 @@ class Upload extends CI_Controller {
 
                         }
                         else {
-                                $data['libelle'] = $this->dataaccess::getAllPdg(); 
+                                $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
                                 $data['errorFile'] = $errorFile;
                                 $this->load->view('upload_form', $data);
                         }                                         
@@ -128,9 +128,9 @@ class Upload extends CI_Controller {
                 $this->load->view('gestionPdg', $data);
         }
 
-        public function LoadPdfPage($style=0, $libellePdg=0, $version=0){
-                $data['emplacementPdf'] = $this->dataaccess::getPageDeGardeToView($style, $libellePdg, $version);
-                $this->load->view('pdfView', $data);
+        public function LoadPdfPage($libellePdg){
+                $emplacement = $this->dataaccess::getPageDeGardeToView($libellePdg);
+                echo json_encode($emplacement);
         }
 
         public function UploadArrayIsValid($fileName) {
@@ -157,13 +157,7 @@ class Upload extends CI_Controller {
                 return $isMissing; 
         }
 
-        public function AddItemToVersionList($libellePdg) {
-                echo json_encode($this->dataaccess::GetVersionForPdg($libellePdg));
-        }
 
-        public function AddItemToModeleList($libellePdg = 0, $numVersion = 0){
-                echo json_encode($this->dataaccess::GetModeleForPdg($libellePdg, $numVersion));
-        }
 
 
 

@@ -5,44 +5,33 @@ use integrationweb;
 
 Create table cours (
 id int auto_increment,
-libelle varchar(256) not null, 
+libelle varchar(256) not null unique, 
+codeBaps varchar(256),
 primary key (id) 
 )
 ENGINE=InnoDB;
 
-Create table pageDeGarde (
-id int auto_increment,
-libellePdg varchar(256) not null,
-primary key (id),
-version int,
-unique key pageDeGarde_idx (libellePdg, version)
-)
+create table codeBaps ( 
+id int auto_increment, 
+libelleCodeBaps varchar(256) not null unique, 
+libelleCours varchar(256), 
+codeRayhane varchar(256),
+primary key (id)
+) 
 ENGINE=InnoDB;
 
-
-Create table version ( 
-id int auto_increment, 
-numVersion int unique, 
+create table codeRayhane (
+id int auto_increment,
+codeRayhane varchar(256) not null unique,
+codeBaps varchar(256),
 primary key (id)
 )
-ENGINE=InnoDB;	
-
-
-
-Create table style (
-id int auto_increment, 
-libelleCouleur varchar(256) unique,
-primary key(id)
-)
-ENGINE = InnoDB;
-
+ENGINE = INNODB;
 
 Create table stockerPageDeGarde (
 id int auto_increment, 
 emplacement varchar(256) not null, 
-style varchar(256),
-libellePdg varchar(256) not null, 
-version int default 1,
+libelle varchar(256) not null unique, 
 dateInjection timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp, 
 primary key(id)
@@ -50,45 +39,16 @@ primary key(id)
 ENGINE = InnoDb;
 
 
-
 Create table supportCoursGen ( 
 id int auto_increment, 
 dateGeneration timestamp not null default current_timestamp,
 emplacement varchar(256) not null, 
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
-numVersion int default 1,
-libelle varchar(256) not null, 
+libelle varchar(256) not null unique, 
 idSupportCoursSource int, 
-idCodeBaps int not null, 
-primary key (id)
-)
-ENGINE=InnoDB;
-
-create table pdgLier ( 
-idPageDeGarde int, 
-idSupportCoursGen int,  
-primary key(idPageDeGarde, idSupportCoursGen)
-)
-ENGINE=InnoDB;
-
-
-create table codeBaps ( 
-id int auto_increment, 
-libCodeBaps varchar(256) not null, 
-idCours int, 
-primary key (id)
-) 
-ENGINE=InnoDB;
-
-create table sourceSlide ( 
-id int auto_increment, 
-dateInjection timestamp not null default current_timestamp,
-emplacement varchar(256) not null, 
-dateDerniereModification timestamp not null default current_timestamp on update current_timestamp, 
-libelle varchar(256) not null,
-numVersion int default 1,
-idSupportCours int, 
-idCodeBaps int not null, 
+idSlide int,
+codeBaps varchar(256),
+codeRayhane varchar(256),
 primary key (id)
 )
 ENGINE=InnoDB;
@@ -98,14 +58,53 @@ id int auto_increment,
 dateInjection timestamp not null default current_timestamp,
 emplacement varchar(256) not null,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
-numVersion int default 1, 
-libellePdf varchar(256) not null, 
-idCours int not null, 
-idCodeBaps int not null, 
+libelle varchar(256) not null, 
+codeBaps varchar(256),
+codeRayhane varchar(256), 
 idSlide int, 
+idSupportCoursGen int, 
 primary key (id) 
 ) 
 ENGINE=InnoDB;
+
+create table slide ( 
+id int auto_increment, 
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null, 
+dateDerniereModification timestamp not null default current_timestamp on update current_timestamp, 
+libelle varchar(256) not null,
+idSupportCoursSource int, 
+idSupportCoursGen int, 
+codeBaps varchar(256),
+codeRayhane varchar(256), 
+primary key (id)
+)
+ENGINE=InnoDB;
+
+
+
+
+
+alter table cours 
+add constraint fk_cours_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
+
+
+
+
+alter table codeBaps 
+add constraint fk_codeBaps_cours foreign key(libelleCours) references cours(libelle);
+
+alter table codeBaps 
+add constraint fk_codeBaps_codeRayhane foreign key(codeRayhane) references codeRayhane(codeRayhane);
+
+
+
+
+
+alter table codeRayhane 
+add constraint fk_codeRayhane_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
+
+
 
 
 ALTER TABLE supportCoursGen 
@@ -113,63 +112,50 @@ ADD CONSTRAINT fk_supportCoursGen_supCoursSource FOREIGN KEY (idSupportCoursSour
 REFERENCES supportCoursSource(id);
 
 ALTER TABLE supportCoursGen
-ADD CONSTRAINT fk_supportCoursGen_libCodeBaps FOREIGN KEY (idCodeBaps) REFERENCES codeBaps (id); 
+ADD CONSTRAINT fk_supportCoursGen_codeBaps FOREIGN KEY (codeBaps) REFERENCES codeBaps (libelleCodeBaps); 
+
+ALTER TABLE supportCoursGen
+ADD CONSTRAINT fk_supportCoursGen_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
+
+
+ALTER TABLE supportCoursGen
+ADD CONSTRAINT fk_supportCoursGen_idSlide FOREIGN KEY (idSlide) REFERENCES slide (id); 
 
 
 
 
-alter table pdgLier 
-add constraint fk_pdgLier_idPageDeGarde foreign key (idPageDeGarde) references pageDeGarde(id);
+ALTER TABLE supportCoursSource 
+ADD CONSTRAINT fk_supportCoursSource_supCoursGen FOREIGN KEY (idSupportCoursGen)
+REFERENCES supportCoursGen(id);
 
-alter table pdgLier
-add constraint fk_pdgLier_idSupportCoursGen foreign key (idSupportCoursGen) references supportCoursGen(id);
+ALTER TABLE supportCoursSource
+ADD CONSTRAINT fk_supportCoursSource_codeBaps FOREIGN KEY (codeBaps) REFERENCES codeBaps (libelleCodeBaps); 
 
+ALTER TABLE supportCoursSource
+ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
-
-
-alter table codeBaps 
-add constraint fk_codeBaps_idCours foreign key (idCours) references cours(id);
-
-
-alter table sourceSlide 
-add constraint fk_sourceSlide_idSupportCours foreign key (idSupportCours) references supportCoursSource(id);
-
-alter table sourceSlide
-add constraint fk_sourceSlide_idCodeBaps foreign key (idCodeBaps) references codeBaps(id);
-
-
-alter table supportCoursSource
-add constraint fk_supportCoursSource_codeBaps foreign key (idCodeBaps) references codeBaps(id);
-
-alter table supportCoursSource 
-add constraint fk_supportCoursSource_idSlide foreign key (idSlide) references sourceSlide(id);
-
-alter table supportCoursSource 
-add constraint fk_supportCoursSource_idCours foreign key (idCours) references cours(id);
+ALTER TABLE supportCoursSource
+ADD CONSTRAINT fk_supportCoursSource_idSlide FOREIGN KEY (idSlide) REFERENCES slide (id); 
 
 
 
-alter table stockerPageDeGarde
-add constraint fk_stockerPageDeGarde_style foreign key (style) references style(libelleCouleur);
 
-alter table stockerPageDeGarde 
-add constraint fk_stockerPageDeGarde__pdg foreign key(libellePdg) references pageDeGarde(libellePdg);
+alter table slide 
+add constraint fk_slide_idSupportCoursSource foreign key (idSupportCoursSource) references supportCoursSource(id);
 
-alter table stockerPageDeGarde
-add constraint fk_stockerPageDeGarde_version foreign key(version) references pageDeGarde(version);
+alter table slide 
+add constraint fk_slide_idSupportCoursGen foreign key (idSupportCoursGen) references supportCoursGen(id);
 
 
-alter table pageDeGarde
-add constraint fk_pageDeGarde_version foreign key(version) references version(numVersion);
+alter table slide
+add constraint fk_sourceSlide_codeBaps foreign key (codeBaps) references codeBaps(libelleCodeBaps);
+
+alter table slide
+add constraint fk_sourceSlide_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
 
 
-insert into version(numVersion) values(1);
-insert into version(numVersion) values(2);
-insert into version(numVersion) values(3);
 
-insert into libelleCouleur(libelleCouleur) values ('vert');
-insert into libelleCouleur(libelleCouleur) values ('rouge');
-insert into libelleCouleur(libelleCouleur) values ('violet');
+
 
 
 

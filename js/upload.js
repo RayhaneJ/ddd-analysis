@@ -62,113 +62,42 @@ function InputErrorInView(numKey) {
   input.parentElement.insertBefore(div, label.nextSibling);
 }
 
-function addPdgToList(libelle, numLibelle) {
+function addPdgToList(libelle) {
   var customSelect = document.getElementsByClassName('custom-select')[0];
   var option = document.createElement('option');
-  option.value = numLibelle;
+  option.value = libelle;
   option.innerHTML += libelle;
   customSelect.appendChild(option);
 }
 
-var selectedPdg = document.getElementById('pdgSelect');
-
-selectedPdg.addEventListener("change", function() {
-
-  var selectAttribute = selectedPdg.options[selectedPdg.selectedIndex].text;
-  var version = document.getElementById('versionSelect');
-
-  $('#versionSelect').find('option').not(':nth-child(1)').remove();
-
-  if(selectAttribute != 'Pages de garde') {
-    jQuery.ajax({
-                type: "POST",
-                url: base_url + "upload/AddItemToVersionList/" + selectAttribute,
-                dataType: "JSON",
-                success: function(data) {
-                  addVersionToList(data);
-                }
-    });
-    }
-    else {
-      version.setAttribute('disabled', "");
-      var modele = document.getElementById('modeleSelect');
-      modele.setAttribute('disabled', "");
-      var support = document.getElementById('typeSupportSelect');
-      support.setAttribute('disabled', "");
-    }
+var pageDeGardeList = document.getElementById('pdgSelect');
+pageDeGardeList.addEventListener("change", function(){
+  var typeSupporList = document.getElementById('typeSupportSelect');
+  typeSupporList.removeAttribute("disabled");
 });
 
-var selectedVersion = document.getElementById('versionSelect');
-
-selectedVersion.addEventListener("change", function() {
-  var selectAttributePdg = selectedPdg.options[selectedPdg.selectedIndex].text;
-  var selectAttributeVersion = selectedVersion.options[selectedVersion.selectedIndex].text;
-  var selectAttributeVersion = selectAttributeVersion.replace(/Version /, "");
-  var modele = document.getElementById('modeleSelect');
-  var selectAttributeModele = modele.options[modele.selectedIndex].text;
-
-  $('#modeleSelect').find('option').not(':nth-child(1)').remove();
-
-  if(selectAttributeVersion != 'Version'){
-  jQuery.ajax({
-    type:"POST",
-    url: base_url + "upload/AddItemToModeleList/" + selectAttributePdg + "/" + selectAttributeVersion,
-    dataType : "JSON",
-    success: function(data) {
-      addModeleToList(data);
-    }
-  })
-  }
-  else {
-    modele.setAttribute('disabled', "");
-    var support = document.getElementById('typeSupportSelect');
-    support.setAttribute('disabled', "")
-  }
-  
-});
-
-function addVersionToList(tableauVersion) {
-  var version = document.getElementById('versionSelect');
-
-  Array.from(tableauVersion).forEach(element => { 
-      select = document.getElementById('versionSelect');
-  option = document.createElement('option');
-  option.innerHTML = 'Version ' + element;
-  select.appendChild(option);
-  });
-  
-  version.removeAttribute('disabled');
+function ActivateCodeRayhaneInput(){
+  var codeRayhaneInput = document.getElementById('codeRayhane');
+  codeRayhaneInput.removeAttribute("disabled");
 }
 
-function addModeleToList(tableauVersion) {
-  Array.from(tableauVersion).forEach(element => { 
-  select = document.getElementById('modeleSelect');
-  option = document.createElement('option');
-  option.innerHTML = 'Modèle ' + element;
-  select.appendChild(option);
-  });
-  var modele = document.getElementById('modeleSelect');
-  modele.removeAttribute('disabled');
-
-  var support = document.getElementById('typeSupportSelect');
-  support.removeAttribute('disabled');
-}
-
-
 window.addEventListener('load', (event)=> {
-  var version = document.getElementById('versionSelect');
-  version.setAttribute('disabled', "");
-})
-
-window.addEventListener('load', (event)=> {
-  var modele = document.getElementById('modeleSelect');
-  modele.setAttribute('disabled', "");
   var support = document.getElementById('typeSupportSelect');
   support.setAttribute('disabled', "");
+  var codeBapsInput = document.getElementById('codeBaps');
+  codeBapsInput.value = "";
+  var libelleCoursInput = document.getElementById('libelleCours');
+  libelleCoursInput.value = "";
+  var codeRayhaneInput = document.getElementById('codeRayhane');
+  codeRayhaneInput.setAttribute("disabled", "");
 })
 
-
-
+window.addEventListener("keypress", function(event){
+  if(event.key == "Enter") {
+    var submit = document.getElementById('submit');
+    submit.click();
+  }
+});
 
 
 
