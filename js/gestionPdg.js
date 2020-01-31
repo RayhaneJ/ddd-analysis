@@ -21,11 +21,17 @@ function addPdfLogo(libelle) {
     div3.className="libelle";
     div2.appendChild(div3);
   
+    var a = document.createElement("a");
+    a.setAttribute("href", "#SettingsPageDeGarde");
+    a.setAttribute("data-toggle", "modal");
+    a.setAttribute("onclick", "createPdfView(this);");
+
     var i2 = document.createElement("i");
     i2.className='fas fa-cog';
+    a.appendChild(i2);
     
     div1.appendChild(div2);
-    div1.appendChild(i2);
+    div1.appendChild(a);
   
     container.appendChild(div1);
   

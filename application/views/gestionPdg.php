@@ -43,7 +43,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- ModalPdf -->
 <div class="modal fade" id="viewPageDeGarde" tabindex="-1" role="dialog" aria-labelledby="viewPageDeGarde" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -64,6 +64,28 @@
     </div>
   </div>
 </div>
+
+<!-- ModalSettings -->
+<div class="modal fade" id="SettingsPageDeGarde" tabindex="-1" role="dialog" aria-labelledby="settingPageDeGarde" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermez">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <script type="text/javascript" src="<?php echo base_url();?>js/gestionPdg.js"></script>
 
