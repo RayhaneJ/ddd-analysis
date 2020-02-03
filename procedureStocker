@@ -1,20 +1,73 @@
-delimiter |
+delimiter | 
+create procedure formInsert(libelleCours varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), libelleCoursSource varchar(256), emplacementCoursSource varchar(256), libelleSlide varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256))
+BEGIN 
+	insert ignore into codeBaps(libelleCodeBaps) values(libCodeBaps);
 
-create procedure supportCoursSourceInsert (emplacement varchar(256),  libellePdf varchar(256), idCours int, idCodeBaps int, idSlide int)  
-begin 
-	insert into supportCoursSource(emplacement, libellePdf, idCours, idCodeBaps, idSlide) values (emplacement, libellePdf, idCours, idCodeBaps, idSlide);
+	insert ignore into cours(libelle, codeBaps) values(libelleCours, libCodeBaps);
+
+	insert ignore into codeRayhane(codeRayhane, codebaps) values(libCodeRayhane, libCodeBaps);
+
+	insert ignore into codeBaps(libelleCours, codeRayhane) values(libelleCours, libCodeRayhane)  		where id = LAST_INSERT_ID();
+
+	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane) values 		(emplacementCoursSource, libelleCoursSource, libCodeBaps, libCodeRayhane);
+
+	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, 		codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, 		libCodeBaps, libCodeRayhane);
+
+	insert ignore into slide(emplacement, libelle, supportCoursSource, supportCoursGen, codeBaps, 		codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleCoursGen, 		libCodeBaps, libCodeRayhane); 
+
+	insert ignore into supportCoursSource(slide, supportCoursGen) values(libelleSlide, 			libelleSupportCoursGen) where id = LAST_INSERT_ID();
+
+	insert ignore into supportCoursGen(slide) values (libelleSlide) where id = LAST_INSERT_ID();
 end |
 delimiter ;
 
 
 
-	 
+	
+
+libelleCours, codeRayhane) values(libelleCodeBaps, libelleCours, codeRayhane);
+	insert ignore into cours(libelle, codeBaps) values(libelleCours, libelleCodeBaps);
+	insert ignore into codeRayhane(codeRayhane, codeBaps) values(codeRayhane, libelleCodeBaps);
+
+	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane, slide, supportCoursGen) values(emplacementLibelleCoursSource, libelleCoursSource, libelleCodeBaps, codeRayhane, libelleSlide, libelleSupportCoursGen);
+	
+	
+	
+end |
+delimiter ; 
+
+
+
+
+delimiter |
+
+create procedure supportCoursSourceInsert (emplacement varchar(256),  libelle varchar(256), codeBaps int, codeRayhane int, idSlide int, idSupportCoursGen);  
+begin 
+	insert into supportCoursSource(emplacement, libellePdf, codeBaps, codeRayhane, idSlide, idSupportCoursGen) values (emplacement, libelle, codeBaps, codeRayhane, idSlide, idSupportCoursGen);
+end |
+delimiter ;
+
+
+
+
+
+
+
 delimiter | 
 create procedure coursInsert (libelle varchar(256))
 begin 
 	insert ignore into cours(libelle) values(libelle);
 end |
 delimiter ;
+
+
+
+
+
+
+
+	 
+
 
 
 
@@ -31,12 +84,7 @@ delimiter ;
  
 
 
-delimiter | 
-create procedure codeBapsInsert (libCodeBaps varchar(256), idCours int) 
-begin 
-	insert ignore into codeBaps(libCodeBaps, idCours) values(libCodeBaps, idCours);
-end |
-delimiter ; 
+
 
 
 

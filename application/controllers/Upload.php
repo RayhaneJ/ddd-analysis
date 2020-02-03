@@ -86,22 +86,28 @@ class Upload extends CI_Controller {
                                         //$fichier['client_name'] -> nom d'origine du fichier
                                         //traiter la réussite pour ce fichier comme il vous convient.
                 
-                                        // switch ($fichier['file_type']) 
-                                        // {
-                                        //         case 'text/plain':
-                                        //                 $currentCsvName = $fichier['file_name'];
-                                        //                 break;
-                                        //         case 'application/pdf':
-                                        //                 $currentPdfName = $fichier['file_name'];
-                                        //                 break;
-                                        //         default:
-                                        //                 break;
-                                        // }
+                                        switch ($fichier['file_type']) 
+                                        {
+                                                case 'text/plain':
+                                                        $currentCsvName = $fichier['file_name'];
+                                                        break;
+                                                case 'application/pdf':
+                                                        $currentPdfName = $fichier['file_name'];
+                                                        break;
+                                                default:
+                                                        break;
+                                        }
                                 }
                         }
 
                         if($errorFile[0] == FALSE && $errorFile[1]==FALSE && $errorFile[2]==FALSE) {
-
+                                $this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
+                                
+                                $libelleCours = $this->input->post('libelleCours');
+                                $this->dataaccess::coursInsert($libelleCours);
+                
+                                $codeBaps = $this->input->post('codeBaps');
+                                $this->dataaccess::codeBapsInsert($codeBaps, $libelleCours);
                         }
                         else {
                                 $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
@@ -111,13 +117,7 @@ class Upload extends CI_Controller {
                 }                    
         }
                 
-                                //$this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
                                 
-                                // $libelleCours = $this->input->post('libelleCours');
-                                // $this->dataaccess::coursInsert($libelleCours);
-                
-                                // $codeBaps = $this->input->post('codeBaps');
-                                // $this->dataaccess::codeBapsInsert($codeBaps, $libelleCours);
 
 
 
@@ -131,6 +131,10 @@ class Upload extends CI_Controller {
         public function LoadPdfPage($libellePdg){
                 $emplacement = $this->dataaccess::getPageDeGardeToView($libellePdg);
                 echo json_encode($emplacement);
+        }
+
+        public function SupprimerPdg($libelle) {
+                $this->dataaccess::pdgDelete($libelle);
         }
 
         public function UploadArrayIsValid($fileName) {

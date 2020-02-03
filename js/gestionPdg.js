@@ -24,7 +24,9 @@ function addPdfLogo(libelle) {
     var a = document.createElement("a");
     a.setAttribute("href", "#SettingsPageDeGarde");
     a.setAttribute("data-toggle", "modal");
-    a.setAttribute("onclick", "createPdfView(this);");
+    a.setAttribute("onclick", "AddTitleSettings(this);");
+    a.className = "settings";
+    a.id = libelle;
 
     var i2 = document.createElement("i");
     i2.className='fas fa-cog';
@@ -36,7 +38,12 @@ function addPdfLogo(libelle) {
     container.appendChild(div1);
   
     div3.innerHTML += libelle;
-  }
+}
+
+function AddTitleSettings(htmlElement){
+  var modalTile = document.getElementById('ModalCenterTitleSettings');
+  modalTile.innerHTML = htmlElement.id;
+}
 
 function createPdfView(htmlElement){
   $.ajax({
@@ -56,7 +63,7 @@ function AddIframeToModal($emplacement, libelle){
 
   var modal = document.getElementById('modal');
 
-  var modaltile = document.getElementById('ModalCenterTitle');
+  var modaltile = document.getElementById('ModalCenterTitlePdf');
   modaltile.innerHTML = libelle;
 
   var iframe = document.createElement('iframe');
@@ -66,3 +73,24 @@ function AddIframeToModal($emplacement, libelle){
   modal.appendChild(iframe);
 }
 
+function DeletePage() {
+  var modalTile = document.getElementById('ModalCenterTitleSettings');
+  title = modalTile.innerHTML;
+    $.ajax({
+    type: "POST",
+    url: base_url + "upload/supprimerPdg/"+title,
+    success: function (response) {
+      $('#SettingsPageDeGarde').modal('hide')
+
+    },
+    error: function(){
+      alert("Erreur");
+    }
+  });
+}
+
+jQuery(function RefreshPage($){
+  $('#SettingsPageDeGarde').on('hidden.bs.modal', function (e) {
+    location.reload();
+  });
+});

@@ -89,19 +89,23 @@ a{
     color:#212529
 }
 
-a:hover {
-    color:dodgerblue;
+a:hover{
+    color:#212529
 }
 
-.fa, .fas {
 
+.fa, .fas:hover {
+    color:#212529;
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
-    max-height: 10%; /*Trick*/
 }
 
-i.fas.fa-cog:hover {
-    color:dodgerblue;
+.fas.fa-file-pdf.fa-9x:hover {
+	color: dodgerblue;
+}
+
+i:hover {
+    color:dodgerblue !important;
 }
 
 .add {
@@ -157,6 +161,28 @@ i.fas.fa-cog:hover {
     padding-top:4.5%;
     margin-bottom: 7%;
     width: 95%;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    box-shadow: 20px 20px rgba(0,0,0,.11);
+    transition: all .4s ease;
+    min-height:600px;
 }
 
+.container-fluid:hover {
+    min-height:600px;
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
+}
 
+.modal-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+h5 {
+    font-family: 'gothammedium';
+    font-size:25px;
+}
+
+.fa-9x {
+    font-size: 10em !important;
+}

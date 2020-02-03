@@ -98,6 +98,3 @@ window.addEventListener("keypress", function(event){
     submit.click();
   }
 });
-
-
-

@@ -19,6 +19,12 @@ class Dataaccess {
         $CI->db->query($sql,$libelle);
     }
 
+    public static function pdgDelete($libelle) {
+        $CI = & get_instance();
+        $CI->db->where('libelle', $libelle);
+        $CI->db->delete('stockerPageDeGarde');
+    }
+
     public static function codeBapsInsert($codeBaps, $libelleCours) {
         $CI =& get_instance();
         $sql1 = 'call getIdCoursByLib(?, @output)';
