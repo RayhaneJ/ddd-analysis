@@ -1,5 +1,5 @@
 delimiter | 
-create procedure formInsert(libelleCours varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), libelleCoursSource varchar(256), emplacementCoursSource varchar(256), libelleSlide varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256))
+create procedure formInsertCode(libelleCours varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256))
 BEGIN 
 	insert ignore into codeBaps(libelleCodeBaps) values(libCodeBaps);
 
@@ -7,23 +7,35 @@ BEGIN
 
 	insert ignore into codeRayhane(codeRayhane, codebaps) values(libCodeRayhane, libCodeBaps);
 
-	insert ignore into codeBaps(libelleCours, codeRayhane) values(libelleCours, libCodeRayhane)  		where id = LAST_INSERT_ID();
+	update ignore codeBaps set libelleCours = libelleCours, codeRayhane = libCodeRayhane where id = (select max(id)); 
+end |
+delimiter ;
+	
 
-	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane) values 		(emplacementCoursSource, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, 		codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, 		libCodeBaps, libCodeRayhane);
 
-	insert ignore into slide(emplacement, libelle, supportCoursSource, supportCoursGen, codeBaps, 		codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleCoursGen, 		libCodeBaps, libCodeRayhane); 
+delimiter | 
+create procedure formInsertFiles(libelleCoursSource varchar(256), emplacementCoursSource varchar(256), libelleSlide varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256))
+BEGIN 
+	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane) values (emplacementCoursSource, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into supportCoursSource(slide, supportCoursGen) values(libelleSlide, 			libelleSupportCoursGen) where id = LAST_INSERT_ID();
+	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into supportCoursGen(slide) values (libelleSlide) where id = LAST_INSERT_ID();
+	insert ignore into slide(emplacement, libelle, supportCoursSource, supportCoursGen, codeBaps, codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane); 
+	
+	update supportCoursSource set slide = libelleSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
+
+	update supportCoursGen set slide = libelleSlide where id = (select max(id));
 end |
 delimiter ;
 
 
 
 	
+
+
+
+
 
 libelleCours, codeRayhane) values(libelleCodeBaps, libelleCours, codeRayhane);
 	insert ignore into cours(libelle, codeBaps) values(libelleCours, libelleCodeBaps);

@@ -13,10 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             self::$initialized = true;
         }
-
+        //2
         public static function addSummaryToPdfBookmark($dataSummary, $pdfName){
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' dump_data output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/bookmark.txt');
-            $file = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/bookmark.txt';
+            $bookmarkFileName = date('YmdHis') . '_' . rand(1, 1000).'bookmark.txt';
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' dump_data output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName);
+            $file = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName;
             $txt="";
     
             foreach($dataSummary as $item => $value){
@@ -24,17 +25,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
     
             file_put_contents($file, $txt);
+            return $bookmarkFileName;
         }
     
         //meilleure nom de fonctions possible
-        public static function addSummaryToPdf($dataSummary, $pdfName) {
-            self::addSummaryToPdfBookmark($dataSummary, $pdfName);
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/bookmark.txt output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/bookmarked.pdf');
+        //1
+        public static function ConvertPdf($dataSummary, $pdfName, $pdgName) {
+            $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
+            $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName);
+            self::AddPdgToPdg($pdgName, $pdfName, $fileNameGen);
+            return $fileNameGen;
         }
-    
-        public static function csvToPdfSummary($csvName, $pdfName){
+        //4
+        public static function IntegrationPdf($csvName, $pdfName, $pdgName){
             $dataSummary = self::csvStringToArray(file_get_contents('./uploads/csv/'.$csvName));
-            self::addSummaryToPdf($dataSummary, $pdfName);
+            $fileNameGen = self::ConvertPdf($dataSummary, $pdfName, $pdgName);
+            return $fileNameGen;
+        }
+        //3
+        public static function AddPdgToPdg($pdgEmplacement, $pdfName, $fileNameGen){
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].''.$pdgEmplacement.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName.' cat output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
         }
     
     

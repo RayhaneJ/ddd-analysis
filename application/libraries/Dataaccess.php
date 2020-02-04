@@ -13,11 +13,11 @@ class Dataaccess {
         self::$initialized = true;
     }
 
-    public static function coursInsert($libelle) {
-        $CI =& get_instance();
-        $sql = 'call coursInsert(?)';
-        $CI->db->query($sql,$libelle);
-    }
+    // public static function coursInsert($libelle) {
+    //     $CI =& get_instance();
+    //     $sql = 'call coursInsert(?)';
+    //     $CI->db->query($sql,$libelle);
+    // }
 
     public static function pdgDelete($libelle) {
         $CI = & get_instance();
@@ -25,16 +25,30 @@ class Dataaccess {
         $CI->db->delete('stockerPageDeGarde');
     }
 
-    public static function codeBapsInsert($codeBaps, $libelleCours) {
+    // public static function codeBapsInsert($codeBaps, $libelleCours) {
+    //     $CI =& get_instance();
+    //     $sql1 = 'call getIdCoursByLib(?, @output)';
+    //     $CI->db->query($sql1, $libelleCours);
+    //     //recupere output de la procedure
+    //     $query = $CI->db->query(('select @output as output'));
+    //     $result = $query->result_array();
+    //     $idCours = $result[0]['output'];
+    //     $sql2 = 'call codeBapsInsert(?, ?)';
+    //     $CI->db->query($sql2,array($codeBaps, $idCours));
+    // }
+
+    public static function formInsert($libelleCours, $libCodeBaps, $libCodeRayhane) {
         $CI =& get_instance();
-        $sql1 = 'call getIdCoursByLib(?, @output)';
-        $CI->db->query($sql1, $libelleCours);
-        //recupere output de la procedure
-        $query = $CI->db->query(('select @output as output'));
-        $result = $query->result_array();
-        $idCours = $result[0]['output'];
-        $sql2 = 'call codeBapsInsert(?, ?)';
-        $CI->db->query($sql2,array($codeBaps, $idCours));
+        $sql = 'call formInsertCode(?, ?, ?)';
+        $param = array($libelleCours, $libCodeBaps, $libCodeRayhane);
+        $CI->db->query($sql, $param);
+    }
+
+    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane) {
+        $CI =& get_instance();
+        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?)';
+        $param = array($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane);
+        $CI->db->query($sql, $param);
     }
 
     public static function getAllPdgInDb() {
@@ -53,7 +67,7 @@ class Dataaccess {
     }
 
 
-    public static function GetPageDeGardeToView($libellePdg){
+    public static function GetPageDeGarde($libellePdg){
         $CI = & get_instance();
         $CI->db->select('emplacement');
         $CI->db->from('stockerPageDeGarde');

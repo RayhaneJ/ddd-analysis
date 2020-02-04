@@ -6,7 +6,8 @@ class Upload extends CI_Controller {
                 $this->load->helper(array('form', 'url'));
                 $this->load->database();
                 $this->load->library('dataaccess');
-                $this->load->library('manipulationpdf');    
+                $this->load->library('manipulationpdf');  
+                $this->load->helper('download');  
                            
         }
 
@@ -94,6 +95,9 @@ class Upload extends CI_Controller {
                                                 case 'application/pdf':
                                                         $currentPdfName = $fichier['file_name'];
                                                         break;
+                                                case 'application/zip':
+                                                        $currentZipName = $fichier['file_name'];
+                                                        break;
                                                 default:
                                                         break;
                                         }
@@ -101,13 +105,40 @@ class Upload extends CI_Controller {
                         }
 
                         if($errorFile[0] == FALSE && $errorFile[1]==FALSE && $errorFile[2]==FALSE) {
-                                $this->manipulationpdf::csvToPdfSummary($currentCsvName, $currentPdfName);
                                 
                                 $libelleCours = $this->input->post('libelleCours');
-                                $this->dataaccess::coursInsert($libelleCours);
-                
                                 $codeBaps = $this->input->post('codeBaps');
-                                $this->dataaccess::codeBapsInsert($codeBaps, $libelleCours);
+                                $codeRayhane = $this->input->post('codeRayhane');
+                                $pageDeGarde = $this->input->post('pageDeGarde');
+                                $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
+
+                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
+
+                                $emplacemenPdfSource = '/IntegrSupCours/uploads/'.$currentPdfName;
+                                $emplacementZipSource = '/IntegrSupCours/uploads/'.$currentZipName;
+                                $emplacementPdfGen = '/IntegrSupCours/uploads/'.$fileNameGen;
+
+                                $libellePdfSource = $currentPdfName; 
+                                $libelleZipSource = $currentZipName;
+                                $libellePdfGen = $fileNameGen;
+
+
+                                if(empty($codeRayhane)) {
+                                        $this->dataaccess::formInsert($libelleCours, $codeBaps, '');
+                                }
+                                else {
+                                        $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
+                                }
+
+                                $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
+
+                                
+                                $emplacementPdf = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
+                                print_r($emplacementPdf);
+                                force_download($emplacementPdfGen, NULL);
+
+                                //$this->load->view('downloadView');
+                                
                         }
                         else {
                                 $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
@@ -116,12 +147,7 @@ class Upload extends CI_Controller {
                         }                                         
                 }                    
         }
-                
-                                
-
-
-
-        
+                  
 
         public function GestionPdg(){
                 $data['libelle'] = $this->dataaccess::getAllPdgInDb();
@@ -129,7 +155,7 @@ class Upload extends CI_Controller {
         }
 
         public function LoadPdfPage($libellePdg){
-                $emplacement = $this->dataaccess::getPageDeGardeToView($libellePdg);
+                $emplacement = $this->dataaccess::GetPageDeGarde($libellePdg);
                 echo json_encode($emplacement);
         }
 
