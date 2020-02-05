@@ -1,8 +1,0 @@
-BookmarkBegin
-BookmarkTitle: chapitre1
-BookmarkLevel: 1
-BookmarkPageNumber: 5
-BookmarkBegin
-BookmarkTitle: chapitre2
-BookmarkLevel: 1
-BookmarkPageNumber: 15

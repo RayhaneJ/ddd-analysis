@@ -114,9 +114,9 @@ class Upload extends CI_Controller {
 
                                 $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
 
-                                $emplacemenPdfSource = '/IntegrSupCours/uploads/'.$currentPdfName;
-                                $emplacementZipSource = '/IntegrSupCours/uploads/'.$currentZipName;
-                                $emplacementPdfGen = '/IntegrSupCours/uploads/'.$fileNameGen;
+                                $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
+                                $emplacementZipSource = '/IntegrSupCours/uploads/sourceSlide/'.$currentZipName;
+                                $emplacementPdfGen = '/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen;
 
                                 $libellePdfSource = $currentPdfName; 
                                 $libelleZipSource = $currentZipName;
@@ -133,8 +133,8 @@ class Upload extends CI_Controller {
                                 $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
 
                                 
-                                $emplacementPdf = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
-                                print_r($emplacementPdf);
+                                $emplacementPdfGen = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
+                                print_r($emplacementPdfGen);
                                 force_download($emplacementPdfGen, NULL);
 
                                 //$this->load->view('downloadView');
