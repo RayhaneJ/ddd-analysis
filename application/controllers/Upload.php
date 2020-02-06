@@ -110,9 +110,15 @@ class Upload extends CI_Controller {
                                 $codeBaps = $this->input->post('codeBaps');
                                 $codeRayhane = $this->input->post('codeRayhane');
                                 $pageDeGarde = $this->input->post('pageDeGarde');
-                                $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
 
-                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
+                                if($pageDeGarde == "Pages de garde") {
+                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName);
+                                }
+                                else {
+                                        $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
+                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
+                                }
+
 
                                 $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
                                 $emplacementZipSource = '/IntegrSupCours/uploads/sourceSlide/'.$currentZipName;
@@ -132,13 +138,10 @@ class Upload extends CI_Controller {
 
                                 $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
 
+                                //$emplacementPdfGen = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
                                 
-                                $emplacementPdfGen = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
-                                print_r($emplacementPdfGen);
-                                force_download($emplacementPdfGen, NULL);
-
-                                //$this->load->view('downloadView');
-                                
+                                $this->load->view('downloadView', $data);
+                                //force_download($emplacementPdfGen, "NULL");
                         }
                         else {
                                 $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
@@ -153,6 +156,7 @@ class Upload extends CI_Controller {
                 $data['libelle'] = $this->dataaccess::getAllPdgInDb();
                 $this->load->view('gestionPdg', $data);
         }
+
 
         public function LoadPdfPage($libellePdg){
                 $emplacement = $this->dataaccess::GetPageDeGarde($libellePdg);
@@ -170,6 +174,10 @@ class Upload extends CI_Controller {
                 else {
                         return FALSE;
                 }
+        }
+
+        public function LoadSuccessView() {
+                $this->load->view('downloadView');
         }
 
         public function FormInputFileMissing($fileName) {

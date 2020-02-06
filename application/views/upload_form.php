@@ -8,6 +8,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <link href="<?php echo base_url();?>css/upload.css" rel="stylesheet">
+
   
   <script>var base_url = '<?php echo base_url() ?>';</script>
   
@@ -35,12 +36,12 @@
 </header>
 
 <div class="container-fluid vertical-align">
-<form action="http://localhost/IntegrSupCours/upload/doUpload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form action="<?php echo base_url() ?>upload/doUpload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
     <div class="text">
       Veuillez remplir le formulaire : 
     </div>
     <div class="custom-file mb-3">
-      <input type="file" name="fichiers[]" class="custom-file-input " id="customFileLang" value = "<?php echo set_value('fichiers[0]');?>" lang="fr"> 
+      <input type="file" name="fichiers[]" class="custom-file-input " id="customFileLang" value = "<?php echo set_value('fichiers[0]');?>"> 
       <label class="custom-file-label " for="customFile">Insérez le fichier PDF</label>
     </div>
     <div class="custom-file mb-3">
@@ -82,13 +83,11 @@
 
 
 
-
 <script type="text/javascript" src="<?php echo base_url();?>js/upload.js">
 </script>
 
 
 <?php 
-
 $erreurCodeBaps = form_error('codeBaps');
 $erreurLibelleCours = form_error('libelleCours');
 

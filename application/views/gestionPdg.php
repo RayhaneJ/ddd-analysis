@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <link href="<?php echo base_url();?>css/gestionPdg.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
 <script>var base_url = '<?php echo base_url() ?>';</script>
@@ -34,9 +34,12 @@
 </nav>
 </header>
 
+
+<a href="#AddNewPdg" data-toggle="modal">
 <div class="add">
 <i class="fas fa-plus-circle fa-4x"></i>
 </div>
+</a>
 
 
 <div class="container-fluid vertical-align">
@@ -79,6 +82,38 @@
       <div class="modal-body">
         <button onclick="DeletePage();" type="button" class="btn btn-danger">Supprimer</button>
         <button type="button" class="btn btn-primary">Remplacer</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ModalAddNewPdg -->
+<div class="modal fade" id="AddNewPdg" tabindex="-1" role="dialog" aria-labelledby="AddNewPdg" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalCenterTitleSettings">Ajouter une nouvelle page de garde</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermez">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form id = "AddPdgForm" action="<?php echo base_url() ?>AddPdg/AddNewPageDeGarde" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+
+        <div class = "form-row">
+          <div class = "form-group col-md-6 ">
+            <input id="libellePdg" type="text" class="form-control" placeholder="Libelle page de garde" name='libellePdg' value = "<?php echo set_value('libellePdg');?>">
+          </div>
+          <div class = "form-group col-md-6 ">
+            <input id ="file" type="file" name="file" class="custom-file-input" id="customFileLang" lang="fr"> 
+            <label class="custom-file-label " for="customFile">Fichier PDF</label>          
+          </div>
+        </div>
+        <input type="submit" value="upload"/>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>

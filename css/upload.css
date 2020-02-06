@@ -138,9 +138,7 @@ header {
 }
 
 .margin-bottom {
-
     padding-bottom: -2rem;
-
 }
 
 .custom-control-label::before, .custom-file-label, .custom-select {

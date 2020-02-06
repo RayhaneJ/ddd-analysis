@@ -31,6 +31,16 @@ delimiter ;
 
 
 
+
+delimiter |
+create procedure insertPdg(libelle varchar(256), emplacement varchar(256))
+Begin
+	insert ignore into stockerPageDeGarde(emplacement, libelle) values(emplacement , libelle);
+end |
+delimiter ;
+
+
+
 	
 
 

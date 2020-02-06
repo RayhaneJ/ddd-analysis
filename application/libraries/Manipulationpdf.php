@@ -30,18 +30,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
         //meilleure nom de fonctions possible
         //1
-        public static function ConvertPdf($dataSummary, $pdfName, $pdgName) {
-            $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
-            $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName);
-            self::AddPdgToPdg($pdgName, $pdfName, $fileNameGen);
-            return $fileNameGen;
+        public static function ConvertPdf($dataSummary, $pdfName, $pdgName=null) {
+            if($pdgName == null) {
+                $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
+                $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
+                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
+                return $fileNameGen;
+            }
+            else {
+                $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
+                $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
+                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName);
+                self::AddPdgToPdg($pdgName, $pdfName, $fileNameGen);
+                return $fileNameGen;
+            }
         }
+
         //4
-        public static function IntegrationPdf($csvName, $pdfName, $pdgName){
-            $dataSummary = self::csvStringToArray(file_get_contents('./uploads/csv/'.$csvName));
-            $fileNameGen = self::ConvertPdf($dataSummary, $pdfName, $pdgName);
-            return $fileNameGen;
+        public static function IntegrationPdf($csvName, $pdfName, $pdgName=null){
+            if($pdgName == null) {
+                $dataSummary = self::csvStringToArray(file_get_contents('./uploads/csv/'.$csvName));
+                $fileNameGen = self::ConvertPdf($dataSummary, $pdfName, null);
+                return $fileNameGen;
+            }
+            else {
+                $dataSummary = self::csvStringToArray(file_get_contents('./uploads/csv/'.$csvName));
+                $fileNameGen = self::ConvertPdf($dataSummary, $pdfName, $pdgName);
+                return $fileNameGen;
+            }
         }
         //3
         public static function AddPdgToPdg($pdgEmplacement, $pdfName, $fileNameGen){

@@ -32,5 +32,9 @@
 
 succes
 
+<a href= "<?php echo base_url('uploads/integrationPdf/'). $pdfGen ?>" download>
+Download
+</a>
+
 </body>
 </html>

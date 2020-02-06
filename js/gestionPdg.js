@@ -94,3 +94,28 @@ jQuery(function RefreshPage($){
     location.reload();
   });
 });
+
+$(document).ready(function(){  
+  $('#AddPdgForm').on('submit', function(e){  
+       e.preventDefault();  
+       if($('#file').val() == '')  
+       {  
+            alert("Please Select the File");  
+       }  
+       else  
+       {  
+            $.ajax({  
+                 url:base_url + "AddPdg/AddNewPageDeGarde",    
+                 method:"POST",  
+                 data:new FormData(this),  
+                 contentType: false,  
+                 cache: false,  
+                 processData:false,  
+                 success:function(data)  
+                 {  
+                      alert('success');
+                 }  
+            });  
+       }  
+  });  
+});  

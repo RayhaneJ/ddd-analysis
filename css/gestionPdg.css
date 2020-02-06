@@ -180,9 +180,17 @@ i:hover {
 
 h5 {
     font-family: 'gothammedium';
-    font-size:25px;
+    font-size:23px;
 }
 
 .fa-9x {
     font-size: 10em !important;
+}
+
+.btn-primary{
+    font-size:18px !important;
+}
+
+.modal-body {
+    padding-bottom: 0.3;
 }
