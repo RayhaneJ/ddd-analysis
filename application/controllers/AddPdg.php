@@ -25,7 +25,7 @@ class AddPdg extends CI_Controller {
 
                         $data = array('upload_data' => $this->upload->data());
  
-                        $libelle= $this->input->post('title');
+                        $libelle= $this->input->post('libellePdg');
                         $file= $data['upload_data']['file_name']; 
                         $emplacementPdg = "uploads/pageDeGarde/".$file;
 

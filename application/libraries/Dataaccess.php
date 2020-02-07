@@ -54,7 +54,7 @@ class Dataaccess {
     public static function InsertPdgInDb($emplacement, $libelle) {
         $CI = & get_instance();
         $sql = 'call insertPdg(?, ?)';
-        $param = array($emplacement, $libelle);
+        $param = array($libelle, $emplacement);
         $CI->db->query($sql, $param);
     }
 

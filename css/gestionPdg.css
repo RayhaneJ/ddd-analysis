@@ -178,6 +178,17 @@ i:hover {
     justify-content: space-around;
 }
 
+.modal-bodyAddPdg {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom : 0rem !important;
+}
+
 h5 {
     font-family: 'gothammedium';
     font-size:23px;
@@ -192,5 +203,10 @@ h5 {
 }
 
 .modal-body {
-    padding-bottom: 0.3;
+    padding-bottom: 1rem !important;
+}
+
+
+.form-row {
+    justify-content: space-evenly;
 }

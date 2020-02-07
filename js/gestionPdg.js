@@ -1,3 +1,10 @@
+(function($) {
+  $('.custom-file-input').on('change', function() { 
+    let fileName = $(this).val().split('\\').pop(); 
+    $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+  });
+})(jQuery);
+
 function addPdfLogo(libelle) {
     var container = document.getElementsByClassName('container-fluid vertical-align')[0];
   
@@ -89,7 +96,12 @@ function DeletePage() {
   });
 }
 
-jQuery(function RefreshPage($){
+// function RefreshPage($) {
+//   $('#SettingsPageDeGarde').on('hidden.bs.modal', function (e) {
+//     location.reload();
+// })(jQuery);
+
+jQuery(function RefreshPageSettings($){
   $('#SettingsPageDeGarde').on('hidden.bs.modal', function (e) {
     location.reload();
   });
@@ -98,24 +110,55 @@ jQuery(function RefreshPage($){
 $(document).ready(function(){  
   $('#AddPdgForm').on('submit', function(e){  
        e.preventDefault();  
-       if($('#file').val() == '')  
+       if($('#file').val() == '' && $("#libellePdg").val() == '')  
        {  
-            alert("Please Select the File");  
+            alert("Erreur dans le formulaire");  
        }  
        else  
        {  
-            $.ajax({  
-                 url:base_url + "AddPdg/AddNewPageDeGarde",    
-                 method:"POST",  
-                 data:new FormData(this),  
-                 contentType: false,  
-                 cache: false,  
-                 processData:false,  
-                 success:function(data)  
-                 {  
-                      alert('success');
-                 }  
-            });  
-       }  
+         if($("#libellePdg").val() == '') {
+           alert("Veuillez inscrire un libelle");
+         }
+         else {
+          if($('#file').val() == '') {
+            alert("Veuillez choisir un fichier");
+          }
+          else {
+          $.ajax({  
+                url:base_url + "AddPdg/AddNewPageDeGarde",    
+                method:"POST",  
+                data:new FormData(this),  
+                contentType: false,  
+                cache: false,  
+                processData:false,  
+                success:function(data)  
+                {  
+                $('#AddNewPdg').modal('hide');
+                jQuery(function RefreshPageAdd($){
+                  $('#AddNewPdg').on('hidden.bs.modal', function (e) {
+                    location.reload();
+                  });
+                });
+                }  
+          });  
+          }  
+        }
+      }
   });  
 });  
+
+jQuery(document).ready(function($) {
+  var alterClass = function() {
+    var ww = document.body.clientWidth;
+    if (ww < 450) {
+      $('#libellePdg').addClass('mb-2');
+    } else if (ww >= 401) {
+      $('#libellePdg').removeClass('mb-2');
+    };
+  };
+  $(window).resize(function(){
+    alterClass();
+  });
+  alterClass();
+});
+

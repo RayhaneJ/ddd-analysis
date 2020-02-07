@@ -100,23 +100,22 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-bodyAddPdg">
       <form id = "AddPdgForm" action="<?php echo base_url() ?>AddPdg/AddNewPageDeGarde" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-
-        <div class = "form-row">
-          <div class = "form-group col-md-6 ">
-            <input id="libellePdg" type="text" class="form-control" placeholder="Libelle page de garde" name='libellePdg' value = "<?php echo set_value('libellePdg');?>">
+      <div class = "form-row">
+        <input id="libellePdg" type="text" class="form-control mb-2 col-md-5" placeholder="Libelle page de garde" name='libellePdg' value = "<?php echo set_value('libellePdg');?>">
+        <div class="custom-file col-md-5">
+          <input id ="file" type="file" name="file" class="custom-file-input" id="customFileLang" lang="fr"> 
+          <label class="custom-file-label " for="customFile">Fichier PDF</label> 
           </div>
-          <div class = "form-group col-md-6 ">
-            <input id ="file" type="file" name="file" class="custom-file-input" id="customFileLang" lang="fr"> 
-            <label class="custom-file-label " for="customFile">Fichier PDF</label>          
-          </div>
-        </div>
-        <input type="submit" value="upload"/>
-      </form>
+      </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>
+        <div class="col-md-12 text-center"> 
+          <button type="submit" class="btn btn-primary col-md-6">Ajouter</button>
+        </div>
+      </form>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button> -->
       </div>
     </div>
   </div>

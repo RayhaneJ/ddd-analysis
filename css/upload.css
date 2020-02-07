@@ -68,7 +68,7 @@ header {
 
 .text {
     text-align: center;
-    margin-bottom: 5%;
+    margin-bottom: 6%;
     color:#343a40;
     font-size:45px;
     font-family: 'gotham_lightregular';
@@ -147,4 +147,20 @@ header {
 
 .form-control-lg {
     font-size: 20px;
+}
+
+.space1 {
+    padding-top:0.2%;
+}
+
+.space2 {
+    margin-top:0%;
+}
+
+.mb-5, .my-5 {
+    margin-bottom: 2.5rem !important;
+}
+
+.form-group-1 {
+    margin-bottom: 0.4rem;
 }

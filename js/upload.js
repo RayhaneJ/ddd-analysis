@@ -1,4 +1,4 @@
-$('.custom-file-input').on('change', function() { 
+jQuery.$('.custom-file-input').on('change', function() { 
   let fileName = $(this).val().split('\\').pop(); 
   $(this).next('.custom-file-label').addClass("selected").html(fileName); 
 });
@@ -9,7 +9,8 @@ function erreurCodeBaps() {
   input.classList.remove('mb-3');
 
   var div = document.createElement('div');
-  div.className = 'invalid-feedback'
+  div.className = 'invalid-feedback';
+  div.classList.add("space2");
   div.innerHTML = 'Code Baps manquant !';
 
   input.parentNode.insertBefore(div, input.nextSibling);
@@ -22,6 +23,7 @@ function erreurLibelleCours() {
 
   var div = document.createElement('div');
   div.className = 'invalid-feedback';
+  div.classList.add("space2");
   div.innerHTML = 'Libelle du cours manquant !';
 
   input.parentNode.insertBefore(div, input.nextSibling);
@@ -38,6 +40,7 @@ function MissingInputInView(numKey) {
   
   div = document.createElement('div');
   div.className = 'invalid-feedback';
+  div.classList.add("space1");
   div.innerHTML = 'Fichiers manquant !';
 
   label = document.getElementsByClassName('custom-file-label')[numKey];
@@ -55,6 +58,7 @@ function InputErrorInView(numKey) {
   
   div = document.createElement('div');
   div.className = 'invalid-feedback';
+  div.classList.add("space1");
   div.innerHTML = 'Format du fichiers non autorisé !';
 
   label = document.getElementsByClassName('custom-file-label')[numKey];
