@@ -1,13 +1,13 @@
 (function() {
-    var canvas = document.getElementById('canvas'),
-            context = canvas.getContext('2d');
+    var canvas1 = document.getElementById('canvas1'),
+            context1 = canvas1.getContext('2d');
 
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas1.width = window.innerWidth;
+            canvas1.height = window.innerHeight;
 
             
             /**
@@ -19,7 +19,7 @@
     resizeCanvas();
 
     function drawStuff() {
-        var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive1.JPG';
+        var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive2.JPG';
  
 //Create a new Image object.
     var imgObj = new Image();
@@ -27,12 +27,93 @@
 //Set the src of this Image object.
     imgObj.src = imgPath;
 
+
     imgObj.onload = function(){
     //Draw the image onto the canvas.
-    context.drawImage(imgObj, 0, 0);
+    if(screen.width < 991) {
+      context1.drawImage(imgObj, 0, 0, window.innerWidth, window.innerHeight);
+    }
+    else if(screen.width >= 991) {
+      context1.drawImage(imgObj,0, 0, window.innerWidth, window.innerHeight);
+    }
+    
 }
             // do your drawing stuff here
     }
+})();
+
+(function() {
+  var canvas2 = document.getElementById('canvas2'),
+          context = canvas2.getContext('2d');
+
+  // resize the canvas to fill browser window dynamically
+  window.addEventListener('resize', resizeCanvas, false);
+
+  function resizeCanvas() {
+          canvas2.width = window.innerWidth;
+          canvas2.height = window.innerHeight;
+
+          
+          /**
+           * Your drawings need to be inside this function otherwise they will be reset when 
+           * you resize the browser window and the canvas goes will be cleared.
+           */
+          drawStuff(); 
+  }
+  resizeCanvas();
+
+  function drawStuff() {
+      var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive3.JPG';
+
+//Create a new Image object.
+  var imgObj = new Image();
+
+//Set the src of this Image object.
+  imgObj.src = imgPath;
+
+  imgObj.onload = function(){
+  //Draw the image onto the canvas.
+  context.drawImage(imgObj, 0, 0, window.innerWidth*0.9, window.innerHeight);
+}
+          // do your drawing stuff here
+  }
+})();
+
+(function() {
+  var canvas3 = document.getElementById('canvas3'),
+          context = canvas3.getContext('2d');
+
+  // resize the canvas to fill browser window dynamically
+  window.addEventListener('resize', resizeCanvas, false);
+
+  function resizeCanvas() {
+          canvas3.width = window.innerWidth;
+          canvas3.height = window.innerHeight;
+
+          
+          /**
+           * Your drawings need to be inside this function otherwise they will be reset when 
+           * you resize the browser window and the canvas goes will be cleared.
+           */
+          drawStuff(); 
+  }
+  resizeCanvas();
+
+  function drawStuff() {
+      var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive3.JPG';
+
+//Create a new Image object.
+  var imgObj = new Image();
+
+//Set the src of this Image object.
+  imgObj.src = imgPath;
+
+  imgObj.onload = function(){
+  //Draw the image onto the canvas.
+  context.drawImage(imgObj, 0, 0);
+}
+          // do your drawing stuff here
+  }
 })();
 
 /* © 2009 ROBO Design
@@ -42,23 +123,23 @@
 // Keep everything in anonymous function, called on window load.
 if(window.addEventListener) {
     window.addEventListener('load', function () {
-      var canvas, context, tool;
+      var canvas1, context, tool;
     
       function init () {
         // Find the canvas element.
-        canvas = document.getElementById('canvas');
-        if (!canvas) {
+        canvas1 = document.getElementById('canvas1');
+        if (!canvas1) {
           alert('Error: I cannot find the canvas element!');
           return;
         }
     
-        if (!canvas.getContext) {
+        if (!canvas1.getContext) {
           alert('Error: no canvas.getContext!');
           return;
         }
     
         // Get the 2D canvas context.
-        context = canvas.getContext('2d');
+        context = canvas1.getContext('2d');
         if (!context) {
           alert('Error: failed to getContext!');
           return;
@@ -68,9 +149,9 @@ if(window.addEventListener) {
         tool = new tool_pencil();
     
         // Attach the mousedown, mousemove and mouseup event listeners.
-        canvas.addEventListener('mousedown', ev_canvas, false);
-        canvas.addEventListener('mousemove', ev_canvas, false);
-        canvas.addEventListener('mouseup',   ev_canvas, false);
+        canvas1.addEventListener('mousedown', ev_canvas, false);
+        canvas1.addEventListener('mousemove', ev_canvas, false);
+        canvas1.addEventListener('mouseup',   ev_canvas, false);
       }
     
       // This painting tool works like a drawing pencil which tracks the mouse 

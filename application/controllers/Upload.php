@@ -6,7 +6,8 @@ class Upload extends CI_Controller {
                 $this->load->helper(array('form', 'url'));
                 $this->load->database();
                 $this->load->library('dataaccess');
-                $this->load->library('manipulationpdf');  
+                $this->load->library('manipulationpdf'); 
+                $this->load->library('manipulationslides'); 
                 $this->load->helper('download');  
                            
         }
@@ -47,7 +48,7 @@ class Upload extends CI_Controller {
                                                 $filtre ='pdf';
                                                 break;
                                         case 1:
-                                                $dest="./uploads/sourceSlide";
+                                                $dest="./uploads/sourcesSlides";
                                                 $filtre ='zip';
                                                 break;
                                         case 2:
@@ -121,7 +122,7 @@ class Upload extends CI_Controller {
 
 
                                 $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
-                                $emplacementZipSource = '/IntegrSupCours/uploads/sourceSlide/'.$currentZipName;
+                                $emplacementZipSource = '/IntegrSupCours/uploads/sourcesSlides/'.$currentZipName;
                                 $emplacementPdfGen = '/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen;
 
                                 $libellePdfSource = $currentPdfName; 
@@ -137,8 +138,11 @@ class Upload extends CI_Controller {
                                 }
 
                                 $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
+                                
+                                $libelleZipSourceWithoutExtension = $this->manipulationslides::ExtractZipSlide($libelleZipSource);
+                                $this->manipulationslides::InsertSlidesInDb($libelleZipSourceWithoutExtension, $libelleZipSource);
 
-                                //$emplacementPdfGen = str_replace('/IntegrSupCours/', '', $emplacementPdfGen );
+                                $data['pdfGen'] = $libellePdfGen;
                                 
                                 $this->load->view('downloadView', $data);
                                 //force_download($emplacementPdfGen, "NULL");

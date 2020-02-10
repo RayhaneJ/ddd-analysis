@@ -67,21 +67,42 @@ primary key (id)
 ) 
 ENGINE=InnoDB;
 
-create table slide ( 
+create table slideZip ( 
 id int auto_increment, 
 dateInjection timestamp not null default current_timestamp,
-emplacement varchar(256) not null, 
+emplacementFichier varchar(256) not null, 
 dateDerniereModification timestamp not null default current_timestamp on update current_timestamp, 
 libelle varchar(256) not null unique,
-supportCoursSource int, 
-supportCoursGen int, 
+supportCoursSource varchar(256), 
+supportCoursGen varchar(256), 
 codeBaps varchar(256),
 codeRayhane varchar(256), 
 primary key (id)
 )
 ENGINE=InnoDB;
 
+create table lierSlideToJpg(
+idSlideZip int, 
+idSlideJpg int,
+primary key (idSlideZip, idSlideJpg)
+)
+ENGINE = InnoDB;
 
+create table slideJpg (
+id int auto_increment, 
+dateInjection timestamp not null default current_timestamp, 
+dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
+emplacement varchar(256) not null,
+primary key (id)
+)
+ENGINE = InnoDB; 
+
+
+alter table lierSlideToJpg
+add constraint fk_lierSlideToJpg_idSlideZip foreign key (idSlideZip) references slideZip(id);
+
+alter table lierSlideToJpg
+add constraint fk_lierSlideToJpg_idSlideJpg foreign key (idSlideJpg) references slideJpg(id);
 
 
 
@@ -119,7 +140,7 @@ ADD CONSTRAINT fk_supportCoursGen_codeRayhane FOREIGN KEY (codeRayhane) REFERENC
 
 
 ALTER TABLE supportCoursGen
-ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (libelle); 
+ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slideZip (libelle); 
 
 
 
@@ -135,23 +156,23 @@ ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
 ALTER TABLE supportCoursSource
-ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (libelle); 
+ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slideZip (libelle); 
 
 
 
 
-alter table slide 
-add constraint fk_slide_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(libelle);
+alter table slideZip 
+add constraint fk_slideZip_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(libelle);
 
-alter table slide 
-add constraint fk_slide_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(libelle);
+alter table slideZip 
+add constraint fk_slideZip_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(libelle);
 
 
-alter table slide
-add constraint fk_sourceSlide_codeBaps foreign key (codeBaps) references codeBaps(libelleCodeBaps);
+alter table slideZip
+add constraint fk_slideZip_codeBaps foreign key (codeBaps) references codeBaps(libelleCodeBaps);
 
-alter table slide
-add constraint fk_sourceSlide_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
+alter table slideZip
+add constraint fk_slideZip_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
 
 
 

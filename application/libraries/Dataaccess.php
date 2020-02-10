@@ -88,6 +88,31 @@ class Dataaccess {
         return $emplacement;
     }
 
+    public static function InsertJpg($data){
+        $CI = & get_instance();
+        $CI->db->insert('slideJpg', $data);
+
+        $insert_id = $CI->db->insert_id();
+        return $insert_id;
+    }
+
+    public static function InsertJpgToSlide($data) {
+        $CI = & get_instance();
+        $CI->db->insert('lierSlideToJpg', $data);
+    }
+
+    public static function getIdByFileNameZip($fileName){
+        $CI = & get_instance();
+        $CI->db->select('id');
+        $CI->db->from('slideZip');
+        $CI->db->where('libelle', $fileName);
+
+        $result = $CI->db->get()->row();
+
+        $id = $result;
+        return $id;
+    }
+
     
 
 

@@ -14,6 +14,8 @@ canvas { display:block; } /* To remove the scrollbars */
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="<?php echo base_url();?>css/t.css" rel="stylesheet">
+
 	</head>
 	<body>
 
@@ -30,21 +32,22 @@ canvas { display:block; } /* To remove the scrollbars */
   
   <!-- The slideshow -->
   <div class="carousel-inner">
-    <div class="carousel-item active"><canvas id="canvas">
+    <div class="carousel-item active">
+      <canvas id="canvas1">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>
       <!-- <img src="la.jpg" alt="Los Angeles" width="1100" height="500"> -->
     </div>
     <div class="carousel-item">
-    <canvas id="canvas">
+    <canvas id="canvas2">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>
       <!-- <img src="chicago.jpg" alt="Chicago" width="1100" height="500"> -->
     </div>
     <div class="carousel-item">
-    <canvas id="canvas">
+    <canvas id="canvas3">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>

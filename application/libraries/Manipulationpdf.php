@@ -118,7 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
             }
         
-            if($fieldValue) { // save last field
+            if($fieldValue) { 
                 $array[$rowIndex][$columnIndex] = $fieldValue;
             }
             return $array;

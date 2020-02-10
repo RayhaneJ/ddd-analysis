@@ -21,7 +21,7 @@ BEGIN
 
 	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into slide(emplacement, libelle, supportCoursSource, supportCoursGen, codeBaps, codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane); 
+	insert ignore into slideZip(emplacementFichier, libelle, supportCoursSource, supportCoursGen, codeBaps, codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane); 
 	
 	update supportCoursSource set slide = libelleSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
 
@@ -38,6 +38,7 @@ Begin
 	insert ignore into stockerPageDeGarde(emplacement, libelle) values(emplacement , libelle);
 end |
 delimiter ;
+
 
 
 
