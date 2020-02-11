@@ -111,15 +111,22 @@ class Upload extends CI_Controller {
                                 $codeBaps = $this->input->post('codeBaps');
                                 $codeRayhane = $this->input->post('codeRayhane');
                                 $pageDeGarde = $this->input->post('pageDeGarde');
+                                $typeSupport = $this->input->post('typeSupport');
+
+                                $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
 
                                 if($pageDeGarde == "Pages de garde") {
                                         $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName);
                                 }
                                 else {
-                                        $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
-                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
+                                        if($typeSupport == "1") {
+                                                $text = "'Support de cours'";
+                                                $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
+                                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
+                                        }
+                                        //remplacer avec $emplacementPageDeGarde
+                                        //$fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
                                 }
-
 
                                 $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
                                 $emplacementZipSource = '/IntegrSupCours/uploads/sourcesSlides/'.$currentZipName;
@@ -145,7 +152,6 @@ class Upload extends CI_Controller {
                                 $data['pdfGen'] = $libellePdfGen;
                                 
                                 $this->load->view('downloadView', $data);
-                                //force_download($emplacementPdfGen, "NULL");
                         }
                         else {
                                 $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 

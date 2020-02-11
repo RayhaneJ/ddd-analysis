@@ -28,10 +28,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return $bookmarkFileName;
         }
     
-        //meilleure nom de fonctions possible
         //1
-        public static function ConvertPdf($dataSummary, $pdfName, $pdgName=null) {
-            if($pdgName == null) {
+        public static function ConvertPdf($dataSummary, $pdfName, $pdg=null) {
+            if($pdg == null) {
                 $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
                 $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
                 shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
@@ -41,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
                 $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
                 shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName);
-                self::AddPdgToPdg($pdgName, $pdfName, $fileNameGen);
+                self::AddPdgToPdg($pdg, $pdfName, $fileNameGen);
                 return $fileNameGen;
             }
         }
@@ -59,9 +58,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 return $fileNameGen;
             }
         }
-        //3
+        //3 a fixer ?
         public static function AddPdgToPdg($pdgEmplacement, $pdfName, $fileNameGen){
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].''.$pdgEmplacement.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName.' cat output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdgEmplacement.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName.' cat output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
         }
     
     
@@ -122,5 +121,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $array[$rowIndex][$columnIndex] = $fieldValue;
             }
             return $array;
+        }
+
+        //$emplacementPageDeGarde = uploads/pageDeGarde/..et new function name pour $pdg.
+        public static function ConvertPdg($text, $emplacementPageDeGarde) {
+            $pdgName = str_replace('uploads/pageDeGarde/', '', $emplacementPageDeGarde);
+            $pdg = 'uploads/pageDeGardeWText/'.$pdgName;
+            print_r($pdg);
+            shell_exec('convert -density 288 -font Gotham-Bold '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$emplacementPageDeGarde.' -pointsize 35 -annotate +450+2700 '.$text.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdgName);
+            return $pdg;
         }
 }

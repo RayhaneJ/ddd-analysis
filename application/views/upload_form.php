@@ -24,7 +24,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="nav-link"><img src="<?php echo base_url();?>css/RGB-LogoGK.gif" width="145" height="70" alt=""></i></a>
+  <a class="nav-link"><img src="<?php echo base_url();?>css/RGB-LogoGK.gif" width="155" height="70" alt=""></i></a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
       <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
@@ -70,8 +70,8 @@
         </select>
       </div>
       <div class = "form-group col-md-6">
-        <select id="typeSupportSelect" class="custom-select custom-select-lg " disabled>
-          <option selected>Type du support</option>
+        <select id="typeSupportSelect" class="custom-select custom-select-lg" name="typeSupport" disabled>
+          <option value ="0"selected>Type du support</option>
           <option value="1">Support de cours</option>
           <option value="2">Cachier d'exercice</option>
         </select>

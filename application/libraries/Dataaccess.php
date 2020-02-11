@@ -107,7 +107,7 @@ class Dataaccess {
         $CI->db->from('slideZip');
         $CI->db->where('libelle', $fileName);
 
-        $result = $CI->db->get()->row();
+        $result = $CI->db->get()->row()->id;
 
         $id = $result;
         return $id;
