@@ -127,8 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         public static function ConvertPdg($text, $emplacementPageDeGarde) {
             $pdgName = str_replace('uploads/pageDeGarde/', '', $emplacementPageDeGarde);
             $pdg = 'uploads/pageDeGardeWText/'.$pdgName;
-            print_r($pdg);
-            shell_exec('convert -density 288 -font Gotham-Bold '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$emplacementPageDeGarde.' -pointsize 35 -annotate +450+2700 '.$text.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdgName);
+            shell_exec('convert -density 288 -font Gotham-Bold '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$emplacementPageDeGarde.' -pointsize 35 -annotate +450+2700 '.$text.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdg);
             return $pdg;
         }
 }

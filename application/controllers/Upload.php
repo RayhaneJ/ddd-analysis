@@ -113,19 +113,33 @@ class Upload extends CI_Controller {
                                 $pageDeGarde = $this->input->post('pageDeGarde');
                                 $typeSupport = $this->input->post('typeSupport');
 
-                                $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
 
                                 if($pageDeGarde == "Pages de garde") {
                                         $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName);
                                 }
                                 else {
-                                        if($typeSupport == "1") {
-                                                $text = "'Support de cours'";
-                                                $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
-                                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
+                                        $emplacementPageDeGarde = $this->dataaccess::GetPageDeGarde($pageDeGarde);
+
+                                        if($typeSupport == "0"){
+                                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
                                         }
-                                        //remplacer avec $emplacementPageDeGarde
-                                        //$fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementPageDeGarde);
+                                        else {
+                                                if($typeSupport == "1") {
+                                                        $text = "'Support de cours'";
+                                                        $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
+                                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
+                                                }
+                                                else {
+                                                        if($typeSupport == "2") {
+                                                                $text = "'Cahier d'exercice'";
+                                                                $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
+                                                                $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
+                                                        }
+                                                        else {
+                                                        }
+                                                }
+
+                                        }
                                 }
 
                                 $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
@@ -145,9 +159,6 @@ class Upload extends CI_Controller {
                                 }
 
                                 $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
-                                
-                                $libelleZipSourceWithoutExtension = $this->manipulationslides::ExtractZipSlide($libelleZipSource);
-                                $this->manipulationslides::InsertSlidesInDb($libelleZipSourceWithoutExtension, $libelleZipSource);
 
                                 $data['pdfGen'] = $libellePdfGen;
                                 

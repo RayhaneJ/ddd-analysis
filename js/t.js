@@ -1,11 +1,19 @@
+(function($) {
+  $('.carousel').carousel({
+    interval: 90000
+  });
+})(jQuery);
+
+
 (function() {
     var canvas1 = document.getElementById('canvas1'),
             context1 = canvas1.getContext('2d');
-
+            var carrousel = document.getElementsByClassName('carousel-inner');
     // resize the canvas to fill browser window dynamically
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
+      console.log(carrousel.height);
             canvas1.width = window.innerWidth;
             canvas1.height = window.innerHeight;
 
@@ -19,7 +27,8 @@
     resizeCanvas();
 
     function drawStuff() {
-        var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive2.JPG';
+        var imgPath = base_url + 'uploads/images/Diapositive1.JPG';
+        console.log(base_url);
  
 //Create a new Image object.
     var imgObj = new Image();
@@ -30,12 +39,8 @@
 
     imgObj.onload = function(){
     //Draw the image onto the canvas.
-    if(screen.width < 991) {
-      context1.drawImage(imgObj, 0, 0, window.innerWidth, window.innerHeight);
-    }
-    else if(screen.width >= 991) {
+    console.log(window.innerWidth/imgObj.width);
       context1.drawImage(imgObj,0, 0, window.innerWidth, window.innerHeight);
-    }
     
 }
             // do your drawing stuff here
@@ -63,7 +68,7 @@
   resizeCanvas();
 
   function drawStuff() {
-      var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive3.JPG';
+      var imgPath = '<?php echo base_url() . "uploads/images/out.png"; ?>';
 
 //Create a new Image object.
   var imgObj = new Image();
@@ -100,7 +105,7 @@
   resizeCanvas();
 
   function drawStuff() {
-      var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive3.JPG';
+      var imgPath = 'http://localhost/IntegrSupCours/uploads/images/Diapositive2.JPG';
 
 //Create a new Image object.
   var imgObj = new Image();
@@ -210,3 +215,22 @@ if(window.addEventListener) {
     }, false); }
     
     // vim:set spell spl=en fo=wan1croql tw=80 ts=2 sw=2 sts=2 sta et ai cin fenc=utf-8 ff=unix:
+
+
+
+    var element = document.documentElement;
+var button = document.getElementsByTagName('button')[0];
+
+
+button.addEventListener('click', function(){
+  element.requestFullscreen()
+  .then(function() {
+    // element has entered fullscreen mode successfully
+  })
+  .catch(function(error) {
+    // element could not enter fullscreen mode
+    // error message
+    console.log(error.message);
+  });
+});
+

@@ -30,10 +30,10 @@ ENGINE = INNODB;
 
 Create table stockerPageDeGarde (
 id int auto_increment, 
-emplacement varchar(256) not null, 
-libelle varchar(256) not null unique, 
 dateInjection timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp, 
+emplacement varchar(256) not null, 
+libelle varchar(256) not null unique, 
 primary key(id)
 ) 
 ENGINE = InnoDb;
@@ -42,8 +42,8 @@ ENGINE = InnoDb;
 Create table supportCoursGen ( 
 id int auto_increment, 
 dateGeneration timestamp not null default current_timestamp,
-emplacement varchar(256) not null, 
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
+emplacement varchar(256) not null, 
 libelle varchar(256) not null unique, 
 supportCoursSource varchar(256), 
 slide varchar(256),
@@ -67,12 +67,12 @@ primary key (id)
 ) 
 ENGINE=InnoDB;
 
-create table slideZip ( 
+create table slide ( 
 id int auto_increment, 
 dateInjection timestamp not null default current_timestamp,
+dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
 emplacementFichier varchar(256) not null, 
-dateDerniereModification timestamp not null default current_timestamp on update current_timestamp, 
-libelle varchar(256) not null unique,
+libelleZip varchar(256) not null unique,
 supportCoursSource varchar(256), 
 supportCoursGen varchar(256), 
 codeBaps varchar(256),
@@ -80,30 +80,6 @@ codeRayhane varchar(256),
 primary key (id)
 )
 ENGINE=InnoDB;
-
-create table lierSlideToJpg(
-idSlideZip int, 
-idSlideJpg int,
-primary key (idSlideZip, idSlideJpg)
-)
-ENGINE = InnoDB;
-
-create table slideJpg (
-id int auto_increment, 
-dateInjection timestamp not null default current_timestamp, 
-dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
-emplacement varchar(256) not null,
-primary key (id)
-)
-ENGINE = InnoDB; 
-
-
-alter table lierSlideToJpg
-add constraint fk_lierSlideToJpg_idSlideZip foreign key (idSlideZip) references slideZip(id);
-
-alter table lierSlideToJpg
-add constraint fk_lierSlideToJpg_idSlideJpg foreign key (idSlideJpg) references slideJpg(id);
-
 
 
 alter table cours 
@@ -140,7 +116,7 @@ ADD CONSTRAINT fk_supportCoursGen_codeRayhane FOREIGN KEY (codeRayhane) REFERENC
 
 
 ALTER TABLE supportCoursGen
-ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slideZip (libelle); 
+ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (libelleZip); 
 
 
 
@@ -156,23 +132,23 @@ ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
 ALTER TABLE supportCoursSource
-ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slideZip (libelle); 
+ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (libelleZip); 
 
 
 
 
-alter table slideZip 
-add constraint fk_slideZip_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(libelle);
+alter table slide 
+add constraint fk_slide_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(libelle);
 
-alter table slideZip 
-add constraint fk_slideZip_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(libelle);
+alter table slide 
+add constraint fk_slide_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(libelle);
 
 
-alter table slideZip
-add constraint fk_slideZip_codeBaps foreign key (codeBaps) references codeBaps(libelleCodeBaps);
+alter table slide
+add constraint fk_slide_codeBaps foreign key (codeBaps) references codeBaps(libelleCodeBaps);
 
-alter table slideZip
-add constraint fk_slideZip_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
+alter table slide
+add constraint fk_slide_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
 
 
 

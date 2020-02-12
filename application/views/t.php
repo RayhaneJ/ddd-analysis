@@ -15,14 +15,14 @@ canvas { display:block; } /* To remove the scrollbars */
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link href="<?php echo base_url();?>css/t.css" rel="stylesheet">
-
+  <script>var base_url = '<?php echo base_url() ?>';</script>
 	</head>
 	<body>
 
 
 
     <div id="demo" class="carousel slide" data-ride="carousel">
-
+    
   <!-- Indicators -->
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -31,8 +31,9 @@ canvas { display:block; } /* To remove the scrollbars */
   </ul>
   
   <!-- The slideshow -->
-  <div class="carousel-inner">
+  <div id="test" class="carousel-inner">
     <div class="carousel-item active">
+    <button>test</button>
       <canvas id="canvas1">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
@@ -70,5 +71,6 @@ canvas { display:block; } /* To remove the scrollbars */
 			
 		<script src="<?php echo base_url();?>js/t.js"></script>
 </script>
+
 	</body>
 </html>

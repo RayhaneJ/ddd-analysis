@@ -34,31 +34,53 @@ class ManipulationSlides {
         return $fileNameWithoutExtension;
     }
 
-    public static function InsertSlidesInDB($fileNameWithoutExtension, $fileName){
-        $dir = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/slidesFiles/'.$fileNameWithoutExtension;
+    //folderName = ZipFileNameWithoutExtension
+    public static function GetJpgEmplacement($folderName) {
+        $dir = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/slidesFiles/'.$folderName;
         $scanned_directory = array_diff(scandir($dir), array('..', '.'));
         natsort($scanned_directory);
-        $CI = & get_instance();
-        $CI->load->library('Dataaccess');
-
-        $zipId = $CI->dataaccess::getIdByFileNameZip($fileName);
 
         if (is_dir($dir)) {
             if ($dh = opendir($dir)) {
                 foreach($scanned_directory as $value) {
                     $data = array(
-                        'emplacement' => 'uploads/slidesFiles/'.$fileNameWithoutExtension."/".$value
+                        'emplacement' => 'uploads/slidesFiles/'.$folderName."/".$value
                     );
-                    $jpgId = $CI->dataaccess::InsertJpg($data);
-                    $data = array(
-                        'idSlideZip' => $zipId,
-                        'idSlideJpg' =>$jpgId
-                    );
-                    $CI->dataaccess::InsertJpgToSlide($data);
                 }
                 closedir($dh);
+                return $data;
             }
-                
         }
     }
+
+    //Maybe not usefull
+    public static function InsertSlidesInDB($fileNameWithoutExtension, $fileName){
+        // $dir = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/slidesFiles/'.$fileNameWithoutExtension;
+        // $scanned_directory = array_diff(scandir($dir), array('..', '.'));
+        // natsort($scanned_directory);
+        // $CI = & get_instance();
+        // $CI->load->library('Dataaccess');
+
+        // $zipId = $CI->dataaccess::getIdByFileNameZip($fileName);
+
+        // if (is_dir($dir)) {
+        //     if ($dh = opendir($dir)) {
+        //         foreach($scanned_directory as $value) {
+        //             $data = array(
+        //                 'emplacement' => 'uploads/slidesFiles/'.$fileNameWithoutExtension."/".$value
+        //             );
+        //             $jpgId = $CI->dataaccess::InsertJpg($data);
+        //             $data = array(
+        //                 'idSlide' => $zipId,
+        //                 'idSlideJpg' =>$jpgId
+        //             );
+        //             $CI->dataaccess::InsertJpgToSlide($data);
+        //         }
+        //         closedir($dh);
+        //     }
+                
+        // }
+    }
+
+
 }

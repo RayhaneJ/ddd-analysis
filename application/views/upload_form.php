@@ -73,7 +73,7 @@
         <select id="typeSupportSelect" class="custom-select custom-select-lg" name="typeSupport" disabled>
           <option value ="0"selected>Type du support</option>
           <option value="1">Support de cours</option>
-          <option value="2">Cachier d'exercice</option>
+          <option value="2">Cahier d'exercice</option>
         </select>
       </div>
   </div>
