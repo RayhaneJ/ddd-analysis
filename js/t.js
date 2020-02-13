@@ -27,7 +27,7 @@
     resizeCanvas();
 
     function drawStuff() {
-        var imgPath = base_url + 'uploads/images/Diapositive1.JPG';
+        var imgPath = base_url + 'uploads/images/24-18.jpg';
         console.log(base_url);
  
 //Create a new Image object.

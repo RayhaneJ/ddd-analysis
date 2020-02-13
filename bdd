@@ -72,7 +72,7 @@ id int auto_increment,
 dateInjection timestamp not null default current_timestamp,
 dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
 emplacementFichier varchar(256) not null, 
-libelleZip varchar(256) not null unique,
+libellePdf varchar(256) not null unique,
 supportCoursSource varchar(256), 
 supportCoursGen varchar(256), 
 codeBaps varchar(256),
@@ -116,7 +116,7 @@ ADD CONSTRAINT fk_supportCoursGen_codeRayhane FOREIGN KEY (codeRayhane) REFERENC
 
 
 ALTER TABLE supportCoursGen
-ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (libelleZip); 
+ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (libellePdf); 
 
 
 
@@ -132,7 +132,7 @@ ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
 ALTER TABLE supportCoursSource
-ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (libelleZip); 
+ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (libellePdf); 
 
 
 

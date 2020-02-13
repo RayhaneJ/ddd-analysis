@@ -14,15 +14,14 @@ class Visualiser extends CI_Controller {
     }
 
     //tout les codes baps sont differents
-    public function Slides($codeBaps) {
-        $folderNameZip = $this->dataaccess::GetFolderNameForZipFiles($codeBaps);
-        $pathInfo = pathinfo($_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourceSlides/'.$folderNameZip);
-        $fileName = $pathInfo['filename'];
-
-        $data['emplacementArray'] = $this->manipulationslides::GetJpgEmplacement($fileName);
-
-        
-
-
+    public function Slides($codeBaps=null, $codeRayhane=null) {
+        if(empty($codeRayhane)){
+            $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps);
+            $this->load->view('slideView', $data);   
+        }
+        else {
+            $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
+            $this->load->view('slideView', $data);
+        }
     }
 }

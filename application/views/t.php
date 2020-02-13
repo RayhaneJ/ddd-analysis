@@ -20,17 +20,15 @@ canvas { display:block; } /* To remove the scrollbars */
 	<body>
 
 
-
-    <div id="demo" class="carousel slide" data-ride="carousel">
+<embed src = "<?php echo base_url();?>uploads/images/m.pdf" width="100%" height="100%"/>
+    <!-- <div id="demo" class="carousel slide" data-ride="carousel">
     
-  <!-- Indicators -->
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
   </ul>
   
-  <!-- The slideshow -->
   <div id="test" class="carousel-inner">
     <div class="carousel-item active">
     <button>test</button>
@@ -38,32 +36,32 @@ canvas { display:block; } /* To remove the scrollbars */
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>
-      <!-- <img src="la.jpg" alt="Los Angeles" width="1100" height="500"> -->
+       <img src="la.jpg" alt="Los Angeles" width="1100" height="500"> 
     </div>
     <div class="carousel-item">
     <canvas id="canvas2">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>
-      <!-- <img src="chicago.jpg" alt="Chicago" width="1100" height="500"> -->
+       <img src="chicago.jpg" alt="Chicago" width="1100" height="500"> 
     </div>
     <div class="carousel-item">
     <canvas id="canvas3">
 				<p>Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one of the supported browsers listed below, or draw the image you want using an offline tool.</p>
 				<p>Supported browsers: <a href="https://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, and <a href="http://www.konqueror.org">Konqueror</a>.</p>
 			</canvas>
-      <!-- <img src="ny.jpg" alt="New York" width="1100" height="500"> -->
+       <img src="ny.jpg" alt="New York" width="1100" height="500"> 
     </div>
   </div>
   
-  <!-- Left and right controls -->
+  Left and right controls 
   <a class="carousel-control-prev" href="#demo" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </a>
   <a class="carousel-control-next" href="#demo" data-slide="next">
     <span class="carousel-control-next-icon"></span>
   </a>
-</div>
+</div> -->
 
 
 

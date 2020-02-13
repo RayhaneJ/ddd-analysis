@@ -49,7 +49,7 @@ class Upload extends CI_Controller {
                                                 break;
                                         case 1:
                                                 $dest="./uploads/sourcesSlides";
-                                                $filtre ='zip';
+                                                $filtre ='pdf';
                                                 break;
                                         case 2:
                                                 $dest="./uploads/csv";
@@ -88,16 +88,16 @@ class Upload extends CI_Controller {
                                         //$fichier['client_name'] -> nom d'origine du fichier
                                         //traiter la réussite pour ce fichier comme il vous convient.
                 
-                                        switch ($fichier['file_type']) 
+                                        switch ($i) 
                                         {
-                                                case 'text/plain':
-                                                        $currentCsvName = $fichier['file_name'];
-                                                        break;
-                                                case 'application/pdf':
+                                                case 0:
                                                         $currentPdfName = $fichier['file_name'];
                                                         break;
-                                                case 'application/zip':
-                                                        $currentZipName = $fichier['file_name'];
+                                                case 1:
+                                                        $currentSlideName = $fichier['file_name'];
+                                                        break;
+                                                case 2:
+                                                        $currentCsvName = $fichier['file_name'];
                                                         break;
                                                 default:
                                                         break;
@@ -143,11 +143,11 @@ class Upload extends CI_Controller {
                                 }
 
                                 $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
-                                $emplacementZipSource = '/IntegrSupCours/uploads/sourcesSlides/'.$currentZipName;
+                                $emplacementSlideSource = 'uploads/sourcesSlides/'.$currentSlideName;
                                 $emplacementPdfGen = '/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen;
 
                                 $libellePdfSource = $currentPdfName; 
-                                $libelleZipSource = $currentZipName;
+                                $libelleSlideSource = $currentSlideName;
                                 $libellePdfGen = $fileNameGen;
 
 
@@ -158,7 +158,7 @@ class Upload extends CI_Controller {
                                         $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
                                 }
 
-                                $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleZipSource, $emplacementZipSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
+                                $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleSlideSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
 
                                 $data['pdfGen'] = $libellePdfGen;
                                 
@@ -178,9 +178,11 @@ class Upload extends CI_Controller {
                 $this->load->view('gestionPdg', $data);
         }
 
-        public function Visualisation(){
-                $this->load->view('t');
-        }
+        //A supprimer
+
+        // public function Visualisation(){
+        //         $this->load->view('t');
+        // }
 
 
         public function LoadPdfPage($libellePdg){

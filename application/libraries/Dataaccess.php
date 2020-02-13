@@ -113,9 +113,9 @@ class Dataaccess {
     //     return $id;
     // }
 
-    public static function getFolderNameForZipFiles($codeBaps){
+    public static function GetFolderNameForPdfFiles($codeBaps){
         $CI = &get_instance();
-        $CI->db->select('libelleZip');
+        $CI->db->select('libellePdf');
         $CI->db->from('slide');
         $CI->db->where('codeBaps', $codeBaps);
 
@@ -123,6 +123,26 @@ class Dataaccess {
 
         return $result;
     }
+
+    public static function GetEmplacementForPdfFiles($codeBaps=null, $codeRayhane=null) {
+        $CI = &get_instance();
+
+        if(empty($codeRayhane)){
+            $CI->db->select('emplacementFichier');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+        }
+        else {
+            $CI->db->select('emplacementFichier');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->where('codeRayhane', $codeRayhane);
+        }
+    }
+
+    
+
+
 
 
 
