@@ -1,0 +1,272 @@
+@media only screen and (orientation: portrait) and (max-width:768px) {
+
+    #the-canvas{
+      height: 35%!important;
+    }
+
+    .container{
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .fa-arrow-circle-right, .fa-arrow-circle-left {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        font-size: 1.5em !important;
+    } 
+    
+    .fa-arrow-circle-left::before {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        cursor: pointer; 
+    } 
+
+    .fa-arrow-circle-right::before {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        cursor: pointer; 
+        right:0;
+    } 
+    
+    .fa-arrow-circle-right:hover, .fa-arrow-circle-left:hover {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        font-size: 1.5em !important;
+        color:black;
+    }
+
+    .fa-arrow-circle-left {
+        left:2% !important;
+        color:black;
+    }
+
+    .fa-arrow-circle-right {
+        right:2% !important;
+        float: right;
+        color:black;
+    }
+
+    .fa-compress {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:1.8rem !important;
+        color: black;
+    }
+    
+    .fa-compress:hover {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:1.8rem !important;
+        color:black;
+    } 
+
+    .fa-compress::before {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:1.8rem !important;
+        cursor: pointer; 
+        color: black;
+    }
+    
+    .fa-compress:hover::before {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:1.8rem !important;
+        cursor: pointer; 
+        color:black;
+    } 
+    
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+  
+    #the-canvas{
+        height: 50%!important;
+    }
+  
+    .container{
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .fa-arrow-circle-right, .fa-arrow-circle-left {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        cursor: pointer; 
+        font-size: 2.5em !important;
+    } 
+    
+    .fa-arrow-circle-right:hover, .fa-arrow-circle-left:hover {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        cursor: pointer; 
+        font-size: 2.5em !important;
+        color:black;
+    }
+
+    .fa-arrow-circle-left {
+        left:2%!important;
+        color:black;
+    }
+    .fa-arrow-circle-right {
+        right:2%!important;
+        float: right;
+        color:black;
+    }
+
+    .fa-arrow-circle-left::before {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        cursor: pointer; 
+    } 
+
+    .fa-arrow-circle-right::before {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        cursor: pointer; 
+        right:0;
+    } 
+
+    .fa-compress {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:2.3rem !important;
+        color: black;
+    }
+    
+    .fa-compress:hover {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:2.3rem !important;
+        color:black;
+    }
+    
+    .fa-compress::before {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:2.3rem !important;
+        color: black;
+        cursor: pointer; 
+    }
+
+    .fa-compress:hover::before {
+        position: absolute;
+        top:3%;
+        right:2%;
+        font-size:2.3rem !important;
+        color:black;
+        cursor: pointer; 
+    }
+    
+}
+  
+
+body {
+    background-color: black;
+    height: 100%;
+    margin:0;
+}
+
+
+.container {
+    position: relative;
+}
+
+.fa-arrow-circle-right, .fa-arrow-circle-left {
+    position: absolute;
+    top:50%;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+    z-index: 1001;  
+    font-size: 2.5em;
+} 
+
+.fa-arrow-circle-right:hover, .fa-arrow-circle-left:hover {
+    position: absolute;
+    top:50%;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-50%);
+    font-size: 3em;
+    color:black;
+}
+
+.fa-arrow-circle-left {
+    z-index: 1001;
+    left:5%;
+    color:black;
+}
+.fa-arrow-circle-right {
+    right:5%;
+    float: right;
+    color:black;
+}
+
+.fa-arrow-circle-right::before {
+    float: right;
+    cursor: pointer; 
+}
+
+.fa-arrow-circle-left::before {
+    cursor: pointer; 
+}
+
+.fa-compress {
+    position: absolute;
+    top:3%;
+    right:2%;
+    font-size:2.5rem;
+    color: black;
+}
+
+.fa-compress:hover {
+    position: absolute;
+    top:3%;
+    right:2%;
+    font-size:3rem;
+    color:black;
+} 
+
+.fa-compress::before {
+    position: absolute;
+    top:3%;
+    right:2%;
+    font-size:2.5rem;
+    color: black;
+    cursor: pointer;
+}
+
+.fa-compress:hover::before {
+    position: absolute;
+    top:3%;
+    right:2%;
+    font-size:3rem;
+    color:black;
+} 
