@@ -178,12 +178,6 @@ class Upload extends CI_Controller {
                 $this->load->view('gestionPdg', $data);
         }
 
-        //A supprimer
-
-        // public function Visualisation(){
-        //         $this->load->view('t');
-        // }
-
 
         public function LoadPdfPage($libellePdg){
                 $emplacement = $this->dataaccess::GetPageDeGarde($libellePdg);

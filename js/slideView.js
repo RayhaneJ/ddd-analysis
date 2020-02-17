@@ -123,9 +123,7 @@ window.addEventListener("keydown", function(event){
     else {
       if(event.keyCode == '122') {
         console.log('test');
-        if(Element.requestFullscreen){
-          canvas.requestFullscreen();
-          console.log('sucess');
+        if(canvas.requestFullscreen){
         }
       }
     }

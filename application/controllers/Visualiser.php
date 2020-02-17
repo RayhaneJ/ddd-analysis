@@ -10,18 +10,19 @@ class Visualiser extends CI_Controller {
     }
 
     public function index() {
-
+        $this->load->view('slideView');
     }
 
     //tout les codes baps sont differents
-    public function Slides($codeBaps=null, $codeRayhane=null) {
-        if(empty($codeRayhane)){
-            $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps);
-            $this->load->view('slideView', $data);   
-        }
-        else {
-            $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
-            $this->load->view('slideView', $data);
-        }
+    public function Slides() {
+        $this->load->view('t');
+        // if(empty($codeRayhane)){
+        //     $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps);
+        //     $this->load->view('slideView', $data);   
+        // }
+        // else {
+        //     $data['emplacementPdf'] = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
+        //     $this->load->view('slideView', $data);
+        // }
     }
 }

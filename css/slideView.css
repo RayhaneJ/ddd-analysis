@@ -1,7 +1,7 @@
 @media only screen and (orientation: portrait) and (max-width:768px) {
 
     #the-canvas{
-      height: 35%!important;
+        height: 35%!important;
     }
 
     .container{
@@ -55,38 +55,24 @@
         color:black;
     }
 
-    .fa-compress {
+    #fullscreen {
         position: absolute;
         top:3%;
         right:2%;
-        font-size:1.8rem !important;
+        height:3rem;
+        width: 3rem;
         color: black;
+        cursor: pointer;
     }
     
-    .fa-compress:hover {
+    #fullscreen:hover {
         position: absolute;
         top:3%;
         right:2%;
-        font-size:1.8rem !important;
+        height:3.2rem;
+        width: 3.2rem;
         color:black;
-    } 
-
-    .fa-compress::before {
-        position: absolute;
-        top:3%;
-        right:2%;
-        font-size:1.8rem !important;
-        cursor: pointer; 
-        color: black;
-    }
-    
-    .fa-compress:hover::before {
-        position: absolute;
-        top:3%;
-        right:2%;
-        font-size:1.8rem !important;
-        cursor: pointer; 
-        color:black;
+        cursor: pointer;
     } 
     
 
@@ -95,6 +81,7 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
   
     #the-canvas{
+        
         height: 50%!important;
     }
   
@@ -150,39 +137,25 @@
         right:0;
     } 
 
-    .fa-compress {
+    #fullscreen {
         position: absolute;
         top:3%;
         right:2%;
-        font-size:2.3rem !important;
+        height:3rem;
+        width: 3rem;
         color: black;
+        cursor: pointer;
     }
     
-    .fa-compress:hover {
+    #fullscreen:hover {
         position: absolute;
         top:3%;
         right:2%;
-        font-size:2.3rem !important;
+        height:3.2rem;
+        width: 3.2rem;
         color:black;
-    }
-    
-    .fa-compress::before {
-        position: absolute;
-        top:3%;
-        right:2%;
-        font-size:2.3rem !important;
-        color: black;
-        cursor: pointer; 
-    }
-
-    .fa-compress:hover::before {
-        position: absolute;
-        top:3%;
-        right:2%;
-        font-size:2.3rem !important;
-        color:black;
-        cursor: pointer; 
-    }
+        cursor: pointer;
+    } 
     
 }
   
@@ -214,7 +187,7 @@ body {
     width: 3rem;
     height: 3rem;
     transform: translateY(-50%);
-    font-size: 3em;
+    font-size: 2.7em;
     color:black;
 }
 
@@ -238,35 +211,23 @@ body {
     cursor: pointer; 
 }
 
-.fa-compress {
+#fullscreen {
     position: absolute;
     top:3%;
     right:2%;
-    font-size:2.5rem;
-    color: black;
-}
-
-.fa-compress:hover {
-    position: absolute;
-    top:3%;
-    right:2%;
-    font-size:3rem;
-    color:black;
-} 
-
-.fa-compress::before {
-    position: absolute;
-    top:3%;
-    right:2%;
-    font-size:2.5rem;
+    height:3rem;
+    width: 3rem;
     color: black;
     cursor: pointer;
 }
 
-.fa-compress:hover::before {
+#fullscreen:hover {
     position: absolute;
     top:3%;
     right:2%;
-    font-size:3rem;
+    height:3.2rem;
+    width: 3.2rem;
     color:black;
+    cursor: pointer;
 } 
+

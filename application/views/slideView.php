@@ -18,7 +18,7 @@
   </canvas>
   <div class="fas fa-arrow-circle-right" id = "next"></div>
   <div class="fas fa-arrow-circle-left" id ="prev"></div>
-  <i class="fas fa-compress" id="fullscreen"></i>
+  <img id="fullscreen" src = "<?php echo base_url();?>css/fs.png"></img> 
 </div>
 
 <script src = "<?php echo base_url()?>js/slideView.js"></script>
