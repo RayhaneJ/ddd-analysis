@@ -1,222 +1,25 @@
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
-
-    .carousel-item active{
-        height: 100%;
-    }
-    
-    .carousel-item{
-        height: 100%;
-    }
-    
-    body{
-        height: 100%;
-        background-color: black;
-    }
-
-    .container- {
-        top: 50%;
-        transform: translateY(-50%);
-        position: fixed;   
-    }
-
-    #fullscreen {
-        position: absolute;
-        top:2% !important;
-        right:2%;
-        height:3rem;
-        width: 3rem;
-        color: black;
-        cursor: pointer;
-    }
-    
-    #arrow-right, #arrow-left {
-        position: absolute;
-        top:50%;
-        width: 3rem;
-        height: 3rem;
-        transform: translateY(-50%);
-        font-size: 2.5em;
-        cursor: pointer;
-    }
-    
-    #arrow-left {
-        left:5%;
-    }
-    
-    #arrow-right {
-        right:5%;
-    }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
-
-
-    .carousel-item active{
-        height: 100%;
-    }
-    
-    .carousel-item{
-        height: 100%;
-    }
-    
-    body{
-        height: 100%;
-        background-color: black;
-    }
-
-    .container- {
-        top: 50%;
-        transform: translateY(-50%);
-        position: fixed;   
-    }
-
-    #fullscreen {
-        position: absolute;
-        top:2% !important;
-        right:2%;
-        height:3rem;
-        width: 3rem;
-        color: black;
-        cursor: pointer;
-    }
-    
-    #arrow-right, #arrow-left {
-        position: absolute;
-        top:50%;
-        width: 3rem;
-        height: 3rem;
-        transform: translateY(-50%);
-        font-size: 2.5em;
-        cursor: pointer;
-    }
-    
-    #arrow-left {
-        left:5%;
-    }
-    
-    #arrow-right {
-        right:5%;
-    }
-}
-
-@media only screen and (orientation :landscape) and (max-width:768px) {
-
-    .carousel-item active{
-        height: 100%;
-    }
-    
-    .carousel-item{
-        height: 100%;
-    }
-    
-    body{
-        height: 100%;
-        background-color: black;
-    }
-
-    .container- {
-        top: 50%;
-        transform: translateY(-50%);
-        position: fixed;   
-    }
-
-    #fullscreen {
-        position: absolute;
-        top:2% !important;
-        right:2%;
-        height:3rem;
-        width: 3rem;
-        color: black;
-        cursor: pointer;
-    }
-    
-    #arrow-right, #arrow-left {
-        position: absolute;
-        top:50%;
-        width: 3rem;
-        height: 3rem;
-        transform: translateY(-50%);
-        font-size: 2.5em;
-        cursor: pointer;
-    }
-    
-    #arrow-left {
-        left:5%;
-    }
-    
-    #arrow-right {
-        right:5%;
-    }
-    
-}
-
-@media only screen and (orientation: portrait) and (max-width:768px) {
-
-
-    .container- {
-        top: 50%;
-        transform: translateY(-50%);
-        position: fixed;   
-    }
-
-    #fullscreen {
-        position: absolute;
-        top:2% !important;
-        right:2%;
-        height:3rem;
-        width: 3rem;
-        color: black;
-        cursor: pointer;
-    }
-    
-    #arrow-right, #arrow-left {
-        position: absolute;
-        top:50%;
-        width: 3rem;
-        height: 3rem;
-        transform: translateY(-50%);
-        font-size: 2.5em;
-        cursor: pointer;
-    }
-    
-    #arrow-left {
-        left:5%;
-    }
-    
-    #arrow-right {
-        right:5%;
-    }
-    
-}
-
-.carousel-item active{
-    height: 100%;
-}
-
-.carousel-item{
-    height: 100%;
-}
+@media screen and (min-width:1024px) {
 
 body{
     position: fixed;
     height: 100%;
     background-color: black;
-}
+} 
 
-#fullscreen {
+#fullScreen {
     position: absolute;
-    top:3%;
-    right:2%;
+    top:1%;
+    right:1%;
     height:3rem;
     width: 3rem;
     color: black;
     cursor: pointer;
 }
 
-#fullscreen:hover {
+#fullScreen:hover {
     position: absolute;
-    top:3%;
-    right:2%;
+    top:1%;
+    right:1%;
     height:3.2rem;
     width: 3.2rem;
     color:black;
@@ -242,4 +45,46 @@ body{
 #arrow-right {
     right:5%;
 }
+}
 
+@media screen and (max-width: 1024px) and (orientation:portrait){
+
+    
+    body, html{
+        height: 100% !important;
+    }
+
+    .container- {
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;   
+    }
+
+    #fullScreen {
+        position: absolute;
+        top:3.8% !important;
+        right:2.5%;
+        height:3rem;
+        width: 3rem;
+        color: black;
+        cursor: pointer;
+    }
+    
+    #arrow-right, #arrow-left {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        font-size: 2.5em;
+        cursor: pointer;
+    }
+    
+    #arrow-left {
+        left:5%;
+    }
+    
+    #arrow-right {
+        right:5%;
+    }
+}
