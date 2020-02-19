@@ -21,7 +21,7 @@ BEGIN
 
 	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into slide(emplacementFichier, libellePdf, supportCoursSource, supportCoursGen, codeBaps, codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane); 
+	insert ignore into slide(emplacementFichier, libelle, supportCoursSource, supportCoursGen, codeBaps, codeRayhane) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane); 
 	
 	update supportCoursSource set slide = libelleSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
 
@@ -43,100 +43,3 @@ delimiter ;
 
 
 	
-
-
-
-
-
-libelleCours, codeRayhane) values(libelleCodeBaps, libelleCours, codeRayhane);
-	insert ignore into cours(libelle, codeBaps) values(libelleCours, libelleCodeBaps);
-	insert ignore into codeRayhane(codeRayhane, codeBaps) values(codeRayhane, libelleCodeBaps);
-
-	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane, slide, supportCoursGen) values(emplacementLibelleCoursSource, libelleCoursSource, libelleCodeBaps, codeRayhane, libelleSlide, libelleSupportCoursGen);
-	
-	
-	
-end |
-delimiter ; 
-
-
-
-
-delimiter |
-
-create procedure supportCoursSourceInsert (emplacement varchar(256),  libelle varchar(256), codeBaps int, codeRayhane int, idSlide int, idSupportCoursGen);  
-begin 
-	insert into supportCoursSource(emplacement, libellePdf, codeBaps, codeRayhane, idSlide, idSupportCoursGen) values (emplacement, libelle, codeBaps, codeRayhane, idSlide, idSupportCoursGen);
-end |
-delimiter ;
-
-
-
-
-
-
-
-delimiter | 
-create procedure coursInsert (libelle varchar(256))
-begin 
-	insert ignore into cours(libelle) values(libelle);
-end |
-delimiter ;
-
-
-
-
-
-
-
-	 
-
-
-
-
-
-
-delimiter |
-create procedure slideInsert (emplacement varchar(256), libelle varchar(256), idSupportCours varchar(256), idCodeBaps varchar(256))
-begin 
-	insert into sourceSlide (emplacement, libelle, idSupportCours, idCodeBaps) values (emplacement, libelle, idSupportCours, idCodeBaps);
-end | 
-delimiter ;
-
-
- 
-
-
-
-
-
-
-
-delimiter | 
-create procedure getIdCoursByLib (lib varchar(256), out idCours int)
-begin 
-	select id into idCours from cours where libelle = lib ;
-end | 
-delimiter ; 
-
-
-
-
-delimiter | 
-create procedure getidCodeBapsByLib (lib varchar(256))
-begin 
-	select id from codeBaps where libCodeBaps = lib;
-end | 
-delimiter ; 
-
-
-//non utliser
-
-delimiter | 
-create procedure getAllPdg (out libelle varchar(256))
-begin 
-	select libellePdg into libelle from  pageDeGarde order by dateInjection ASC;
-end |
-delimiter ;
-
-

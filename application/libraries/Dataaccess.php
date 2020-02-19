@@ -13,29 +13,11 @@ class Dataaccess {
         self::$initialized = true;
     }
 
-    // public static function coursInsert($libelle) {
-    //     $CI =& get_instance();
-    //     $sql = 'call coursInsert(?)';
-    //     $CI->db->query($sql,$libelle);
-    // }
-
     public static function pdgDelete($libelle) {
         $CI = & get_instance();
         $CI->db->where('libelle', $libelle);
         $CI->db->delete('stockerPageDeGarde');
     }
-
-    // public static function codeBapsInsert($codeBaps, $libelleCours) {
-    //     $CI =& get_instance();
-    //     $sql1 = 'call getIdCoursByLib(?, @output)';
-    //     $CI->db->query($sql1, $libelleCours);
-    //     //recupere output de la procedure
-    //     $query = $CI->db->query(('select @output as output'));
-    //     $result = $query->result_array();
-    //     $idCours = $result[0]['output'];
-    //     $sql2 = 'call codeBapsInsert(?, ?)';
-    //     $CI->db->query($sql2,array($codeBaps, $idCours));
-    // }
 
     public static function formInsert($libelleCours, $libCodeBaps, $libCodeRayhane) {
         $CI =& get_instance();
@@ -88,46 +70,22 @@ class Dataaccess {
         return $emplacement;
     }
 
-    // public static function InsertJpg($data){
-    //     $CI = & get_instance();
-    //     $CI->db->insert('slideJpg', $data);
-
-    //     $insert_id = $CI->db->insert_id();
-    //     return $insert_id;
-    // }
-
-    // public static function InsertJpgToSlide($data) {
-    //     $CI = & get_instance();
-    //     $CI->db->insert('lierSlideToJpg', $data);
-    // }
-
-    // public static function getIdByFileNameZip($fileName){
-    //     $CI = & get_instance();
-    //     $CI->db->select('id');
-    //     $CI->db->from('slide');
-    //     $CI->db->where('libelleZip', $fileName);
-
-    //     $result = $CI->db->get()->row()->id;
-
-    //     $id = $result;
-    //     return $id;
-    // }
-
+    //Inutile
     public static function GetFolderNameForPdfFiles($codeBaps){
         $CI = &get_instance();
-        $CI->db->select('libellePdf');
+        $CI->db->select('libelle');
         $CI->db->from('slide');
         $CI->db->where('codeBaps', $codeBaps);
 
-        $result = $CI->db->get()->row()->libelleZip;
+        $result = $CI->db->get()->row()->libelle;
 
         return $result;
     }
 
-    public static function GetEmplacementForPdfFiles($codeBaps=null, $codeRayhane=null) {
+    public static function GetEmplacementForPdfFiles($codeBaps, $codeRayhane=null) {
         $CI = &get_instance();
 
-        if(empty($codeRayhane)){
+        if($codeRayhane == null){
             $CI->db->select('emplacementFichier');
             $CI->db->from('slide');
             $CI->db->where('codeBaps', $codeBaps);
@@ -138,6 +96,17 @@ class Dataaccess {
             $CI->db->where('codeBaps', $codeBaps);
             $CI->db->where('codeRayhane', $codeRayhane);
         }
+
+        $query = $CI->db->get();
+
+        if($query->num_rows()>0){
+            $result = $query->row()->emplacementFichier;
+        }
+        else {
+            $result = null;
+        }
+
+        return $result;
     }
 
     

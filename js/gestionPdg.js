@@ -96,11 +96,6 @@ function DeletePage() {
   });
 }
 
-// function RefreshPage($) {
-//   $('#SettingsPageDeGarde').on('hidden.bs.modal', function (e) {
-//     location.reload();
-// })(jQuery);
-
 jQuery(function RefreshPageSettings($){
   $('#SettingsPageDeGarde').on('hidden.bs.modal', function (e) {
     location.reload();

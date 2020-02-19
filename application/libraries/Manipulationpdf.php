@@ -16,8 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         //2
         public static function addSummaryToPdfBookmark($dataSummary, $pdfName){
             $bookmarkFileName = date('YmdHis') . '_' . rand(1, 1000).'bookmark.txt';
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' dump_data output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName);
-            $file = $_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName;
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/sourcePdf/'.$pdfName.' dump_data output '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/metaDonnees/'.$bookmarkFileName);
+            $file = $_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/metaDonnees/'.$bookmarkFileName;
             $txt="";
     
             foreach($dataSummary as $item => $value){
@@ -33,13 +33,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if($pdg == null) {
                 $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
                 $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
-                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
+                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen);
                 return $fileNameGen;
             }
             else {
                 $bookmarkFileName = self::addSummaryToPdfBookmark($dataSummary, $pdfName);
                 $fileNameGen = date('YmdHis') . '_' . rand(1, 1000) .$pdfName;
-                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName);
+                shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/sourcePdf/'.$pdfName.' update_info '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/metaDonnees/'.$bookmarkFileName.' output '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/sourcePdfSummary/[Summary]'.$pdfName);
                 self::AddPdgToPdg($pdg, $pdfName, $fileNameGen);
                 return $fileNameGen;
             }
@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         //3 a fixer ?
         public static function AddPdgToPdg($pdgEmplacement, $pdfName, $fileNameGen){
-            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdgEmplacement.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/sourcePdfSummary/[Summary]'.$pdfName.' cat output '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen);
+            shell_exec('pdftk '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$pdgEmplacement.' '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/sourcePdfSummary/[Summary]'.$pdfName.' cat output '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen);
         }
     
     
@@ -127,7 +127,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         public static function ConvertPdg($text, $emplacementPageDeGarde) {
             $pdgName = str_replace('uploads/pageDeGarde/', '', $emplacementPageDeGarde);
             $pdg = 'uploads/pageDeGardeWText/'.$pdgName;
-            shell_exec('convert -density 288 -font Gotham-Bold '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$emplacementPageDeGarde.' -pointsize 35 -annotate +450+2700 '.$text.' '.$_SERVER['DOCUMENT_ROOT'].'/IntegrSupCours/'.$pdg);
+            shell_exec('convert -density 288 -font Gotham-Bold '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementPageDeGarde.' -pointsize 35 -annotate +450+2700 '.$text.' '.$_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$pdg);
             return $pdg;
         }
+
 }
