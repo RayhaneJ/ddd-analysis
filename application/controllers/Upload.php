@@ -49,7 +49,7 @@ class Upload extends CI_Controller {
                                                 break;
                                         case 1:
                                                 $dest="./uploads/sourcesSlides";
-                                                $filtre ='pdf';
+                                                $filtre ='zip';
                                                 break;
                                         case 2:
                                                 $dest="./uploads/csv";
@@ -142,12 +142,16 @@ class Upload extends CI_Controller {
                                         }
                                 }
 
-                                $emplacemenPdfSource = '/IntegrSupCours/uploads/sourcePdf/'.$currentPdfName;
+                                $emplacemenPdfSource = '/SiteWebIntegrationWeb/uploads/sourcePdf/'.$currentPdfName;
+
                                 $emplacementSlideSource = 'uploads/sourcesSlides/'.$currentSlideName;
-                                $emplacementPdfGen = '/IntegrSupCours/uploads/integrationPdf/'.$fileNameGen;
+                                $folderNameSlide = $this->manipulationslides::ExtractZip($emplacementSlideSource);
+                                $emplacementSlideSource = 'uploads/sourcesSlides/'.$folderNameSlide;
+
+                                $emplacementPdfGen = '/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen;
 
                                 $libellePdfSource = $currentPdfName; 
-                                $libelleSlideSource = $currentSlideName;
+                                $libelleSlideSource = $folderNameSlide;
                                 $libellePdfGen = $fileNameGen;
 
 
@@ -177,12 +181,6 @@ class Upload extends CI_Controller {
                 $data['libelle'] = $this->dataaccess::getAllPdgInDb();
                 $this->load->view('gestionPdg', $data);
         }
-
-        //A supprimer
-
-        // public function Visualisation(){
-        //         $this->load->view('t');
-        // }
 
 
         public function LoadPdfPage($libellePdg){

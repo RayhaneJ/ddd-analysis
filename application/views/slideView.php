@@ -1,27 +1,55 @@
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-    <link rel = "stylesheet" href = "<?php echo base_url()?>css/slideView.css"/>
-    <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
-    <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <script>let base_url = "<?php echo base_url();?>";</script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link href="<?php echo base_url();?>css/t.css" rel="stylesheet">
+  <script>var base_url = '<?php echo base_url() ?>';</script>
+  
+</head>
 
-  </head>
 <body>
 
-  <!-- <div id = "count"><span>Page: <span id="page_num"></span> / <span id="page_count"></span></span></div> -->
+<div class="container-">
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-3.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-4.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-4.png" alt="Third slide">
+    </div>
+  </div>
+  <a >
+    <img id ="arrow-left" src="<?php echo base_url();?>css/arrow-left.png"></img>
+  </a>  
+  <a >
+    <img id = "arrow-right" src = "<?php echo base_url();?>css/arrow-right.png"></img>
+  </a>
+  </div>
 
-
-<div class = "container">
-  <canvas id="the-canvas" style = "height:100%; width:100%; ">
-  </canvas>
-  <div class="fas fa-arrow-circle-right" id = "next"></div>
-  <div class="fas fa-arrow-circle-left" id ="prev"></div>
-  <i class="fas fa-compress" id="fullscreen"></i>
+  <a>
+    <img id = "fullScreen" src = "<?php echo base_url();?>css/fs.png"></img>
+  </a>
 </div>
+			
 
-<script src = "<?php echo base_url()?>js/slideView.js"></script>
+<script src="<?php echo base_url();?>js/slideView.js">
 
-	</body>
+var files = <?php echo json_encode($files);?>;
+
+files.forEach(element => {
+
+})
+
+</script>
+
+</body>
+
 </html>

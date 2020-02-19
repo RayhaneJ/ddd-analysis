@@ -1,151 +1,124 @@
-var url = base_url + "uploads/images/m.pdf";
-
-// Loaded via <script> tag, create shortcut to access PDF.js exports.
-var pdfjsLib = window['pdfjs-dist/build/pdf'];
-
-// The workerSrc property shall be specified.
-pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-var pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
-    canvas = document.getElementById('the-canvas'),
-    scale = 2.0,
-    ctx = canvas.getContext('2d');
-
-/**
- * Get page info from document, resize canvas accordingly, and render page.
- * @param num Page number.
- */
-function renderPage(num) {
-    pageRendering = true;
-    // Using promise to fetch the page
-    pdfDoc.getPage(num).then(function(page) {
-    var viewport = page.getViewport({scale : scale});
-    scale = window.innerWidth/0.2/ (viewport.width);
-    viewport = page.getViewport({scale : scale});
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-    
-    // Render PDF page into canvas context
-    var renderContext = {
-      canvasContext: ctx,
-      viewport: viewport
-    };
-    var renderTask = page.render(renderContext);
-
-    // Wait for rendering to finish
-    renderTask.promise.then(function() {
-      pageRendering = false;
-      if (pageNumPending !== null) {
-        // New page rendering is pending
-        renderPage(pageNumPending);
-        pageNumPending = null;
-      }
-    });
-  });
-
-  // Update page counters
-  //document.getElementById('page_num').textContent = num;
-}
-
-/**
- * If another page rendering in progress, waits until the rendering is
- * finised. Otherwise, executes rendering immediately.
- */
-function queueRenderPage(num) {
-  if (pageRendering) {
-    pageNumPending = num;
-  } else {
-    renderPage(num);
-  }
-}
-
-/**
- * Displays previous page.
- */
-function onPrevPage() {
-  if (pageNum <= 1) {
-    return;
-  }
-  pageNum--;
-  queueRenderPage(pageNum);
-  console.log('next');
-}
-
-document.getElementById('prev').addEventListener('click', onPrevPage);
-
-/**
- * Displays next page.
- */
-function onNextPage() {
-  if (pageNum >= pdfDoc.numPages) {
-    return;
-  }
-  pageNum++;
-  queueRenderPage(pageNum);
-  console.log('prev');
-}
-
-document.getElementById('next').addEventListener('click', onNextPage);
-
-/**
- * Asynchronously downloads PDF.
- */
-pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-  pdfDoc = pdfDoc_;
-
-  // Initial/first page rendering
-  renderPage(pageNum);
-});
-
 (function() {
-  button = document.getElementById('fullscreen');
-  canvas = document.getElementById('the-canvas');
-  button.addEventListener('click', function(){
-      if (button.requestFullscreen) {
-      canvas.requestFullscreen();
-      }
+  var button = document.getElementById('fullScreen');
+  var carousel = document.getElementsByClassName('carousel-inner')[0];
+  button.addEventListener("touchstart", function(){
+    if (carousel.requestFullscreen) {
+      carousel.requestFullscreen();
+    } else if (carousel.mozRequestFullScreen) {
+      carousel.mozRequestFullScreen();
+    } else if (carousel.webkitRequestFullscreen) {
+      carousel.webkitRequestFullscreen();
+    } else if (carousel.msRequestFullscreen) {
+      carousel.msRequestFullscreen();
+    }
   });
+
+  button.addEventListener("click", function(){
+    if (carousel.requestFullscreen) {
+      carousel.requestFullscreen();
+    } else if (carousel.mozRequestFullScreen) {
+      carousel.mozRequestFullScreen();
+    } else if (carousel.webkitRequestFullscreen) {
+      carousel.webkitRequestFullscreen();
+    } else if (carousel.msRequestFullscreen) {
+      carousel.msRequestFullscreen();
+    }
+});
 
 })();
 
-window.addEventListener("keydown", function(event){
-  var canvas = document.getElementById('the-canvas');
-  if(event.keyCode == '39') {
-    onNextPage();
-  }
-  else {
-    if(event.keyCode == '37'){
-      onPrevPage();
+// const FsEvent = class {
+//   called = false;
+
+//   constructor() {}
+
+//   fullScreenEvent(){
+//     if(this.called == false){
+//       var called = false;
+
+//       var arrow_left = document.getElementById("arrow-left");
+//       var arrow_right =document.getElementById("arrow-right");
+//       var fsButton = document.getElementById("fullScreen");
+
+//       arrow_left.parentElement.remove();
+//       arrow_right.parentElement.remove();
+//       fsButton.parentElement.remove();
+
+//       this.called = true;
+//     }
+//     else {
+//       var arrow_left = document.createElement('img');
+//       var arrow_right = document.createElement('img');
+//       var fsButton = document.createElement('img');
+
+//       var a1 = document.createElement('a');
+//       var a2 = document.createElement('a');
+//       var a3 = document.createElement('a');
+
+//       arrow_left.src = base_url + "css/arrow-left.png";
+//       arrow_right.src = base_url + "css/arrow-right.png";
+//       fsButton.src = base_url + "css/fs.png";
+  
+//       arrow_left.id = "arrow-left";
+//       arrow_right.id = "arrow-right";
+//       fsButton.id = "fullScreen";
+
+//       a1.appendChild(arrow_left);
+//       a2.appendChild(arrow_right);
+//       a3.appendChild(fsButton);
+
+//       var carrouselControls = document.getElementById('carouselExampleControls');
+//       carrouselControls.appendChild(a1);
+//       carrouselControls.appendChild(a2);
+
+//       var container = document.getElementsByClassName("container-")[0];
+//       container.appendChild(a3);
+
+//       this.called = false;
+//     }
+//   }
+// }
+
+$(document).ready(function () {
+  
+  // let fsEvent = new FsEvent();
+  $('#arrow-right').click(function(){
+    $('.carousel').carousel('next');
+  });
+  
+  $('#arrow-left').click(function(){
+    $('.carousel').carousel('prev');
+  });
+  
+  $(document).keydown(function(e) {
+    if(e.keyCode == "37"){
+      $("#arrow-left").click()
     }
     else {
-      if(event.keyCode == '122') {
-        console.log('test');
-        if(Element.requestFullscreen){
-          canvas.requestFullscreen();
-          console.log('sucess');
+      if(e.keyCode == "39"){
+        $("#arrow-right").click()
+      }
+      else {
+        if(e.keyCode == "122"){
+          // fsEvent.fullScreenEvent();
         }
       }
     }
-  }
+  });
 });
 
+document.addEventListener("fullscreenchange", function(){
+    if(screen.width < 1024){
+      screen.orientation.lock('landscape');
+    }
+  });
 
+  console.log(screen.height);
+    console.log(window.outerHeight);
 
-/*------- Smooth Scroll -------*/
-
-// $('a[href^="#"]').on('click', function(event) {
-
-//     var target = $( $(this).attr('href') );
-
-//     if( target.length ) {
-//         event.preventDefault();
-//         $('html, body').animate({
-//             scrollTop: target.offset().top
-//         }, 1000);
-//     }
-
-// });
-
+// document.
+//   if(screen.width === window.outerWidth && screen.height === window.outerHeight){
+//     console.log('t');
+//     console.log(screen.width);
+//     console.log(window.outerWidth);
+//   }
