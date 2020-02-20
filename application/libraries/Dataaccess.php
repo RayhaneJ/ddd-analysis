@@ -26,11 +26,19 @@ class Dataaccess {
         $CI->db->query($sql, $param);
     }
 
-    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane) {
+    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
         $CI =& get_instance();
-        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?)';
-        $param = array($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane);
-        $CI->db->query($sql, $param);
+
+        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $param = array($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv);
+
+        if(!$CI->db->query($sql, $param)){
+            return false;
+        }            
+        else {
+            return true;
+        }
+            
     }
 
     public static function InsertPdgInDb($emplacement, $libelle) {

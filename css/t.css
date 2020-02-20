@@ -2,8 +2,14 @@
 
 body{
     position: fixed;
-    height: 100%;
+    height:100%;
+    width: 100%;
     background-color: black;
+    margin: auto;
+}
+
+.image{
+    height: 100%;
 } 
 
 #fullScreen {
@@ -31,8 +37,7 @@ body{
     top:50%;
     width: 3rem;
     height: 3rem;
-    transform: translateY(-50%);
-    z-index: 1001;  
+    transform: translateY(-50%); 
     font-size: 2.5em;
     cursor: pointer;
 }
@@ -44,6 +49,15 @@ body{
 
 #arrow-right {
     right:5%;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-menu {
+    z-index: 1;
 }
 }
 
@@ -58,11 +72,62 @@ body{
         top: 50%;
         transform: translateY(-50%);
         position: absolute;   
+        width: 100%;
     }
 
     #fullScreen {
         position: absolute;
         top:3.8% !important;
+        right:2.5%;
+        height:3rem;
+        width: 3rem;
+        color: black;
+        cursor: pointer;
+    }
+    
+    #arrow-right, #arrow-left {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%);
+        font-size: 2.5em;
+        cursor: pointer;
+    }
+    
+    #arrow-left {
+        left:5%;
+    }
+    
+    #arrow-right {
+        right:5%;
+    }
+}
+
+@media screen and (max-width: 1024px) and (orientation:landscape){
+
+    body, html{
+        height: 100% !important;
+        width: 100%;
+    }
+
+
+    .container- {
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;   
+        width: 100%; 
+        height: 100%;
+    }
+
+    .image {
+        height: 100%;
+        width: 100%;
+    }
+
+    #fullScreen {
+        position: absolute;
+        bottom:3.8% !important;
         right:2.5%;
         height:3rem;
         width: 3rem;

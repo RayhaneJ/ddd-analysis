@@ -95,6 +95,7 @@ class Upload extends CI_Controller {
                                                         break;
                                                 case 1:
                                                         $currentSlideName = $fichier['file_name'];
+                                                        print_r($currentSlideName);
                                                         break;
                                                 case 2:
                                                         $currentCsvName = $fichier['file_name'];
@@ -150,6 +151,8 @@ class Upload extends CI_Controller {
 
                                 $emplacementPdfGen = '/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen;
 
+                                $emplacementCsv = 'uploads/csv/'.$currentCsvName;
+
                                 $libellePdfSource = $currentPdfName; 
                                 $libelleSlideSource = $folderNameSlide;
                                 $libellePdfGen = $fileNameGen;
@@ -162,11 +165,21 @@ class Upload extends CI_Controller {
                                         $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
                                 }
 
-                                $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleSlideSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane);
+                                $formInsert = $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleSlideSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
 
-                                $data['pdfGen'] = $libellePdfGen;
+                                if($formInsert == false){
+                                        $error = "Le Code Baps est déja associé à un diaporama !";
+                                        $data['erreur'] = $error;
+
+                                        $this->load->view('errorView', $data);
+                                }
                                 
-                                $this->load->view('downloadView', $data);
+                                else {
+                                        $data['pdfGen'] = $libellePdfGen;
+                                        $this->load->view('downloadView', $data);
+                                }
+
+
                         }
                         else {
                                 $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 

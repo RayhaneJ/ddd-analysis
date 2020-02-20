@@ -76,10 +76,19 @@ libelle varchar(256) not null unique,
 supportCoursSource varchar(256), 
 supportCoursGen varchar(256), 
 codeBaps varchar(256) unique,
-codeRayhane varchar(256), 
+codeRayhane varchar(256),
+emplacementCsv varchar(256), 
 primary key (id)
 )
 ENGINE=InnoDB;
+
+create table csv (
+id int auto_increment, 
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null unique,
+primary key (id)
+)
+ENGINE = InnoDB;
 
 
 alter table cours 
@@ -149,6 +158,9 @@ add constraint fk_slide_codeBaps foreign key (codeBaps) references codeBaps(libe
 
 alter table slide
 add constraint fk_slide_codeRayhane foreign key (codeRayhane) references codeRayhane(codeRayhane);
+
+alter table slide 
+add constraint fk_slide_emplacementCsv foreign key (emplacementCsv) references csv(emplacement);
 
 
 

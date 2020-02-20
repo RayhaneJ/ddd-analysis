@@ -8,7 +8,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <link href="<?php echo base_url();?>css/upload.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <script>var base_url = '<?php echo base_url() ?>';</script>
   
@@ -121,8 +120,8 @@ if(empty($errorFile) == FALSE) {
 
 var dataPdfTab = <?php echo json_encode($libelle); ?>;
 
-
 dataPdfTab.forEach(element => {
+ 
   addPdgToList(element); 
 })
 
