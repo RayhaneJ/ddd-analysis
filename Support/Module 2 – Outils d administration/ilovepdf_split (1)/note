@@ -1,0 +1,10 @@
+convert           \
+   -verbose       \
+   -density 150   \
+   -trim          \
+    Diapositive1.JPG      \
+   -quality 100   \
+   -flatten       \
+   -sharpen 0x1.0 \
+    24-18.jpg
+

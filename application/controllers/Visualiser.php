@@ -28,7 +28,6 @@ class Visualiser extends CI_Controller {
                 
                 $data['emplacement'] = $emplacement;
                 $data['files'] = $files;
-                print_r($files);
                 $this->load->view('slideView', $data); 
             }
         }

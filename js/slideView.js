@@ -23,61 +23,62 @@
     } else if (carousel.msRequestFullscreen) {
       carousel.msRequestFullscreen();
     }
-});
+  });
+
 
 })();
 
-// const FsEvent = class {
-//   called = false;
+// // const FsEvent = class {
+// //   called = false;
 
-//   constructor() {}
+// //   constructor() {}
 
-//   fullScreenEvent(){
-//     if(this.called == false){
-//       var called = false;
+// //   fullScreenEvent(){
+// //     if(this.called == false){
+// //       var called = false;
 
-//       var arrow_left = document.getElementById("arrow-left");
-//       var arrow_right =document.getElementById("arrow-right");
-//       var fsButton = document.getElementById("fullScreen");
+// //       var arrow_left = document.getElementById("arrow-left");
+// //       var arrow_right =document.getElementById("arrow-right");
+// //       var fsButton = document.getElementById("fullScreen");
 
-//       arrow_left.parentElement.remove();
-//       arrow_right.parentElement.remove();
-//       fsButton.parentElement.remove();
+// //       arrow_left.parentElement.remove();
+// //       arrow_right.parentElement.remove();
+// //       fsButton.parentElement.remove();
 
-//       this.called = true;
-//     }
-//     else {
-//       var arrow_left = document.createElement('img');
-//       var arrow_right = document.createElement('img');
-//       var fsButton = document.createElement('img');
+// //       this.called = true;
+// //     }
+// //     else {
+// //       var arrow_left = document.createElement('img');
+// //       var arrow_right = document.createElement('img');
+// //       var fsButton = document.createElement('img');
 
-//       var a1 = document.createElement('a');
-//       var a2 = document.createElement('a');
-//       var a3 = document.createElement('a');
+// //       var a1 = document.createElement('a');
+// //       var a2 = document.createElement('a');
+// //       var a3 = document.createElement('a');
 
-//       arrow_left.src = base_url + "css/arrow-left.png";
-//       arrow_right.src = base_url + "css/arrow-right.png";
-//       fsButton.src = base_url + "css/fs.png";
+// //       arrow_left.src = base_url + "css/arrow-left.png";
+// //       arrow_right.src = base_url + "css/arrow-right.png";
+// //       fsButton.src = base_url + "css/fs.png";
   
-//       arrow_left.id = "arrow-left";
-//       arrow_right.id = "arrow-right";
-//       fsButton.id = "fullScreen";
+// //       arrow_left.id = "arrow-left";
+// //       arrow_right.id = "arrow-right";
+// //       fsButton.id = "fullScreen";
 
-//       a1.appendChild(arrow_left);
-//       a2.appendChild(arrow_right);
-//       a3.appendChild(fsButton);
+// //       a1.appendChild(arrow_left);
+// //       a2.appendChild(arrow_right);
+// //       a3.appendChild(fsButton);
 
-//       var carrouselControls = document.getElementById('carouselExampleControls');
-//       carrouselControls.appendChild(a1);
-//       carrouselControls.appendChild(a2);
+// //       var carrouselControls = document.getElementById('carouselExampleControls');
+// //       carrouselControls.appendChild(a1);
+// //       carrouselControls.appendChild(a2);
 
-//       var container = document.getElementsByClassName("container-")[0];
-//       container.appendChild(a3);
+// //       var container = document.getElementsByClassName("container-")[0];
+// //       container.appendChild(a3);
 
-//       this.called = false;
-//     }
-//   }
-// }
+// //       this.called = false;
+// //     }
+// //   }
+// // }
 
 $(document).ready(function () {
   
@@ -111,14 +112,42 @@ document.addEventListener("fullscreenchange", function(){
     if(screen.width < 1024){
       screen.orientation.lock('landscape');
     }
-  });
 
-  console.log(screen.height);
-    console.log(window.outerHeight);
+    // if(screen.height == window.innerHeight){
+    //   var carousel = document.get
+    // }
+});
 
-// document.
-//   if(screen.width === window.outerWidth && screen.height === window.outerHeight){
-//     console.log('t');
-//     console.log(screen.width);
-//     console.log(window.outerWidth);
-//   }
+function AddSlideToView(emplacement, file) {
+  var carrouselItem = document.createElement('div');
+  carrouselItem.classList.add("carousel-item");
+
+  var img = document.createElement('img');
+  img.classList.add("d-block", "w-100", "image");
+  img.src = base_url + emplacement + "/" + file;
+
+  carrouselItem.appendChild(img);
+  
+  var carouselInner = document.getElementsByClassName("carousel-inner")[0];
+  carouselInner.appendChild(carrouselItem);
+  // var arrow_left = document.getElementById("firstChildArrow");
+
+  // carouselInner.insertBefore(carrouselItem, arrow_left);
+};
+
+function AddFirstSlideToView(emplacement, file){
+  var carrouselItem = document.createElement('div');
+  carrouselItem.classList.add("carousel-item", "active");
+
+  var img = document.createElement('img');
+  img.classList.add("d-block", "w-100", "image");
+  img.src = base_url + emplacement + "/" + file;
+
+  carrouselItem.appendChild(img);
+  
+  var carouselInner = document.getElementsByClassName("carousel-inner")[0];
+  carouselInner.appendChild(carrouselItem);
+  // var arrow_left = document.getElementById("firstChildArrow");
+
+  // carouselInner.insertBefore(carrouselItem, arrow_left);
+}
