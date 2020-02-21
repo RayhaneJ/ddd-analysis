@@ -90,11 +90,18 @@ primary key (id)
 )
 ENGINE = InnoDB;
 
+create table thumbnails (
+id int auto_increment,
+dateInjection timestamp not null default current_timestamp,
+emplacement varchar(256) not null unique,
+primary key (id)
+)
+ENGINE = InnoDB; 
+
+
 
 alter table cours 
 add constraint fk_cours_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
-
-
 
 
 alter table codeBaps 
@@ -104,13 +111,8 @@ alter table codeBaps
 add constraint fk_codeBaps_codeRayhane foreign key(codeRayhane) references codeRayhane(codeRayhane);
 
 
-
-
-
 alter table codeRayhane 
 add constraint fk_codeRayhane_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
-
-
 
 
 ALTER TABLE supportCoursGen 
@@ -128,8 +130,6 @@ ALTER TABLE supportCoursGen
 ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (libelle); 
 
 
-
-
 ALTER TABLE supportCoursSource 
 ADD CONSTRAINT fk_supportCoursSource_supCoursGen FOREIGN KEY (supportCoursGen)
 REFERENCES supportCoursGen(libelle);
@@ -142,8 +142,6 @@ ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFER
 
 ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (libelle); 
-
-
 
 
 alter table slide 

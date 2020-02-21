@@ -1,64 +1,144 @@
+@font-face {
+    font-family: 'gothambold';
+    src: url('ufonts.com_gotham-bold-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-bold-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gotham_lightregular';
+    src: url('ufonts.com_gotham-light-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothamregular';
+    src: url('ufonts.com_gotham-light-1-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-1-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothammedium';
+    src: url('ufonts.com_gotham-medium-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-medium-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 @media screen and (min-width:1024px) {
 
-body{
-    position: fixed;
-    height:100%;
-    width: 100%;
-    background-color: black;
-    margin: auto;
-}
+    body{
+        position: fixed;
+        height:100%;
+        width: 100%;
+        background-color: black;
+        margin: auto;
+    }
 
-.image{
-    height: 100%;
-} 
+    .dropdown{
+        top:1%;
+        left:0.8%;
+    }
 
-#fullScreen {
-    position: absolute;
-    top:1%;
-    right:1%;
-    height:3rem;
-    width: 3rem;
-    color: black;
-    cursor: pointer;
-}
+    .image{
+        height: 100%;
+    } 
 
-#fullScreen:hover {
-    position: absolute;
-    top:1%;
-    right:1%;
-    height:3.2rem;
-    width: 3.2rem;
-    color:black;
-    cursor: pointer;
-} 
+    #fullScreen {
+        position: absolute;
+        top:1%;
+        right:1%;
+        height:3rem;
+        width: 3rem;
+        color: black;
+        cursor: pointer;
+    }
 
-#arrow-right, #arrow-left {
-    position: absolute;
-    top:50%;
-    width: 3rem;
-    height: 3rem;
-    transform: translateY(-50%); 
-    font-size: 2.5em;
-    cursor: pointer;
-}
+    #fullScreen:hover {
+        position: absolute;
+        top:1%;
+        right:1%;
+        height:3.2rem;
+        width: 3.2rem;
+        color:black;
+        cursor: pointer;
+    } 
+
+    #arrow-right, #arrow-left {
+        position: absolute;
+        top:50%;
+        width: 3rem;
+        height: 3rem;
+        transform: translateY(-50%); 
+        font-size: 2.5em;
+        cursor: pointer;
+    }
 
 
-#arrow-left {
-    left:5%;
-}
+    #arrow-left {
+        left:5%;
+    }
 
-#arrow-right {
-    right:5%;
-}
+    #arrow-right {
+        right:5%;
+    }
 
-.dropdown {
-    position: absolute;
-    z-index: 1;
-}
+    .dropdown-submenu {
+        position: relative;
+        font-family: 'gothammedium';
+    }
+    
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
+    
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
 
-.dropdown-menu {
-    z-index: 1;
-}
+    .dropdown{
+        z-index: 1;
+        position: absolute;
+        left:0.8%;
+        top:1%;
+    }
+
+    .btn-light {
+        font-size: 18px;
+        font-family: 'gothammedium';
+        color: #212529;
+        background-color :transparent!important;
+        border-color:#e6e6e6;
+    }
+
+    .dropdown-item:focus, .dropdown-item{
+        font-family: 'gothammedium';
+    }
+
 }
 
 @media screen and (max-width: 1024px) and (orientation:portrait){
@@ -101,6 +181,45 @@ body{
     
     #arrow-right {
         right:5%;
+    }
+
+
+    .dropdown-submenu {
+        position: relative;
+        font-family: 'gothammedium';
+    }
+    
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
+    
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
+
+    .dropdown{
+        z-index: 1;
+        position: absolute;
+        left:0.8%;
+        top:1%;
+    }
+
+    .btn-light {
+        font-size: 18px;
+        font-family: 'gothammedium';
+        color: #212529;
+        background-color :transparent!important;
+        border-color:#e6e6e6;
+    }
+
+    .dropdown-item:focus, .dropdown-item{
+        font-family: 'gothammedium';
     }
 }
 
@@ -151,5 +270,44 @@ body{
     
     #arrow-right {
         right:5%;
+    }
+
+
+    .dropdown-submenu {
+        position: relative;
+        font-family: 'gothammedium';
+    }
+  
+    .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+    }
+  
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+    }
+
+    .dropdown{
+        z-index: 1;
+        position: absolute;
+        left:0.8%;
+        top:1%;
+    }
+
+    .btn-light {
+        font-size: 18px;
+        font-family: 'gothammedium';
+        color: #212529;
+        background-color :transparent!important;
+        border-color:#e6e6e6;
+    }
+
+    .dropdown-item:focus, .dropdown-item{
+        font-family: 'gothammedium';
     }
 }

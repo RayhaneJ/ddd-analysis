@@ -13,34 +13,19 @@
 <body>
 
 <div class="container-">
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">Action</button>
-    <button class="dropdown-item" type="button">Another action</button>
-    <button class="dropdown-item" type="button">Something else here</button>
+  <div class="dropdown">
+    <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sommaire
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Vignettes</a></li>
+      <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Chapitres</a>
+        <ul class="dropdown-menu" id = "sommaire">
+        </ul>
+      </li>
   </div>
-</div>
-  <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-ride="carousel">
-  <div class="carousel-inner">
-  <!-- <div class="carousel-item active">
-    <img class="d-block w-100 image" src="<?php echo base_url();?>uploads/images/output-0.png">
-  </div>
-  <div class="carousel-item">
-    <img class="d-block w-100 image" src="http://localhost/SiteWebIntegrationWeb/uploads/sourcesSlides/20200219165320_387GKAG01_FR/Diapositive1.JPG">
-  </div> -->
-  <!-- <div class="carousel-item active">
-      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-3.png" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-4.png" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="<?php echo base_url();?>uploads/images/output-4.png" alt="Third slide">
-    </div> -->
-  
+  <div id="carouselId" class="carousel slide" data-interval="false" data-ride="carousel">
+  <div class="carousel-inner">  
   </div>
   <a id="firstChildArrow">
     <img id ="arrow-left" src="<?php echo base_url();?>css/arrow-left.png"></img>
@@ -53,6 +38,15 @@
   </a>
   </div>
 </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
 </div>
 			
 
@@ -75,6 +69,12 @@ filesArray.forEach(element => {
   else {
     AddSlideToView(emplacement, element);
   }
+});
+
+var sommaire = <?php echo json_encode($sommaire);?>;
+
+sommaire.forEach(element => {
+  AddSummary(element);
 });
 
 

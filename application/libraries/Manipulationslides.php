@@ -82,6 +82,10 @@ class ManipulationSlides {
         return $files;
     }
 
+    public static function ExecThumbailsScript($emplacementSlide) {
+        
+    }
+
 
 
 }

@@ -1,0 +1,16 @@
+BookmarkBegin
+BookmarkTitle: chapitre 1
+BookmarkLevel: 1
+BookmarkPageNumber:  2
+BookmarkBegin
+BookmarkTitle: chapitre 2
+BookmarkLevel: 1
+BookmarkPageNumber:  3
+BookmarkBegin
+BookmarkTitle: chapitre 3
+BookmarkLevel: 1
+BookmarkPageNumber:  5
+BookmarkBegin
+BookmarkTitle: chapitre 4
+BookmarkLevel: 1
+BookmarkPageNumber:  7

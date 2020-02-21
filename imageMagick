@@ -1,0 +1,2 @@
+convert output-0.png -trim -resize 300x300 thumbnail.png
+

@@ -117,6 +117,43 @@ class Dataaccess {
         return $result;
     }
 
+    public static function GetEmplacementCsv($codeBaps, $codeRayhane=null){
+        $CI = &get_instance();
+
+        if($codeRayhane == null){
+            $CI->db->select('emplacementCsv');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+        }
+
+        else {
+            $CI->db->select('emplacementCsv');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->where('codeRayhane', $codeRayhane);
+        }
+
+        $query = $CI->db->get();
+
+        if($query->num_rows()>0){
+            $result = $query->row()->emplacementCsv;
+        }
+        else {
+            $result = null;
+        }
+
+        return $result;
+    }
+
+    public static function InsertThumbnailsInDb($emplacement){
+        $CI = &get_instance();
+        $data = array(
+            'emplacement'=> $emplacement
+        );
+
+        $CI->db->insert('thumbnails', $data);
+    }
+
     
 
 

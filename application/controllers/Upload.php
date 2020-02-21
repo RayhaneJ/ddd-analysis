@@ -147,7 +147,7 @@ class Upload extends CI_Controller {
 
                                 $emplacementSlideSource = 'uploads/sourcesSlides/'.$currentSlideName;
                                 $folderNameSlide = $this->manipulationslides::ExtractZip($emplacementSlideSource);
-                                $emplacementSlideSource = 'uploads/sourcesSlides/'.$folderNameSlide;
+                                $emplacementSlideSource = "uploads/sourcesSlides/".$folderNameSlide;
 
                                 $emplacementPdfGen = '/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen;
 
@@ -174,11 +174,17 @@ class Upload extends CI_Controller {
                                         $this->load->view('errorView', $data);
                                 }
                                 
-                                else {
+                                else {  
                                         $data['pdfGen'] = $libellePdfGen;
                                         $this->load->view('downloadView', $data);
-                                }
+                                        print_r($emplacementSlideSource);
 
+                                        $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideSource);
+
+                                        // print_r($emplacementThumbnailsCreated);
+                                        // $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
+
+                                }
 
                         }
                         else {

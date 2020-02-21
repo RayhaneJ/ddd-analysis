@@ -7,6 +7,7 @@ class Visualiser extends CI_Controller {
         $this->load->database();
         $this->load->library('dataaccess');
         $this->load->library('manipulationslides');
+        $this->load->library('manipulationpdf');
     }
 
     public function index() {
@@ -17,8 +18,11 @@ class Visualiser extends CI_Controller {
     public function Slides($codeBaps, $codeRayhane = null) {
         if($codeRayhane == null){
             $emplacement = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps);
+            $csvEmplacement = $this->dataaccess::GetEmplacementCsv($codeBaps);
 
-            if($emplacement == null){
+            $sommaire = $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
+
+            if($emplacement == null || $csvEmplacement==null){
                 $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
@@ -28,13 +32,18 @@ class Visualiser extends CI_Controller {
                 
                 $data['emplacement'] = $emplacement;
                 $data['files'] = $files;
+                $data['sommaire'] = $sommaire;
+
                 $this->load->view('slideView', $data); 
             }
         }
         else {
             $emplacement = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
+            $csvEmplacement = $this->dataaccess::GetEmplacementCsv($codeBaps, $codeRayhane);
 
-            if($emplacement == null){
+            $sommaire =  $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
+
+            if($emplacement == null || $csvEmplacement == null){
                 $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
@@ -43,6 +52,7 @@ class Visualiser extends CI_Controller {
 
                 $data['emplacementPdf'] = $emplacement;
                 $data['files'] = $files;
+                $data['sommaire'] = $sommaire;
                 
                 $this->load->view('slideView', $data);
             }
