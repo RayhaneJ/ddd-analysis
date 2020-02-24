@@ -1,2 +1,6 @@
 convert output-0.png -trim -resize 300x300 thumbnail.png
 
+convert -density 288 -gravity Center -font Gotham-Bold pageDeGarde.pdf -pointsize 35 -annotate +0+1140 'GKAGK01' temp1.pdf
+
+!!INSERER LES FONTS!!
+
