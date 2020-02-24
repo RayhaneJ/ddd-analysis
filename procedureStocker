@@ -15,7 +15,7 @@ delimiter ;
 
 
 delimiter | 
-create procedure formInsertFiles(libelleCoursSource varchar(256), emplacementCoursSource varchar(256), libelleSlide varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), csv varchar(256))
+create procedure formInsertFiles(libelleCoursSource varchar(256), emplacementCoursSource varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), csv varchar(256))
 BEGIN 
 	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane) values (emplacementCoursSource, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
@@ -23,11 +23,11 @@ BEGIN
 
 	insert into csv(emplacement) values(csv);
 
-	insert into slide(emplacementFichier, libelle, supportCoursSource, supportCoursGen, codeBaps, codeRayhane, emplacementCsv) values (emplacementSlide, libelleSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane, csv); 
+	insert into slide(emplacementFichier, supportCoursSource, supportCoursGen, codeBaps, codeRayhane, emplacementCsv) values (emplacementSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane, csv); 
 	
-	update supportCoursSource set slide = libelleSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
+	update supportCoursSource set slide = emplacementSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
 
-	update supportCoursGen set slide = libelleSlide where id = (select max(id));
+	update supportCoursGen set slide = emplacementSlide where id = (select max(id));
 end |
 delimiter ;
 

@@ -38,13 +38,12 @@
   </a>
   </div>
 </div>
-</div>
 
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id = "modalThumbnails" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      ...
+      
     </div>
   </div>
 </div>
@@ -54,27 +53,40 @@
 
 <script>
 
-var files = <?php echo json_encode($files);?>;
-var emplacement = <?php echo json_encode($emplacement);?>;
+var filesSlides = <?php echo json_encode($files);?>;
+var emplacementSlides = <?php echo json_encode($emplacementSlides);?>;
 
-const filesArray = Object.values(files);
+const filesArraySlides = Object.values(filesSlides);
 
 var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
-filesArray.sort(collator.compare);
+filesArraySlides.sort(collator.compare);
 
-filesArray.forEach(element => {
-  if(filesArray[0]==element){
-    AddFirstSlideToView(emplacement, element);
+filesArraySlides.forEach(element => {
+  if(filesArraySlides[0]==element){
+    AddFirstSlideToView(emplacementSlides, element);
   }
   else {
-    AddSlideToView(emplacement, element);
+    AddSlideToView(emplacementSlides, element);
   }
 });
+
 
 var sommaire = <?php echo json_encode($sommaire);?>;
 
 sommaire.forEach(element => {
   AddSummary(element);
+});
+
+var emplacementThumbnails = <?php echo json_encode($emplacementThumbnails);?>;
+var filesTumbnails = <?php echo json_encode($thumbnailsFiles);?>;
+const filesArrayThumbnails = Object.values(filesTumbnails);
+
+filesArrayThumbnails.sort(collator.compare);
+
+var i =0;
+filesArrayThumbnails.forEach(element => {
+  AddThumbnailsToModal(emplacementThumbnails, element, i);
+  i++;
 });
 
 

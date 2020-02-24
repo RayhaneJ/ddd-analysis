@@ -148,3 +148,26 @@ function AddSummary(element){
   var menu = document.getElementById('sommaire');
   menu.appendChild(li);
 }
+
+function AddThumbnailsToModal(emplacement, thumbnailsSrc, i){
+  var a = document.createElement('a');
+  a.id = i;
+  a.href = "#";
+  a.setAttribute('data-slide-to', i);
+  a.setAttribute('onclick', 'NavigateToSlide(this);');
+
+  var thumbnails = document.createElement('img');
+  thumbnails.classList.add('thumbnails');
+  thumbnails.src = base_url + emplacement + "/" + thumbnailsSrc;
+
+  a.appendChild(thumbnails);
+  
+  var modalContent = document.getElementsByClassName('modal-content')[0];
+  modalContent.appendChild(a);
+}
+
+function NavigateToSlide(element){
+  var id = element.id;
+  $('#modalThumbnails').modal('hide');
+   $('.carousel').carousel(parseInt(id));
+}

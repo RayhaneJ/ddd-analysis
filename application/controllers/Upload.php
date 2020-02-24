@@ -165,7 +165,7 @@ class Upload extends CI_Controller {
                                         $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
                                 }
 
-                                $formInsert = $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $libelleSlideSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
+                                $formInsert = $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
 
                                 if($formInsert == false){
                                         $error = "Le Code Baps est déja associé à un diaporama !";
@@ -182,7 +182,8 @@ class Upload extends CI_Controller {
                                         $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideSource);
 
                                         // print_r($emplacementThumbnailsCreated);
-                                        // $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
+                                        $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
+                                        $this->dataaccess::InsertThumbnailsInSlide($codeBaps, $codeRayhane, $emplacementThumbnailsCreated);
 
                                 }
 

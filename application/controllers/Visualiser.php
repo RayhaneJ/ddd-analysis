@@ -17,43 +17,51 @@ class Visualiser extends CI_Controller {
     //tout les codes baps sont differents
     public function Slides($codeBaps, $codeRayhane = null) {
         if($codeRayhane == null){
-            $emplacement = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps);
+            $emplacementSlides = $this->dataaccess::GetEmplacementForSlidesFiles($codeBaps);
             $csvEmplacement = $this->dataaccess::GetEmplacementCsv($codeBaps);
-
+            $thumbnailsEmplacement = $this->dataaccess::GetEmplacementThumbnailsFolder($codeBaps, $codeRayhane);
+            $thumbnailsFiles = $this->manipulationslides::GetFiles($thumbnailsEmplacement);
+            
             $sommaire = $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
 
-            if($emplacement == null || $csvEmplacement==null){
+            if($emplacementSlides == null || $csvEmplacement==null){
                 $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
 
             else{
-                $files = $this->manipulationslides::GetFiles($emplacement);
+                $files = $this->manipulationslides::GetFiles($emplacementSlides);
                 
-                $data['emplacement'] = $emplacement;
+                $data['emplacementSlides'] = $emplacementSlides;
                 $data['files'] = $files;
                 $data['sommaire'] = $sommaire;
+                $data['emplacementThumbnails'] = $thumbnailsEmplacement;
+                $data['thumbnailsFiles'] = $thumbnailsFiles;
 
                 $this->load->view('slideView', $data); 
             }
         }
         else {
-            $emplacement = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
+            $emplacementSlides = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
             $csvEmplacement = $this->dataaccess::GetEmplacementCsv($codeBaps, $codeRayhane);
+            $thumbnails = $this->dataaccess::GetEmplacementThumbnailsFolder($codeBaps, $codeRayhane);
+            $thumbnailsFiles = $this->manipulationslides::GetFiles($thumbnails);
 
             $sommaire =  $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
 
-            if($emplacement == null || $csvEmplacement == null){
+            if($emplacementSlides == null || $csvEmplacement == null){
                 $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
             else {
-                $files = $this->manipulationslides::GetFiles($emplacement);
+                $files = $this->manipulationslides::GetFiles($emplacementSlides);
 
-                $data['emplacementPdf'] = $emplacement;
+                $data['emplacementSlides'] = $emplacementSlides;
                 $data['files'] = $files;
                 $data['sommaire'] = $sommaire;
-                
+                $data['emplacementThumbnails'] = $thumbnailsEmplacement;
+                $data['thumbnailsFiles'] = $thumbnailsFiles;
+
                 $this->load->view('slideView', $data);
             }
         }

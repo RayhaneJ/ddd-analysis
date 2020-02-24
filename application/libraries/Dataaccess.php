@@ -26,11 +26,11 @@ class Dataaccess {
         $CI->db->query($sql, $param);
     }
 
-    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
+    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
         $CI =& get_instance();
 
-        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $param = array($libelleCoursSource, $emplacementCoursSource, $libelleSlide, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv);
+        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?)';
+        $param = array($libelleCoursSource, $emplacementCoursSource, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv);
 
         if(!$CI->db->query($sql, $param)){
             return false;
@@ -90,7 +90,7 @@ class Dataaccess {
         return $result;
     }
 
-    public static function GetEmplacementForPdfFiles($codeBaps, $codeRayhane=null) {
+    public static function GetEmplacementForSlidesFiles($codeBaps, $codeRayhane=null) {
         $CI = &get_instance();
 
         if($codeRayhane == null){
@@ -154,15 +154,59 @@ class Dataaccess {
         $CI->db->insert('thumbnails', $data);
     }
 
-    
+    public static function InsertThumbnailsInSlide($codeBaps, $codeRayhane = null, $thumbnails) {
+        $CI = &get_instance();
 
+        if($codeRayhane == null){
+            $data = array(
+                'emplacementThumbnails'=> $thumbnails
+            );
+            $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->update('slide', $data);
+        }
+        else {
+            $data = array(
+                'emplacementThumbnails' => $thumbnails
+            );
+            $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->where('codeRayhane', $codeRayhane);
+            $CI->db->update('slide', $data);
+        }
+    }
 
+    public static function GetEmplacementThumbnailsFolder($codeBaps, $codeRayhane=null){
+        $CI = &get_instance();
 
+        if($codeRayhane == null) {
+            $CI->db->select('emplacementThumbnails');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+        }
 
+        else {
+            $CI->db->select('emplacementThumbnails');
+            $CI->db->from('slide');
+            $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->where('codeRayhane', $codeRayhane);
+        }
 
-    
+        $query = $CI->db->get();
 
+        if($query->num_rows()>0){
+            $result = $query->row()->emplacementThumbnails;
+        }
+        else {
+            $result = null;
+        }
 
-
-    
+        return $result;
+    }        
 }
+
+    
+
+
+
+
+
+    

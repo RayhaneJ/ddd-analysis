@@ -11,7 +11,7 @@
   
   <script>var base_url = '<?php echo base_url() ?>';</script>
   
-  <title>Upload Form</title>
+  <title>Formulaire Intégration</title>
 
 </head>
 

@@ -103,7 +103,7 @@
       <div class="modal-bodyAddPdg">
       <form id = "AddPdgForm" action="<?php echo base_url() ?>AddPdg/AddNewPageDeGarde" enctype="multipart/form-data" method="post" accept-charset="utf-8">
       <div class = "form-row">
-        <input id="libellePdg" type="text" class="form-control mb-2 col-md-5" placeholder="Libelle page de garde" name='libellePdg' value = "<?php echo set_value('libellePdg');?>">
+        <input id="libellePdg" type="text" class="form-control mb-2 col-md-5" placeholder="Libelle page de garde" name='libellePdg'>
         <div class="custom-file col-md-5">
           <input id ="file" type="file" name="file" class="custom-file-input" id="customFileLang" lang="fr"> 
           <label class="custom-file-label " for="customFile">Fichier PDF</label> 
