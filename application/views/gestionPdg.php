@@ -11,7 +11,7 @@
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
 <script>var base_url = '<?php echo base_url() ?>';</script>
 
-<title>gestionPageDeGarde</title>
+<title>Gérer les pages de garde</title>
 
 </head>
 

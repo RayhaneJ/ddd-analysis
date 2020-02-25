@@ -127,19 +127,19 @@ class Upload extends CI_Controller {
                                         else {
                                                 if($typeSupport == "1") {
                                                         $text = "'Support de cours'";
-                                                        $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
-                                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
-                                                }
+                                                        $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde, $libelleCours);
+                                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);                                                }
                                                 else {
                                                         if($typeSupport == "2") {
                                                                 $text = "'Cahier d'exercice'";
-                                                                $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde);
+                                                                $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde, $libelleCours);
                                                                 $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);
                                                         }
                                                         else {
                                                         }
+                                                        
                                                 }
-
+                                                unlink($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementNewPdg);
                                         }
                                 }
 
@@ -181,7 +181,6 @@ class Upload extends CI_Controller {
 
                                         $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideSource);
 
-                                        // print_r($emplacementThumbnailsCreated);
                                         $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
                                         $this->dataaccess::InsertThumbnailsInSlide($codeBaps, $codeRayhane, $emplacementThumbnailsCreated);
 
@@ -209,6 +208,9 @@ class Upload extends CI_Controller {
         }
 
         public function SupprimerPdg($libelle) {
+                $emplacement = $this->dataaccess::GetPageDeGarde($libelle);
+                unlink($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacement);
+
                 $this->dataaccess::pdgDelete($libelle);
         }
 

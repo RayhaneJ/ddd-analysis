@@ -11,7 +11,10 @@ class Visualiser extends CI_Controller {
     }
 
     public function index() {
-        // $this->load->view('slideView');
+        $slides = $this->dataaccess::GetAllSlides();
+
+        $data['slides'] = $slides;
+        $this->load->view('mainMenuSlides', $data);
     }
 
     //tout les codes baps sont differents
@@ -25,7 +28,7 @@ class Visualiser extends CI_Controller {
             $sommaire = $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
 
             if($emplacementSlides == null || $csvEmplacement==null){
-                $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
+                $data['erreur'] = "Le diaporama n'est pas disponible actuellement ou alors il n'existe pas, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
 
@@ -50,7 +53,7 @@ class Visualiser extends CI_Controller {
             $sommaire =  $this->manipulationpdf::csvStringToArray(file_get_contents($csvEmplacement));
 
             if($emplacementSlides == null || $csvEmplacement == null){
-                $data['erreur'] = "Impossible d'accéder au diaporama, veuillez réessayer plus tard.";
+                $data['erreur'] = "Le diaporama n'est pas disponible actuellement ou alors il n'existe pas, veuillez réessayer plus tard.";
                 $this->load->view('errorView', $data);
             }
             else {
@@ -66,4 +69,5 @@ class Visualiser extends CI_Controller {
             }
         }
     }
+
 }

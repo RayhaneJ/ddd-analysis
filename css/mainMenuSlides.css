@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'gothambold';
+    src: url('ufonts.com_gotham-bold-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-bold-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gotham_lightregular';
+    src: url('ufonts.com_gotham-light-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothamregular';
+    src: url('ufonts.com_gotham-light-1-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-light-1-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'gothammedium';
+    src: url('ufonts.com_gotham-medium-opentype-webfont.woff2') format('woff2'),
+         url('ufonts.com_gotham-medium-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@media screen and (min-width: 1024px) {
+
+header {
+    font-size: xx-large;
+}
+
+.navbar {
+    padding: 1.0rem 1rem;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    justify-content: space-around;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,1) !important;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    margin-right:190;
+}
+
+.textwhite {
+    color:white;
+    font-family: 'gothambold';
+}
+
+.table {
+    width:95%;
+    margin-bottom: 1rem;
+    color: #212529;
+    margin-top: 1%;
+    margin: auto;
+    margin-top: 1%;
+}
+
+#thead {
+    font-size: 18px;
+    font-family: gothambold;
+}
+
+#tbody {
+    font-family: gothammedium;
+}
+
+#editer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+}
+
+@media screen and (max-width: 1024px) {
+
+    header {
+        font-size: xx-large;
+    }
+    
+    .navbar {
+        padding: 1.0rem 1rem;
+    }
+    
+    .navbar-expand-lg .navbar-collapse {
+        justify-content: space-around;
+    }
+    
+    .shadow-sm {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,1) !important;
+    }
+    
+    .navbar-expand-lg .navbar-collapse {
+        margin-right:190;
+    }
+    
+    .textwhite {
+        color:white;
+        font-family: 'gothambold';
+    }
+    
+    .table {
+        width:100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        margin-top: 1%;
+        margin-top: 1%;
+    }
+
+    
+    #thead {
+        font-family: gothambold;
+    }
+
+   #tbody {
+       font-family: gothammedium;
+   }
+
+   #edit{
+       vertical-align: middle;
+   }
+
+   #editer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
+
+}

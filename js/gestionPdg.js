@@ -133,7 +133,7 @@ $(document).ready(function(){
                   $('#AddNewPdg').on('hidden.bs.modal', function (e) {
                     location.reload();
                   });
-                  
+                  var libelle = document.getElementsByName
                 });
                 }  
           });  

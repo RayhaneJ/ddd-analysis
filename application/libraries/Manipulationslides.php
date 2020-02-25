@@ -81,4 +81,9 @@ class ManipulationSlides {
 
         return $files;
     }
+
+    // //unlink ne marche pas dans le controller
+    // public static function deletePageDeGarde($emplacement){
+    //     unlink($_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/".$emplacement);
+    // }
 }

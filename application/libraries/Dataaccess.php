@@ -61,6 +61,8 @@ class Dataaccess {
             }
         }
         return $tableauPdg;
+
+        
     }
 
 
@@ -69,13 +71,16 @@ class Dataaccess {
         $CI->db->select('emplacement');
         $CI->db->from('stockerPageDeGarde');
         $CI->db->where('libelle', $libellePdg);
-        $result = $CI->db->get()->result_array();
-        foreach($result as $libellePdg =>$value) {
-            foreach($value as $key) {
-                $emplacement = $key;
-            }
-        }
-        return $emplacement;
+        // $result = $CI->db->get()->result_array();
+        // foreach($result as $libellePdg =>$value) {
+        //     foreach($value as $key) {
+        //         $emplacement = $key;
+        //     }
+        // }
+        // return $emplacement;
+        $result = $CI->db->get()->row()->emplacement;
+
+        return $result;
     }
 
     //Inutile
@@ -200,7 +205,25 @@ class Dataaccess {
         }
 
         return $result;
-    }        
+    }
+    
+    public static function GetAllSlides(){
+        $CI = &get_instance();
+
+        $CI->db->select('id, dateInjection, dateDerniereModification, codeBaps, codeRayhane');
+
+        $query = $CI->db->get('slide')->result_array();
+
+        return $query;
+        // if($query->num_row()>0){
+        //     $result = $CI->db->get()->result_array();
+        // }
+        // else {
+        //     $result = null;
+        // }
+
+        // return $result;
+    }
 }
 
     
