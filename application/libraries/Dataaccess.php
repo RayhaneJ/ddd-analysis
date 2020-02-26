@@ -26,11 +26,11 @@ class Dataaccess {
         $CI->db->query($sql, $param);
     }
 
-    public static function formInsertFiles($libelleCoursSource, $emplacementCoursSource, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
+    public static function formInsertFiles($emplacementCoursSource, $emplacementSlide, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
         $CI =& get_instance();
 
-        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?, ?, ?)';
-        $param = array($libelleCoursSource, $emplacementCoursSource, $emplacementSlide, $libelleSupportCoursGen, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv);
+        $sql = 'call formInsertFiles(?, ?, ?, ?, ?, ?)';
+        $param = array($emplacementCoursSource, $emplacementSlide, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv);
 
         if(!$CI->db->query($sql, $param)){
             return false;
@@ -215,15 +215,114 @@ class Dataaccess {
         $query = $CI->db->get('slide')->result_array();
 
         return $query;
-        // if($query->num_row()>0){
-        //     $result = $CI->db->get()->result_array();
-        // }
-        // else {
-        //     $result = null;
-        // }
-
-        // return $result;
     }
+
+    public static function DeleteSlide($id){
+        $CI = &get_instance();
+
+        $CI->db->delete('slide', array('id' =>$id));
+    }
+
+    public static function GetEmplacementSlide($id){
+        $CI = &get_instance();
+
+            $CI->db->select('emplacementFichier');
+            $CI->db->from('slide');
+            $CI->db->where('id', $id);
+
+        $query = $CI->db->get();
+
+        if($query->num_rows()>0){
+            $result = $query->row()->emplacementFichier;
+        }
+        else {
+            $result = null;
+        }
+
+        return $result;
+    }
+
+    public static function SupportCoursSourceUpdateToNull($emplacement){
+        $CI = &get_instance();
+
+        $data = array(
+            'slide' => null
+        );
+
+        $CI->db->where('slide', $emplacement);
+        $CI->db->update('supportCoursSource', $data);
+    }
+    
+    public static function SupportCoursGenUpdateToNull($emplacement){
+        $CI = &get_instance();
+
+        $data = array(
+            'slide' => null
+        );
+
+        $CI->db->where('slide', $emplacement);
+        $CI->db->update('supportCoursGen', $data);
+    }
+
+    public static function SupportCoursGenUpdate($emplacement, $newSlide){
+        $CI = &get_instance();
+
+        $data = array(
+            'slide' => $newSlide
+        );
+
+        $CI->db->where('slide', $emplacement);
+        $CI->db->update('supportCoursGen', $data);
+    }
+
+    public static function SupportCoursSourceUpdate($emplacement, $newSlide){
+        $CI = &get_instance();
+
+        $data = array(
+            'slide' => $newSlide
+        );
+
+        $CI->db->where('slide', $emplacement);
+        $CI->db->update('supportCoursSource', $data);
+    }
+
+    public static function GetEmplacementThumbnailsById($id){
+        $CI=&get_instance();
+
+        $CI->db->select('emplacementThumbnails');
+        $CI->db->from('slide');
+        $CI->db->where('id', $id);
+
+        $query = $CI->db->get()->row()->emplacementThumbnails;
+
+        return $query;
+    }
+
+    public static function UpdateSlide($emplacement, $newSlide, $newCsv){
+        $CI = &get_instance();
+
+        $data = array(
+            'emplacementFichier' => $newSlide,
+            'emplacementCsv' => $newCsv,
+            'supportCoursGen' => null,
+            'supportCoursSource' => null,
+        );
+
+        $CI->db->where('emplacementFichier', $emplacement);
+        $CI->db->update('slide', $data);
+    }
+
+    public static function updateTumbnailsInSlide($id, $emplacementThumbnailsCreated){
+        $CI = &get_instance();
+
+        $data = array(
+            'emplacementThumbnails'=> $emplacementThumbnailsCreated
+        );
+        
+        $CI->db->where('id', $id);
+        $CI->db->update('slide', $data);
+    }
+
 }
 
     

@@ -1,9 +1,4 @@
-(function($) {
-  $('.custom-file-input').on('change', function() { 
-    let fileName = $(this).val().split('\\').pop(); 
-    $(this).next('.custom-file-label').addClass("selected").html(fileName.substr(0,11)); 
-  });
-})(jQuery);
+
 
 function addPdfLogo(libelle) {
     var container = document.getElementsByClassName('container-fluid vertical-align')[0];
@@ -158,3 +153,38 @@ jQuery(document).ready(function($) {
   alterClass();
 });
 
+  if(window.innerWidth > 767){
+    console.log(window.innerWidth)
+      $('.custom-file-input').on('change', function() { 
+        let fileName = $(this).val().split('\\').pop(); 
+        $(this).next('.custom-file-label').addClass("selected").html(fileName.substr(0,11)); 
+      });
+  }
+  else {
+    $('.custom-file-input').on('change', function() { 
+      let fileName = $(this).val().split('\\').pop(); 
+      $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+    });
+  }
+
+  $(window).resize(function(){
+    if(window.innerWidth > 767){
+      console.log(window.innerWidth)
+        $('.custom-file-input').on('change', function() { 
+          let fileName = $(this).val().split('\\').pop(); 
+          $(this).next('.custom-file-label').addClass("selected").html(fileName.substr(0,10)); 
+        });
+    }
+    else {
+      $('.custom-file-input').on('change', function() { 
+        let fileName = $(this).val().split('\\').pop(); 
+        $(this).next('.custom-file-label').addClass("selected").html(fileName); 
+      });
+    }
+  })
+
+
+
+// document.getElementById('file').onchange = function(){
+//   document.getElementById("form").submit();
+// };

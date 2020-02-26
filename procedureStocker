@@ -15,19 +15,21 @@ delimiter ;
 
 
 delimiter | 
-create procedure formInsertFiles(libelleCoursSource varchar(256), emplacementCoursSource varchar(256), emplacementSlide varchar(256), libelleSupportCoursGen varchar(256), emplacementSupportCoursGen varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), csv varchar(256))
+create procedure formInsertFiles(emplacementCoursSource varchar(256), emplacementSlide varchar(256), emplacementSupportCoursGen varchar(256), libCodeBaps varchar(256), libCodeRayhane varchar(256), csv varchar(256))
 BEGIN 
-	insert ignore into supportCoursSource(emplacement, libelle, codeBaps, codeRayhane) values (emplacementCoursSource, libelleCoursSource, libCodeBaps, libCodeRayhane);
 
-	insert ignore into supportCoursGen(emplacement, libelle, supportCoursSource, codeBaps, codeRayhane) values(emplacementSupportCoursGen, libelleSupportCoursGen, libelleCoursSource, libCodeBaps, libCodeRayhane);
+	insert ignore into supportCoursSource(emplacement, codeBaps, codeRayhane) values (emplacementCoursSource, libCodeBaps, libCodeRayhane);
+
+	insert ignore into supportCoursGen(emplacement, supportCoursSource, codeBaps, codeRayhane) values(emplacementSupportCoursGen, emplacementCoursSource, libCodeBaps, libCodeRayhane);
 
 	insert into csv(emplacement) values(csv);
 
-	insert into slide(emplacementFichier, supportCoursSource, supportCoursGen, codeBaps, codeRayhane, emplacementCsv) values (emplacementSlide, libelleCoursSource, libelleSupportCoursGen, libCodeBaps, libCodeRayhane, csv); 
-	
-	update supportCoursSource set slide = emplacementSlide, supportCoursGen = libelleSupportCoursGen where id = (select max(id));
+	insert into slide(emplacementFichier, supportCoursSource, supportCoursGen, codeBaps, codeRayhane, emplacementCsv) values (emplacementSlide, emplacementCoursSource, emplacementSupportCoursGen, libCodeBaps, libCodeRayhane, csv); 
 
-	update supportCoursGen set slide = emplacementSlide where id = (select max(id));
+	
+	update supportCoursSource set slide = emplacementSlide, supportCoursGen = emplacementSupportCoursGen where id = (select max(id) from slide);
+
+	update supportCoursGen set slide = emplacementSlide where id = (select max(id) from slide);
 end |
 delimiter ;
 

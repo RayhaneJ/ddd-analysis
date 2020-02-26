@@ -33,7 +33,6 @@ class Upload extends CI_Controller {
 
                 else {  
                         $errorFile = array();
-                        $inputFileName = array();
                         //dans ce cas on boucle sur chaque élément du tableau qui ne peut contenir que 3 élément
                         for($i = 0; $i <= 2; $i++) {
                                                 
@@ -95,7 +94,6 @@ class Upload extends CI_Controller {
                                                         break;
                                                 case 1:
                                                         $currentSlideName = $fichier['file_name'];
-                                                        print_r($currentSlideName);
                                                         break;
                                                 case 2:
                                                         $currentCsvName = $fichier['file_name'];
@@ -165,7 +163,7 @@ class Upload extends CI_Controller {
                                         $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
                                 }
 
-                                $formInsert = $this->dataaccess::FormInsertFiles($libellePdfSource, $emplacemenPdfSource, $emplacementSlideSource, $libellePdfGen, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
+                                $formInsert = $this->dataaccess::FormInsertFiles($emplacemenPdfSource, $emplacementSlideSource, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
 
                                 if($formInsert == false){
                                         $error = "Le Code Baps est déja associé à un diaporama !";
@@ -177,7 +175,6 @@ class Upload extends CI_Controller {
                                 else {  
                                         $data['pdfGen'] = $libellePdfGen;
                                         $this->load->view('downloadView', $data);
-                                        print_r($emplacementSlideSource);
 
                                         $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideSource);
 

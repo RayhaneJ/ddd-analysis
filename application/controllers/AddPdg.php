@@ -32,6 +32,8 @@ class AddPdg extends CI_Controller {
                         $this->dataaccess::InsertPdgInDb($emplacementPdg, $libelle);
                 }
         }
+
+        
 }
         
 

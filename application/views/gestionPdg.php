@@ -81,7 +81,11 @@
       </div>
       <div class="modal-body">
         <button onclick="DeletePage();" type="button" class="btn btn-danger">Supprimer</button>
-        <button type="button" class="btn btn-primary">Remplacer</button>
+        <!-- <form id="form" action="<?php echo base_url()?>AddPdg/ChangePdg" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+        <div class = "file btn btn-primary">Remplacer
+          <input onclick="RemplacerPage();" type = "file" name = "file" id="file"/>
+        </div>
+        </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button>
@@ -115,7 +119,6 @@
           <button type="submit" class="btn btn-primary col-md-6">Ajouter</button>
         </div>
       </form>
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermez</button> -->
       </div>
     </div>
   </div>

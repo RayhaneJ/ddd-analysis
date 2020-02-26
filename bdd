@@ -43,8 +43,7 @@ Create table supportCoursGen (
 id int auto_increment, 
 dateGeneration timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
-emplacement varchar(256) not null, 
-libelle varchar(256) not null unique, 
+emplacement varchar(256) not null unique,  
 supportCoursSource varchar(256), 
 slide varchar(256),
 codeBaps varchar(256) unique,
@@ -56,9 +55,8 @@ ENGINE=InnoDB;
 create table supportCoursSource (
 id int auto_increment, 
 dateInjection timestamp not null default current_timestamp,
-emplacement varchar(256) not null,
+emplacement varchar(256) not null unique,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
-libelle varchar(256) not null unique, 
 codeBaps varchar(256) unique,
 codeRayhane varchar(256), 
 slide varchar(256), 
@@ -117,7 +115,7 @@ add constraint fk_codeRayhane_codeBaps foreign key(codeBaps) references codeBaps
 
 ALTER TABLE supportCoursGen 
 ADD CONSTRAINT fk_supportCoursGen_supCoursSource FOREIGN KEY (supportCoursSource)
-REFERENCES supportCoursSource(libelle);
+REFERENCES supportCoursSource(emplacement);
 
 ALTER TABLE supportCoursGen
 ADD CONSTRAINT fk_supportCoursGen_codeBaps FOREIGN KEY (codeBaps) REFERENCES codeBaps (libelleCodeBaps); 
@@ -132,7 +130,7 @@ ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (em
 
 ALTER TABLE supportCoursSource 
 ADD CONSTRAINT fk_supportCoursSource_supCoursGen FOREIGN KEY (supportCoursGen)
-REFERENCES supportCoursGen(libelle);
+REFERENCES supportCoursGen(emplacement);
 
 ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_codeBaps FOREIGN KEY (codeBaps) REFERENCES codeBaps (libelleCodeBaps); 
@@ -145,10 +143,10 @@ ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide 
 
 
 alter table slide 
-add constraint fk_slide_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(libelle);
+add constraint fk_slide_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(emplacement);
 
 alter table slide 
-add constraint fk_slide_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(libelle);
+add constraint fk_slide_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(emplacement);
 
 
 alter table slide

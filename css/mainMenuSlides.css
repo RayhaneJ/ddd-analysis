@@ -94,6 +94,30 @@ header {
     justify-content: space-around;
 }
 
+#bodyDel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.modal-header{
+    font-family: 'gothambold';
+}
+
+
+
+#ChangeSlideForm {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btnSlide{
+    width:25%;
+    margin-bottom: 0;
+}
+
 
 }
 
@@ -150,5 +174,43 @@ header {
     flex-direction: row;
     justify-content: space-between;
     }
+
+    #bodyDel{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+    .modal-header{
+        font-family: 'gothambold';
+    }
+
+    .bodyDel{
+        position: relative;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1rem;
+        padding-bottom: 1rem!important;
+        display: flex;
+        justify-content: space-around;
+        padding-bottom : 0rem !important;
+    }
+    
+    #form{
+        margin-bottom: 0.5rem;
+    }
+
+
+#ChangeSlideForm {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btnSlide{
+    width:25%;
+    margin-bottom: 0;
+}
 
 }
