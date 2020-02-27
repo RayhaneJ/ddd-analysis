@@ -19,10 +19,10 @@ class Dataaccess {
         $CI->db->delete('stockerPageDeGarde');
     }
 
-    public static function formInsert($libelleCours, $libCodeBaps, $libCodeRayhane) {
+    public static function formInsert($libCodeBaps, $libCodeRayhane) {
         $CI =& get_instance();
-        $sql = 'call formInsertCode(?, ?, ?)';
-        $param = array($libelleCours, $libCodeBaps, $libCodeRayhane);
+        $sql = 'call formInsertCode(?, ?)';
+        $param = array($libCodeBaps, $libCodeRayhane);
         $CI->db->query($sql, $param);
     }
 
@@ -71,13 +71,7 @@ class Dataaccess {
         $CI->db->select('emplacement');
         $CI->db->from('stockerPageDeGarde');
         $CI->db->where('libelle', $libellePdg);
-        // $result = $CI->db->get()->result_array();
-        // foreach($result as $libellePdg =>$value) {
-        //     foreach($value as $key) {
-        //         $emplacement = $key;
-        //     }
-        // }
-        // return $emplacement;
+
         $result = $CI->db->get()->row()->emplacement;
 
         return $result;
@@ -295,21 +289,20 @@ class Dataaccess {
 
         $query = $CI->db->get()->row()->emplacementThumbnails;
 
-        return $query;
-    }
-
-    public static function UpdateSlide($emplacement, $newSlide, $newCsv){
-        $CI = &get_instance();
-
+        return $query;https://stackoverflow.com/questions/60432076/controller-method-dont-detect-parametre
         $data = array(
             'emplacementFichier' => $newSlide,
             'emplacementCsv' => $newCsv,
-            'supportCoursGen' => null,
-            'supportCoursSource' => null,
         );
 
         $CI->db->where('emplacementFichier', $emplacement);
         $CI->db->update('slide', $data);
+    }
+
+    public static function DeleteThumbnailsRow($emplacement){
+        $CI = &get_instance();
+
+        $CI->db->delete('thumbnails', array('emplacement' => $emplacement));
     }
 
     public static function updateTumbnailsInSlide($id, $emplacementThumbnailsCreated){
@@ -321,6 +314,16 @@ class Dataaccess {
         
         $CI->db->where('id', $id);
         $CI->db->update('slide', $data);
+    }
+
+    public static function InsertInCsvTable($emplacement){
+        $CI = &get_instance();
+
+        $data = array(
+            'emplacement'=> $emplacement
+        );
+
+        $CI->db->insert('csv', $data);
     }
 
 }

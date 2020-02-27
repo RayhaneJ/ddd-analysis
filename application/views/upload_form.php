@@ -53,13 +53,13 @@
     </div>
     <div class = "form-row mb-4  border border-top-0 rounded-bottom">
     <div class = "form-group-1 col-md-4 ">
-      <input id="libelleCours" type="text" class="form-control form-control-lg"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('libelleCours');?>">
+      <input id="libelleCours" type="text" class="form-control form-control-lg"  placeholder="Libelle du cours" name='libelleCours' value = "<?php echo set_value('LibelleCours');?>">
     </div>
     <div class = "form-group-1 col-md-4">
-      <input oninput="ActivateCodeRayhaneInput();" id="codeBaps"type="text" class="form-control form-control-lg" placeholder="Code Baps" name='codeBaps' value ="<?php echo set_value('codeBaps');?>">
+      <input oninput="ActivateCodeRayhaneInput();" id="codeBaps"type="text" class="form-control form-control-lg" placeholder="Code Baps" name='codeBaps'>
     </div>
     <div class = "form-group col-md-4">
-      <input id="codeRayhane" type="text" class="form-control form-control-lg" placeholder="Code Rayhane (Optionnel) " name='CodeRayhane' value ="<?php echo set_value('CodeRayhane');?>" disabled>
+      <input id="codeRayhane" type="text" class="form-control form-control-lg" placeholder="Code Rayhane (Optionnel) " name='codeRayhane' disabled>
     </div> 
     </div>
     <div class = "form-row mb-4 border border-top-0 rounded-bottom">

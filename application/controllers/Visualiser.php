@@ -8,6 +8,7 @@ class Visualiser extends CI_Controller {
         $this->load->library('dataaccess');
         $this->load->library('manipulationslides');
         $this->load->library('manipulationpdf');
+        $this->load->library('form_validation');
     }
 
     public function index() {
@@ -45,7 +46,7 @@ class Visualiser extends CI_Controller {
             }
         }
         else {
-            $emplacementSlides = $this->dataaccess::GetEmplacementForPdfFiles($codeBaps, $codeRayhane);
+            $emplacementSlides = $this->dataaccess::GetEmplacementForSlidesFiles($codeBaps, $codeRayhane);
             $csvEmplacement = $this->dataaccess::GetEmplacementCsv($codeBaps, $codeRayhane);
             $thumbnails = $this->dataaccess::GetEmplacementThumbnailsFolder($codeBaps, $codeRayhane);
             $thumbnailsFiles = $this->manipulationslides::GetFiles($thumbnails);
@@ -62,7 +63,7 @@ class Visualiser extends CI_Controller {
                 $data['emplacementSlides'] = $emplacementSlides;
                 $data['files'] = $files;
                 $data['sommaire'] = $sommaire;
-                $data['emplacementThumbnails'] = $thumbnailsEmplacement;
+                $data['emplacementThumbnails'] = $thumbnails;
                 $data['thumbnailsFiles'] = $thumbnailsFiles;
 
                 $this->load->view('slideView', $data);
@@ -75,9 +76,9 @@ class Visualiser extends CI_Controller {
         $emplacementThumbnails = $this->dataaccess::GetEmplacementThumbnailsById($id);
 
         $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide."/*"); 
-        foreach($files as $file){ // iterate files
+        foreach($files as $file){ 
                 if(is_file($file))
-                unlink($file); // delete file
+                unlink($file); 
         }
 
         rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide);
@@ -89,22 +90,19 @@ class Visualiser extends CI_Controller {
         }
 
         rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails);
-
-        $this->dataaccess::SupportCoursGenUpdateToNull($emplacementSlide);
-        $this->dataaccess::SupportCoursSourceUpdateToNull($emplacementSlide);
         
         $this->dataaccess::DeleteSlide($id);
-}
+    }
 
 
-    public function  ChangerSlide($id){
+    public function ChangeSlide($id){
         $emplacementSlide = $this->dataaccess::GetEmplacementSlide($id);
         $emplacementThumbnails = $this->dataaccess::GetEmplacementThumbnailsById($id);
 
         $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide."/*"); 
-        foreach($files as $file){ // iterate files
+        foreach($files as $file){ 
                 if(is_file($file))
-                unlink($file); // delete file
+                unlink($file); 
         }
 
         rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide);
@@ -117,8 +115,8 @@ class Visualiser extends CI_Controller {
 
         rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails);
 
-        for($i = 0; $i < 2; $i++) {
-                                                
+
+        for($i = 0; $i < 2; $i++) {               
             $dest='';
             $filtre='';
 
@@ -137,19 +135,20 @@ class Visualiser extends CI_Controller {
             }
                                     
             //on copie les variables de l'élément courant dans le tableau $_FILES avec comme nom arbitraire "file_temp". Cela permettra à codeigniter de le traiter comme un champ file simple.
-            $_FILES['file_temp']['name'] = $_FILES['fichiers']['name'][$i];
-            $_FILES['file_temp']['type'] = $_FILES['fichiers']['type'][$i];
-            $_FILES['file_temp']['tmp_name'] = $_FILES['fichiers']['tmp_name'][$i];
-            $_FILES['file_temp']['error'] = $_FILES['fichiers']['error'][$i];
-            $_FILES['file_temp']['size'] = $_FILES['fichiers']['size'][$i];
+            $_FILES['file_temp']['name'] = $_FILES['file']['name'][$i];
+            $_FILES['file_temp']['type'] = $_FILES['file']['type'][$i];
+            $_FILES['file_temp']['tmp_name'] = $_FILES['file']['tmp_name'][$i];
+            $_FILES['file_temp']['error'] = $_FILES['file']['error'][$i];
+            $_FILES['file_temp']['size'] = $_FILES['file']['size'][$i];
 
             //on met en place la configuration pour l'upload du fichier, comme on l'aurait pour n'importe quel input file sous codeigniter
             $config = [];
             $config['upload_path'] = $dest;//dossier d'upload
             $config['allowed_types'] = $filtre;//types de fichiers autorisé
-            $fileName = $_FILES['fichiers']['name'][$i];
-            $config['file_name'] =  date('YmdHis') . '_' . rand(1, 1000) . $fileName;//renommage du fichier
+            $fileName = $_FILES['file']['name'][$i];
 
+            $config['file_name'] =  date('YmdHis') . '_' . rand(1, 1000) . $fileName;//renommage du fichier
+            print_r($config['file_name']);
             //ligne les plus importantes : ne fonctionnera pas avec l'habituel "$this->load->library('upload', $config);"
             $this->load->library('upload');
             $this->upload->initialize($config);
@@ -176,23 +175,23 @@ class Visualiser extends CI_Controller {
                                     break;
                     }
             }
-
+            }
+            
             $emplacementCsv = 'uploads/csv/'.$currentCsvName;
 
             $emplacementSlideSource = 'uploads/sourcesSlides/'.$currentSlideName;
             $folderNameSlide = $this->manipulationslides::ExtractZip($emplacementSlideSource);
             $emplacementSlideNew = "uploads/sourcesSlides/".$folderNameSlide;
 
-            $this->dataaccess::SupportCoursGenUpdateToNull($emplacementSlide);
-            $this->dataaccess::SupportCoursSourceUpdateToNull($emplacementSlide);
-
+            $this->dataaccess::InsertInCsvTable($emplacementCsv);
             $this->dataaccess::UpdateSlide($emplacementSlide, $emplacementSlideNew, $emplacementCsv);
 
             $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideNew);
 
             $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
-            $this->dataaccess::InsertThumbnailsInSlide($id, $emplacementThumbnailsCreated);
-        }
+            $this->dataaccess::updateTumbnailsInSlide($id, $emplacementThumbnailsCreated);
+            $this->dataaccess::DeleteThumbnailsRow($emplacementThumbnails);
+        
         }
     }
 

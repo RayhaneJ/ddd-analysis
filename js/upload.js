@@ -96,6 +96,7 @@ window.addEventListener('load', (event)=> {
   libelleCoursInput.value = "";
   var codeRayhaneInput = document.getElementById('codeRayhane');
   codeRayhaneInput.setAttribute("disabled", "");
+  codeRayhaneInput.value= "";
 })
 
 window.addEventListener("keypress", function(event){

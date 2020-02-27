@@ -153,6 +153,7 @@ function AddThumbnailsToModal(emplacement, thumbnailsSrc, i){
   var a = document.createElement('a');
   a.id = i;
   a.href = "#";
+  a.classList.add('aElement');
   a.setAttribute('data-slide-to', i);
   a.setAttribute('onclick', 'NavigateToSlide(this);');
 

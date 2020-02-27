@@ -128,7 +128,7 @@ $(document).ready(function(){
                   $('#AddNewPdg').on('hidden.bs.modal', function (e) {
                     location.reload();
                   });
-                  var libelle = document.getElementsByName
+                  // var libelle = document.getElementsByName
                 });
                 }  
           });  
@@ -185,6 +185,3 @@ jQuery(document).ready(function($) {
 
 
 
-// document.getElementById('file').onchange = function(){
-//   document.getElementById("form").submit();
-// };

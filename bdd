@@ -3,18 +3,10 @@ Create database integrationweb;
 
 use integrationweb;
 
-Create table cours (
-id int auto_increment,
-libelle varchar(256) not null unique, 
-codeBaps varchar(256),
-primary key (id) 
-)
-ENGINE=InnoDB;
 
 create table codeBaps ( 
 id int auto_increment, 
 libelleCodeBaps varchar(256) not null unique, 
-libelleCours varchar(256), 
 codeRayhane varchar(256),
 primary key (id)
 ) 
@@ -23,7 +15,6 @@ ENGINE=InnoDB;
 create table codeRayhane (
 id int auto_increment,
 codeRayhane varchar(256) not null unique,
-codeBaps varchar(256),
 primary key (id)
 )
 ENGINE = INNODB;
@@ -45,7 +36,6 @@ dateGeneration timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
 emplacement varchar(256) not null unique,  
 supportCoursSource varchar(256), 
-slide varchar(256),
 codeBaps varchar(256) unique,
 codeRayhane varchar(256),
 primary key (id)
@@ -55,11 +45,10 @@ ENGINE=InnoDB;
 create table supportCoursSource (
 id int auto_increment, 
 dateInjection timestamp not null default current_timestamp,
-emplacement varchar(256) not null unique,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
+emplacement varchar(256) not null unique,
 codeBaps varchar(256) unique,
-codeRayhane varchar(256), 
-slide varchar(256), 
+codeRayhane varchar(256),  
 supportCoursGen varchar(256), 
 primary key (id) 
 ) 
@@ -70,8 +59,6 @@ id int auto_increment,
 dateInjection timestamp not null default current_timestamp,
 dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
 emplacementFichier varchar(256) not null unique, 
-supportCoursSource varchar(256), 
-supportCoursGen varchar(256), 
 codeBaps varchar(256) unique,
 codeRayhane varchar(256),
 emplacementCsv varchar(256), 
@@ -97,20 +84,8 @@ primary key (id)
 ENGINE = InnoDB; 
 
 
-
-alter table cours 
-add constraint fk_cours_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
-
-
-alter table codeBaps 
-add constraint fk_codeBaps_cours foreign key(libelleCours) references cours(libelle);
-
 alter table codeBaps 
 add constraint fk_codeBaps_codeRayhane foreign key(codeRayhane) references codeRayhane(codeRayhane);
-
-
-alter table codeRayhane 
-add constraint fk_codeRayhane_codeBaps foreign key(codeBaps) references codeBaps(libelleCodeBaps);
 
 
 ALTER TABLE supportCoursGen 
@@ -124,9 +99,6 @@ ALTER TABLE supportCoursGen
 ADD CONSTRAINT fk_supportCoursGen_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
 
-ALTER TABLE supportCoursGen
-ADD CONSTRAINT fk_supportCoursGen_slide FOREIGN KEY (slide) REFERENCES slide (emplacementFichier); 
-
 
 ALTER TABLE supportCoursSource 
 ADD CONSTRAINT fk_supportCoursSource_supCoursGen FOREIGN KEY (supportCoursGen)
@@ -138,15 +110,6 @@ ADD CONSTRAINT fk_supportCoursSource_codeBaps FOREIGN KEY (codeBaps) REFERENCES 
 ALTER TABLE supportCoursSource
 ADD CONSTRAINT fk_supportCoursSource_codeRayhane FOREIGN KEY (codeRayhane) REFERENCES codeRayhane (codeRayhane); 
 
-ALTER TABLE supportCoursSource
-ADD CONSTRAINT fk_supportCoursSource_slide FOREIGN KEY (slide) REFERENCES slide (emplacementFichier); 
-
-
-alter table slide 
-add constraint fk_slide_supportCoursSource foreign key (supportCoursSource) references supportCoursSource(emplacement);
-
-alter table slide 
-add constraint fk_slide_supportCoursGen foreign key (supportCoursGen) references supportCoursGen(emplacement);
 
 
 alter table slide
@@ -160,18 +123,3 @@ add constraint fk_slide_emplacementCsv foreign key (emplacementCsv) references c
 
 alter table slide 
 add constraint fk_slide_emplacementThumbnails foreign key (emplacementThumbnails) references thumbnails(emplacement);
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-

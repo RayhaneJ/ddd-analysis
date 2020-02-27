@@ -95,56 +95,52 @@ $(document).ready(function (){
 
 $(document).ready(function(){
 
-var id = null
+
+        var id = null
   
-$('.remplacer').on("click", function(){
-    $("#ChangerSlide").modal('show');
-    id = $(this).attr('id');
-});
+        $('.remplacer').on("click", function(){
+            $("#ChangerSlide").modal('show');
+            id = $(this).attr('id');
 
-    $('#ChangeSlideForm').on('submit', function(e){  
-        e.preventDefault();  
-           if($('#file1').val() == '' || $('#file2').val() == '') {
-             alert("Veuillez choisir un fichier");
-           }
-           else {
-           $.ajax({  
-                 url:base_url + "Visualiser/ChangerSlide/"+id,    
-                 method:"POST",  
-                 data:new FormData(this),  
-                 contentType: false,  
-                 cache: false,  
-                 processData:false,  
-                 success:function(data)  
-                 {  
-                    alert(data);
-                 }  
-           });  
-           }  
-         });  
-});
+            $('#submit').on('click', function(e){   
 
-//     var id = $(this).attr('id');
-//     $.ajax({  
-//         url:base_url + "Visualiser/ChangerSlide/"+id,    
-//         method:"POST",  
-//         data:new FormData(this),  
-//         contentType: false,  
-//         cache: false,  
-//         processData:false,  
-//         success:function(data)  
-//         {  
-//         // $('#AddNewPdg').modal('hide');
-//         // jQuery(function RefreshPageAdd($){
-//         //   $('#AddNewPdg').on('hidden.bs.modal', function (e) {
-//         //     location.reload();
-//         //   });
-//         //   var libelle = document.getElementsByName
-//         });
-//         }  
-//   });  
-//   }  
-// };
+              
+              e.preventDefault();  
+              var fileInputs = $('.file');
+              var formData = new FormData();
+              $.each(fileInputs, function(i,fileInput){
+                  if( fileInput.files.length > 0 ){
+                      $.each(fileInput.files, function(k,file){
+                          formData.append('file[]', file);
+                      });
+                  }
+              });
+                 $.ajax({  
+                       url:base_url + "Visualiser/ChangeSlide/"+id,    
+                       method:"POST",  
+                       data:formData,  
+                       dataType:'json',
+                       contentType: false,  
+                       cache: false,  
+                       processData:false,  
+                       success:function(msg)  
+                       {  
+                          alert("Le Slideshow à bien était remplacer :" + msg);
+                       },
+                       error: function(msg){
+                        alert('Erreur :' + msg);
+                       }  
+                 }); 
+                 
 
-
+        });
+      });
+        
  
+
+
+    
+
+
+         
+         });  

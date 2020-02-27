@@ -61,6 +61,7 @@ const filesArraySlides = Object.values(filesSlides);
 var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
 filesArraySlides.sort(collator.compare);
 
+
 filesArraySlides.forEach(element => {
   if(filesArraySlides[0]==element){
     AddFirstSlideToView(emplacementSlides, element);

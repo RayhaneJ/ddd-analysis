@@ -94,7 +94,7 @@ header {
     justify-content: space-around;
 }
 
-#bodyDel{
+#bodyDel, #bodyChange{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -103,7 +103,6 @@ header {
 .modal-header{
     font-family: 'gothambold';
 }
-
 
 
 #ChangeSlideForm {
@@ -117,6 +116,7 @@ header {
     width:25%;
     margin-bottom: 0;
 }
+
 
 
 }
@@ -175,7 +175,7 @@ header {
     justify-content: space-between;
     }
 
-    #bodyDel{
+    #bodyDel, #bodyChange{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;

@@ -58,25 +58,27 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalCenterTitleSettings">Ajouter un nouveau slideshow</h5>
+        <h5 class="modal-title" id="ModalCenterTitle">
+        Ajouter un nouveau slideshow
+      </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermez">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div id="bodyChange" class="modal-body">
-      <form id = "ChangeSlideForm" action="<?php echo base_url() ?>Visualiser/ChangerSlide" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+      <!-- <form id = "ChangeSlideForm" action="<?php echo base_url() ?>Visualiser/ChangeSlide" enctype="multipart/form-data" method="post" accept-charset="utf-8"> -->
       <label class="btnSlide btn btn-outline-success">
-        Zip <input id="file1" name="file" type="file" hidden>
+        Zip <input class="file" name="file[]" type="file" hidden>
       </label>
       <label class="btnSlide btn btn-outline-success">
-        Csv <input id="file2" name ="file" type="file" hidden>
+        Csv <input class="file" name ="file[]" type="file" hidden>
       </label>
       </div>
       <div class="modal-footer">
       <div class="col-md-12 text-center"> 
-        <button type="submit" class="btn btn-primary col-md-6">Ajouter</button>
+        <button id="submit" type="submit" class="btn btn-primary col-md-6">Ajouter</button>
       </div>
-      </form>
+      <!-- </form> -->
       </div>
     </div>
   </div>

@@ -126,7 +126,8 @@ class Upload extends CI_Controller {
                                                 if($typeSupport == "1") {
                                                         $text = "'Support de cours'";
                                                         $emplacementNewPdg = $this->manipulationpdf::ConvertPdg($text, $emplacementPageDeGarde, $libelleCours);
-                                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg);                                                }
+                                                        $fileNameGen = $this->manipulationpdf::IntegrationPdf($currentCsvName, $currentPdfName, $emplacementNewPdg); 
+                                               }
                                                 else {
                                                         if($typeSupport == "2") {
                                                                 $text = "'Cahier d'exercice'";
@@ -141,13 +142,13 @@ class Upload extends CI_Controller {
                                         }
                                 }
 
-                                $emplacemenPdfSource = '/SiteWebIntegrationWeb/uploads/sourcePdf/'.$currentPdfName;
+                                $emplacemenPdfSource = 'uploads/sourcePdf/'.$currentPdfName;
 
                                 $emplacementSlideSource = 'uploads/sourcesSlides/'.$currentSlideName;
                                 $folderNameSlide = $this->manipulationslides::ExtractZip($emplacementSlideSource);
                                 $emplacementSlideSource = "uploads/sourcesSlides/".$folderNameSlide;
 
-                                $emplacementPdfGen = '/SiteWebIntegrationWeb/uploads/integrationPdf/'.$fileNameGen;
+                                $emplacementPdfGen = 'uploads/integrationPdf/'.$fileNameGen;
 
                                 $emplacementCsv = 'uploads/csv/'.$currentCsvName;
 
@@ -157,10 +158,10 @@ class Upload extends CI_Controller {
 
 
                                 if(empty($codeRayhane)) {
-                                        $this->dataaccess::formInsert($libelleCours, $codeBaps, '');
+                                        $this->dataaccess::formInsert($codeBaps, '');
                                 }
                                 else {
-                                        $this->dataaccess::formInsert($libelleCours, $codeBaps, $codeRayhane);
+                                        $this->dataaccess::formInsert($codeBaps, $codeRayhane);
                                 }
 
                                 $formInsert = $this->dataaccess::FormInsertFiles($emplacemenPdfSource, $emplacementSlideSource, $emplacementPdfGen, $codeBaps, $codeRayhane, $emplacementCsv);
