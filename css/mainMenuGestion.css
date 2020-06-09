@@ -1,0 +1,127 @@
+.container-fluid {
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.flex{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    color:white;
+}
+
+.support {
+    display: flex;
+    flex-direction: column;
+    font-size: 19px;
+    font-family: 'gothammedium';
+    margin-left: 2%;
+}
+
+.fa-file-pdf:hover::before {
+    color: dodgerblue;
+}
+
+.fa-file-pdf::before {
+    color: #212529;
+}
+
+
+.pdg {
+    display: flex;
+    flex-direction: column;
+    font-size: 19px;
+    font-family: 'gothammedium';
+    margin-right: 2%;
+}
+
+.fa-file-alt::before {
+    color: #212529;
+}
+
+.fa-file-alt:hover::before {
+    color: dodgerblue;
+}
+
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-bottom:5%;
+}
+
+body, html {
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'gothambold';
+    src: url('ufonts.com_gotham-bold-opentype-webfont.woff2') format('woff2'), url('ufonts.com_gotham-bold-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'gotham_lightregular';
+    src: url('ufonts.com_gotham-light-webfont.woff2') format('woff2'), url('ufonts.com_gotham-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'gothamregular';
+    src: url('ufonts.com_gotham-light-1-opentype-webfont.woff2') format('woff2'), url('ufonts.com_gotham-light-1-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'gothammedium';
+    src: url('ufonts.com_gotham-medium-opentype-webfont.woff2') format('woff2'), url('ufonts.com_gotham-medium-opentype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+body {
+    background-color: #5a5a5a !important;
+}
+
+header {
+    font-size: xx-large;
+}
+
+
+.navbar {
+    padding: 1.0rem 1rem;
+}
+
+
+.navbar-expand-lg .navbar-collapse {
+    justify-content: space-around;
+}
+
+.textwhite {
+    color: white;
+    font-family: 'gothambold';
+}
+
+.navbar-expand-lg .navbar-collapse {
+    margin-right: 190;
+}
+
+.textblack {
+    color:black;
+    font-family: 'gothambold';
+}

@@ -43,8 +43,50 @@
 
 }
 
+.dropzone {
+    background: #fff;
+    border: 2px dashed #ddd;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    position: relative !important;
+}
+
+#buttonDownload{
+    margin-top: 3%;
+    width: 50%;
+}
+
+.dz-message {
+    color: #999;
+    text-align: center;
+    margin-top: 6% !important;
+}
+
+.dz-message:hover {
+    color: #464646;
+}
+
+.dz-message h3 {
+    font-size: 200%;
+    margin-bottom: 15px;
+}
+
 body {
     background-color: #5a5a5a !important;
+}
+
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("785.gif");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 header {
@@ -96,6 +138,30 @@ header {
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     box-shadow: 20px 20px rgba(0,0,0,.11);
     transition: all .4s ease;
+}
+
+#submit {
+    position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 3%;
+text-align: center;
+bottom: 4%;
+width: 95%;
+}
+
+
+.dropzone{
+    min-height: 150px;
+    border: 2px solid rgba(0,0,0,0.3);
+    background: white;
+    padding: 20px 20px;
+}
+
+.dz-message {
+    color: #999;
+    text-align: center;
+    min-height: 100px;
 }
 
 .container-fluid:hover {
@@ -163,4 +229,9 @@ header {
 
 .form-group-1 {
     margin-bottom: 0.4rem;
+}
+
+.textblack {
+    color:black;
+    font-family: 'gothambold';
 }

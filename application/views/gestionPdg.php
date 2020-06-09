@@ -27,7 +27,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
       <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
-      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>"><div class="textwhite">Gestion</div></a></li>
+      <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser/LoadMainMenuGestion')?>"><div class="textwhite">Gestion</div></a></li>
       <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser')?>"><div class="textwhite">Visualisation</div></a></li>
     </ul>
   </div>

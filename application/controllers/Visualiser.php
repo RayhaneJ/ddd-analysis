@@ -75,21 +75,21 @@ class Visualiser extends CI_Controller {
         $emplacementSlide = $this->dataaccess::GetEmplacementSlide($id);
         $emplacementThumbnails = $this->dataaccess::GetEmplacementThumbnailsById($id);
 
-        $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide."/*"); 
+        $files = glob($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementSlide."/*"); 
         foreach($files as $file){ 
                 if(is_file($file))
                 unlink($file); 
         }
 
-        rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide);
+        rmdir($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementSlide);
 
-        $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails."/*"); 
+        $files = glob($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementThumbnails."/*"); 
         foreach($files as $file){ 
                 if(is_file($file))
                 unlink($file); 
         }
 
-        rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails);
+        rmdir($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementThumbnails);
         
         $this->dataaccess::DeleteSlide($id);
     }
@@ -99,21 +99,21 @@ class Visualiser extends CI_Controller {
         $emplacementSlide = $this->dataaccess::GetEmplacementSlide($id);
         $emplacementThumbnails = $this->dataaccess::GetEmplacementThumbnailsById($id);
 
-        $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide."/*"); 
+        $files = glob($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementSlide."/*"); 
         foreach($files as $file){ 
                 if(is_file($file))
                 unlink($file); 
         }
 
-        rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementSlide);
+        rmdir($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementSlide);
 
-        $files = glob($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails."/*"); 
+        $files = glob($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementThumbnails."/*"); 
         foreach($files as $file){ 
                 if(is_file($file))
                 unlink($file); 
         }
 
-        rmdir($_SERVER['DOCUMENT_ROOT'].'/SiteWebIntegrationWeb/'.$emplacementThumbnails);
+        rmdir($_SERVER['DOCUMENT_ROOT'].'/'.$emplacementThumbnails);
 
 
         for($i = 0; $i < 2; $i++) {               
@@ -186,12 +186,24 @@ class Visualiser extends CI_Controller {
             $this->dataaccess::InsertInCsvTable($emplacementCsv);
             $this->dataaccess::UpdateSlide($emplacementSlide, $emplacementSlideNew, $emplacementCsv);
 
-            $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/SiteWebIntegrationWeb/script/Thumbnails.php ".$emplacementSlideNew);
+            $emplacementThumbnailsCreated = shell_exec('php '.$_SERVER['DOCUMENT_ROOT']."/script/Thumbnails.php ".$emplacementSlideNew);
 
             $this->dataaccess::InsertThumbnailsInDb($emplacementThumbnailsCreated);
             $this->dataaccess::updateTumbnailsInSlide($id, $emplacementThumbnailsCreated);
             $this->dataaccess::DeleteThumbnailsRow($emplacementThumbnails);
         
         }
+
+        public function LoadMainMenuGestion(){
+            $this->load->view('mainMenuGestion');  
+		}
+
+        public function LoadGestionSupport(){
+        $support = $this->dataaccess::GetAllSupport();
+        $data['libelle'] = $this->dataaccess::getAllPdgInDb(); 
+        $data['support'] = $support;
+
+        $this->load->view('gestionSupport', $data);
+		}
     }
 

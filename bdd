@@ -1,13 +1,12 @@
-drop database integrationweb;
-Create database integrationweb;
+drop database eSLIDES;
+Create database eSLIDES;
 
-use integrationweb;
+use eSLIDES;
 
 
 create table codeBaps ( 
 id int auto_increment, 
 libelleCodeBaps varchar(256) not null unique, 
-codeRayhane varchar(256),
 primary key (id)
 ) 
 ENGINE=InnoDB;
@@ -36,7 +35,7 @@ dateGeneration timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
 emplacement varchar(256) not null unique,  
 supportCoursSource varchar(256), 
-codeBaps varchar(256) unique,
+codeBaps varchar(256),
 codeRayhane varchar(256),
 primary key (id)
 )
@@ -47,7 +46,7 @@ id int auto_increment,
 dateInjection timestamp not null default current_timestamp,
 derniereModification timestamp not null default current_timestamp on update current_timestamp,  
 emplacement varchar(256) not null unique,
-codeBaps varchar(256) unique,
+codeBaps varchar(256),
 codeRayhane varchar(256),  
 supportCoursGen varchar(256), 
 primary key (id) 
@@ -59,7 +58,7 @@ id int auto_increment,
 dateInjection timestamp not null default current_timestamp,
 dateDerniereModification timestamp not null default current_timestamp on update current_timestamp,
 emplacementFichier varchar(256) not null unique, 
-codeBaps varchar(256) unique,
+codeBaps varchar(256),
 codeRayhane varchar(256),
 emplacementCsv varchar(256), 
 emplacementThumbnails varchar(256) unique,
@@ -83,9 +82,6 @@ primary key (id)
 )
 ENGINE = InnoDB; 
 
-
-alter table codeBaps 
-add constraint fk_codeBaps_codeRayhane foreign key(codeRayhane) references codeRayhane(codeRayhane);
 
 
 ALTER TABLE supportCoursGen 

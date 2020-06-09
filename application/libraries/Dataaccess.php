@@ -24,6 +24,14 @@ class Dataaccess {
         $sql = 'call formInsertCode(?, ?)';
         $param = array($libCodeBaps, $libCodeRayhane);
         $CI->db->query($sql, $param);
+
+        if(!$CI->db->query($sql, $param)){
+            return false;
+        }            
+        else {
+            return true;
+        }
+        
     }
 
     public static function formInsertFiles($emplacementCoursSource, $emplacementSlide, $emplacementSupportCoursGen, $libCodeBaps, $libCodeRayhane, $csv) {
@@ -65,11 +73,26 @@ class Dataaccess {
         
     }
 
+    public static function CheckIfCoverPageExistInDb($libellePdg){
+        $CI = &get_instance();
+
+        $CI->db->where('libelle', $libellePdg);
+        $query = $CI->db->get('stockerPageDeGarde');
+
+        if ($query->num_rows() > 0){
+        	return true;
+        }
+        else{
+        	return false;
+        }
+    }
+
 
     public static function GetPageDeGarde($libellePdg){
         $CI = & get_instance();
         $CI->db->select('emplacement');
         $CI->db->from('stockerPageDeGarde');
+        $libellePdg = urldecode($libellePdg);
         $CI->db->where('libelle', $libellePdg);
 
         $result = $CI->db->get()->row()->emplacement;
@@ -145,6 +168,7 @@ class Dataaccess {
     }
 
     public static function InsertThumbnailsInDb($emplacement){
+        
         $CI = &get_instance();
         $data = array(
             'emplacement'=> $emplacement
@@ -161,6 +185,7 @@ class Dataaccess {
                 'emplacementThumbnails'=> $thumbnails
             );
             $CI->db->where('codeBaps', $codeBaps);
+            $CI->db->where('codeRayhane', $codeRayhane);
             $CI->db->update('slide', $data);
         }
         else {
@@ -289,7 +314,11 @@ class Dataaccess {
 
         $query = $CI->db->get()->row()->emplacementThumbnails;
 
-        return $query;https://stackoverflow.com/questions/60432076/controller-method-dont-detect-parametre
+        return $query;
+    }
+    public static function UpdateSlide($emplacement, $newSlide, $newCsv){
+        $CI=&get_instance();
+
         $data = array(
             'emplacementFichier' => $newSlide,
             'emplacementCsv' => $newCsv,
@@ -324,6 +353,31 @@ class Dataaccess {
         );
 
         $CI->db->insert('csv', $data);
+    }
+
+    public static function GetAllSupport(){
+
+        $CI = &get_instance();
+
+        $CI->db->select('id, dateGeneration, derniereModification, emplacement,  codeBaps, codeRayhane');
+        $query = $CI->db->get('supportCoursGen')->result_array();
+
+        return $query;
+    }
+    
+    public static function CheckIfSlideExistInDb($codeBaps, $codeRayhane){
+        $CI = &get_instance();
+
+        $CI->db->where('codeBaps',$codeBaps);
+        $CI->db->where('codeRayhane',$codeRayhane);
+        $query = $CI->db->get('slide');
+
+        if ($query->num_rows() > 0){
+        	return true;
+        }
+        else{
+        	return false;
+        }
     }
 
 }

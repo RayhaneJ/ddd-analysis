@@ -53,7 +53,7 @@ function createPdfView(htmlElement){
     url: base_url + "upload/LoadPdfPage/"+htmlElement.id,
     dataType: "JSON",
     success: function (data) {
-      AddIframeToModal(data, htmlElement.id);
+        AddIframeToModal(data, htmlElement.id);
     },
     error: function(){
     console.log('erreur');
@@ -123,13 +123,22 @@ $(document).ready(function(){
                 processData:false,  
                 success:function(data)  
                 {  
-                $('#AddNewPdg').modal('hide');
-                jQuery(function RefreshPageAdd($){
-                  $('#AddNewPdg').on('hidden.bs.modal', function (e) {
-                    location.reload();
-                  });
-                  // var libelle = document.getElementsByName
-                });
+                  console.log(data);
+                  let response = JSON.parse(data);
+                  if(response == "erreur"){
+                    alert("Ce libelle est déja pris pour une page de garde");
+                  }
+                  else {
+                    $('#AddNewPdg').modal('hide');
+                    jQuery(function RefreshPageAdd($){
+                      $('#AddNewPdg').on('hidden.bs.modal', function (e) {
+                        location.reload();
+                      });
+                    });
+                  }
+                },
+                error:function(file, msg){
+                  alert(msg);
                 }  
           });  
           }  

@@ -94,11 +94,19 @@ header {
     justify-content: space-around;
 }
 
+
 #bodyDel, #bodyChange{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.URL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center ;
+}
+
 
 .modal-header{
     font-family: 'gothambold';
@@ -115,6 +123,11 @@ header {
 .btnSlide{
     width:25%;
     margin-bottom: 0;
+}
+
+.textblack {
+    color:black;
+    font-family: 'gothambold';
 }
 
 
@@ -211,6 +224,11 @@ header {
 .btnSlide{
     width:25%;
     margin-bottom: 0;
+}
+
+.textblack {
+    color:black;
+    font-family: 'gothambold';
 }
 
 }

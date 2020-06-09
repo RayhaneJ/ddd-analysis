@@ -9,7 +9,7 @@
 <link href="<?php echo base_url();?>css/downloadView.css" rel="stylesheet">
 <link href="<?php echo base_url();?>assets/fontawesome/css/all.css" rel="stylesheet">
 <script>var base_url = '<?php echo base_url() ?>';</script>
-<title>pdvView</title>
+<title>Menu principal Gestion</title>
 
 </head>
 <body>
@@ -23,17 +23,17 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
       <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
-      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>"><div class="textwhite">Gestion</div></a></li>
+      <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser/LoadMainMenuGestion')?>"><div class="textwhite">Gestion</div></a></li>
       <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser')?>"><div class="textwhite">Visualisation</div></a></li>
     </ul>
   </div>
 </nav>
 </header>
 
-succes
+
 
 <a href= "<?php echo base_url('uploads/integrationPdf/'). $pdfGen ?>" download>
-Download
+Télécharger
 </a>
 
 </body>

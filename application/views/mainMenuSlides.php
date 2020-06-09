@@ -23,8 +23,8 @@
   <a class="nav-link"><img src="<?php echo base_url();?>css/RGB-LogoGK.gif" width="155" height="70" alt=""></i></a>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav">
-      <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textwhite">Intégration</div></a></li>
-      <li> <a class="nav-item nav-link" href="<?php echo base_url('Upload/GestionPdg')?>"><div class="textwhite">Gestion</div></a></li>
+      <li class="active"> <a class="nav-item nav-link" href="<?php echo base_url()?>"><div class="textblack">Intégration</div></a></li>
+      <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser/LoadMainMenuGestion')?>"><div class="textblack">Gestion</div></a></li>
       <li> <a class="nav-item nav-link" href="<?php echo base_url('Visualiser')?>"><div class="textwhite">Visualisation</div></a></li>
     </ul>
   </div>
@@ -45,7 +45,8 @@
         <th scope="col">Date dernière modification</th>
         <th scope="col" id="cbCustom">Code Baps</th>
         <th scope="col">Code Rayhane</th>
-        <th scope="col" class = "border-left" id="edit">Editer</th>
+        <th scope="col" id="labelUrl" class="text-center">URL</th>
+        <th scope="col" id="labelEditer" class = "border-left" id="edit">Editer</th>
     </tr>
   </thead>
   <tbody id ='tbody'>

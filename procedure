@@ -1,11 +1,9 @@
 delimiter | 
 create procedure formInsertCode(libCodeBaps varchar(256), libCodeRayhane varchar(256))
 BEGIN 
-	insert into codeBaps(libelleCodeBaps) values(libCodeBaps);
+	insert ignore into codeBaps(libelleCodeBaps) values(libCodeBaps);
 
 	insert ignore into codeRayhane(codeRayhane) values(libCodeRayhane);
-
-	update ignore codeBaps set codeRayhane = libCodeRayhane where id = (SELECT id FROM (select * from codeBaps) as cb ORDER BY id DESC LIMIT 1);
 end |
 delimiter ;
 	
@@ -25,7 +23,7 @@ BEGIN
 	insert into slide(emplacementFichier,codeBaps, codeRayhane, emplacementCsv) values (emplacementSlide, libCodeBaps, libCodeRayhane, csv); 
 
 	
-	update supportCoursSource set supportCoursGen = emplacementSupportCoursGen where id = (select max(id) from slide);
+	update supportCoursSource set supportCoursGen = emplacementSupportCoursGen where id = (select id from (select * from supportCoursSource) as sc order by id desc limit 1);
 
 end |
 delimiter ;

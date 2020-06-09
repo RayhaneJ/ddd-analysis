@@ -3,6 +3,11 @@
     let fileName = $(this).val().split('\\').pop(); 
     $(this).next('.custom-file-label').addClass("selected").html(fileName); 
   });
+  document.getElementById("loading").style.visibility = "hidden"; 
+  document.getElementById("codeBaps").value = "";
+  document.getElementById("codeRayhane").value = "";
+  document.getElementById("libelleCours").value = "";
+
 })(jQuery);
 
 function erreurCodeBaps() {
@@ -86,18 +91,6 @@ function ActivateCodeRayhaneInput(){
   var codeRayhaneInput = document.getElementById('codeRayhane');
   codeRayhaneInput.removeAttribute("disabled");
 }
-
-window.addEventListener('load', (event)=> {
-  var support = document.getElementById('typeSupportSelect');
-  support.setAttribute('disabled', "");
-  var codeBapsInput = document.getElementById('codeBaps');
-  codeBapsInput.value = "";
-  var libelleCoursInput = document.getElementById('libelleCours');
-  libelleCoursInput.value = "";
-  var codeRayhaneInput = document.getElementById('codeRayhane');
-  codeRayhaneInput.setAttribute("disabled", "");
-  codeRayhaneInput.value= "";
-})
 
 window.addEventListener("keypress", function(event){
   if(event.key == "Enter") {

@@ -7,6 +7,7 @@ function AddSlideContent(element){
     var dateDerniereModification = document.createElement('th');
     var codeBaps = document.createElement('th');
     var codeRayhane = document.createElement('th');
+    var lien = document.createElement('th');
     var editer = document.createElement('th');
 
     editer.classList.add("border-left");
@@ -46,11 +47,22 @@ function AddSlideContent(element){
 
     codeRayhane.innerHTML = element['codeRayhane'];
 
+    var a3 = document.createElement('a');
+    a3.href=base_url + "slideshow/" + element['codeBaps'] + "/" + element['codeRayhane'];
+    a3.classList.add('URL');
+    a3.id = element['id'];
+    var i3 = document.createElement('i');
+    i3.className = 'fas fa-link urlIcon';
+  
+    a3.appendChild(i3);
+    lien.appendChild(a3);
+    
     tr.appendChild(id);
     tr.appendChild(dateInjection);
     tr.appendChild(dateDerniereModification);
     tr.appendChild(codeBaps);
     tr.appendChild(codeRayhane);
+    tr.appendChild(lien);
     tr.appendChild(editer);
 
     tbody.appendChild(tr);
@@ -103,7 +115,6 @@ $(document).ready(function(){
             id = $(this).attr('id');
 
             $('#submit').on('click', function(e){   
-
               
               e.preventDefault();  
               var fileInputs = $('.file');
