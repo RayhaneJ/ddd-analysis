@@ -7,12 +7,6 @@ namespace Wellcome.DataModel
         public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Start Date")]
-        public DateTime StartDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "End Date")]
-        public DateTime EndDate { get; set; }
         public int AddressID { get; set; }
         public virtual Address Address { get; set; }
         public int ContactID { get; set; }

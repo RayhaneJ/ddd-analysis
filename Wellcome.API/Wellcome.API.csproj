@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Wellcome.Database\Wellcome.Database.csproj" />
+  </ItemGroup>
+
 </Project>

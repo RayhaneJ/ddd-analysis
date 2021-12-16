@@ -350,6 +350,43 @@
             "rid": "win"
           }
         }
+      },
+      "Wellcome.API/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Wellcome.Database": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Wellcome.API.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Wellcome.API.dll": {}
+        }
+      },
+      "Wellcome.Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EntityFramework": "6.4.4",
+          "Wellcome.DataModel": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Wellcome.Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Wellcome.Database.dll": {}
+        }
+      },
+      "Wellcome.DataModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Wellcome.DataModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Wellcome.DataModel.dll": {}
+        }
       }
     }
   },
@@ -1213,12 +1250,28 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Wellcome.API/1.0.0": {
+      "type": "project",
+      "path": "../Wellcome.API/Wellcome.API.csproj",
+      "msbuildProject": "../Wellcome.API/Wellcome.API.csproj"
+    },
+    "Wellcome.Database/1.0.0": {
+      "type": "project",
+      "path": "../Wellcome.Database/Wellcome.Database.csproj",
+      "msbuildProject": "../Wellcome.Database/Wellcome.Database.csproj"
+    },
+    "Wellcome.DataModel/1.0.0": {
+      "type": "project",
+      "path": "../Wellcome.DataModel/Wellcome.DataModel.csproj",
+      "msbuildProject": "../Wellcome.DataModel/Wellcome.DataModel.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "EntityFramework >= 6.4.4",
-      "Swashbuckle.AspNetCore >= 6.2.3"
+      "Swashbuckle.AspNetCore >= 6.2.3",
+      "Wellcome.API >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1247,7 +1300,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Rayhane\\source\\repos\\WellcomeSolution\\Wellcome.API\\Wellcome.API.csproj": {
+              "projectPath": "C:\\Users\\Rayhane\\source\\repos\\WellcomeSolution\\Wellcome.API\\Wellcome.API.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

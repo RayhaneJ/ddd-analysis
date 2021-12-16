@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "61cc268b-3dd5-468a-ae9a-0499cc7661af": {
+      "ProjectGuid": "61cc268b-3dd5-468a-ae9a-0499cc7661af",
+      "DisplayName": "Wellcome",
+      "ColorIndex": 0
+    },
+    "a9577d7b-58d6-4e39-bc8d-9ce37436204d": {
+      "ProjectGuid": "a9577d7b-58d6-4e39-bc8d-9ce37436204d",
+      "DisplayName": "Wellcome.API",
+      "ColorIndex": 1
+    },
+    "962be857-c6dd-4c2b-b9c7-8eeb21680d2e": {
+      "ProjectGuid": "962be857-c6dd-4c2b-b9c7-8eeb21680d2e",
+      "DisplayName": "Wellcome.Database",
+      "ColorIndex": 2
+    },
+    "91ee5148-62cf-460b-be76-797f0f0ef92f": {
+      "ProjectGuid": "91ee5148-62cf-460b-be76-797f0f0ef92f",
+      "DisplayName": "Wellcome.DataModel",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

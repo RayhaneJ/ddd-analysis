@@ -1,0 +1,12 @@
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\bin\Debug\net6.0\Wellcome.DataModel.deps.json
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\bin\Debug\net6.0\Wellcome.DataModel.dll
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\bin\Debug\net6.0\ref\Wellcome.DataModel.dll
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\bin\Debug\net6.0\Wellcome.DataModel.pdb
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.csproj.AssemblyReference.cache
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.AssemblyInfoInputs.cache
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.AssemblyInfo.cs
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.csproj.CoreCompileInputs.cache
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.dll
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\ref\Wellcome.DataModel.dll
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.pdb
