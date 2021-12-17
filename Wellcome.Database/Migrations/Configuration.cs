@@ -39,13 +39,13 @@
 
         private Address GetAddress()
              => new()
-             { City = "Soisy", Country = "France", PostalCode = "95230", Street = "11 rue des dures terres" };
+             { City = "Soisy", Country = "France", PostalCode = "95230", Street = "11 rue des dures terres", Longitude = 2.299731, Latitude = 48.988506 };
 
-        private Travelers GetTravelers()
+        private TravelersConfiguration GetTravelers()
             => new()
             { Adults = 2, Babies = 2, Childs = 0, Pets = 0 };
 
-        private DataModel.Configuration GetConfiguration()
+        private DataModel.HostConfiguration GetConfiguration()
             => new()
             { Bathrooms = 1, Beds = 2, Rooms = 3, Equipments = null };
 

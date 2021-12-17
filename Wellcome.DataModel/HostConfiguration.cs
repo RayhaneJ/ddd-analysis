@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wellcome.DataModel
 {
-    public class Configuration
+    public class HostConfiguration
     {
         public int ID { get; set; }
         public int Rooms { get; set; }

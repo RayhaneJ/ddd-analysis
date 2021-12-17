@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wellcome.DataModel
 {
-    public class Travelers
+    public class TravelersConfiguration
     {
         public int ID { get; set; }
         public int Adults { get; set; }

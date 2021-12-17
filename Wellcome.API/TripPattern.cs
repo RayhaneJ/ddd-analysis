@@ -8,8 +8,6 @@ namespace Wellcome.API
 {
     public class TripPattern
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
         public int Adults { get; set; }
         public int Babies { get; set; }
         public int Pets { get; set; }

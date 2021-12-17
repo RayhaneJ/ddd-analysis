@@ -9,8 +9,8 @@ namespace Wellcome.Database
         public DbSet<Host> Hosts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Configuration> Configurations { get; set; }
-        public DbSet<Travelers> Travelers { get; set; }
+        public DbSet<HostConfiguration> Configurations { get; set; }
+        public DbSet<TravelersConfiguration> Travelers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

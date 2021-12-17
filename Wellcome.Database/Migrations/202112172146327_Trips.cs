@@ -22,7 +22,7 @@
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.Configuration",
+                "dbo.HostConfiguration",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -58,16 +58,16 @@
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Address", t => t.AddressID, cascadeDelete: true)
-                .ForeignKey("dbo.Configuration", t => t.ConfigurationID, cascadeDelete: true)
+                .ForeignKey("dbo.HostConfiguration", t => t.ConfigurationID, cascadeDelete: true)
                 .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
-                .ForeignKey("dbo.Travelers", t => t.TravelersID, cascadeDelete: true)
+                .ForeignKey("dbo.TravelersConfiguration", t => t.TravelersID, cascadeDelete: true)
                 .Index(t => t.AddressID)
                 .Index(t => t.ContactID)
                 .Index(t => t.ConfigurationID)
                 .Index(t => t.TravelersID);
             
             CreateTable(
-                "dbo.Travelers",
+                "dbo.TravelersConfiguration",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -82,18 +82,18 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Host", "TravelersID", "dbo.Travelers");
+            DropForeignKey("dbo.Host", "TravelersID", "dbo.TravelersConfiguration");
             DropForeignKey("dbo.Host", "ContactID", "dbo.Contact");
-            DropForeignKey("dbo.Host", "ConfigurationID", "dbo.Configuration");
+            DropForeignKey("dbo.Host", "ConfigurationID", "dbo.HostConfiguration");
             DropForeignKey("dbo.Host", "AddressID", "dbo.Address");
             DropIndex("dbo.Host", new[] { "TravelersID" });
             DropIndex("dbo.Host", new[] { "ConfigurationID" });
             DropIndex("dbo.Host", new[] { "ContactID" });
             DropIndex("dbo.Host", new[] { "AddressID" });
-            DropTable("dbo.Travelers");
+            DropTable("dbo.TravelersConfiguration");
             DropTable("dbo.Host");
             DropTable("dbo.Contact");
-            DropTable("dbo.Configuration");
+            DropTable("dbo.HostConfiguration");
             DropTable("dbo.Address");
         }
     }

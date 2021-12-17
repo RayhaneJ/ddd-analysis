@@ -12,8 +12,8 @@ namespace Wellcome.DataModel
         public int ContactID { get; set; }
         public virtual Contact Contact { get; set; }
         public int ConfigurationID { get; set; }
-        public virtual Configuration Configuration { get; set; }
+        public virtual HostConfiguration Configuration { get; set; }
         public int TravelersID { get; set; }
-        public virtual Travelers Travelers { get; set; }
+        public virtual TravelersConfiguration Travelers { get; set; }
     }
 }

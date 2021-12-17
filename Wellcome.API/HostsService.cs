@@ -8,19 +8,11 @@ namespace Wellcome.API
     {
         public List<Host> GetHosts() => new WellcomeContext().Hosts.ToList();
 
-        public List<Host> GetHosts(TripPattern pattern)
-        {
-            Func<TripPattern, Host, bool> hostMatch = (x, y) => addressMatch(x, y) && configurationMatch(x, y) && travelersMatch(x, y);
-            return new WellcomeContext().Hosts.Where(h => hostMatch(pattern, h)).ToList();
-        }
-
-        private Func<TripPattern, Host, bool> addressMatch
-            = (x, y) => x.Latitude == y.Address.Latitude && x.Longitude == y.Address.Longitude;
-
-        private Func<TripPattern, Host, bool> configurationMatch
-           = (x, y) => x.Rooms <= y.Configuration.Rooms && x.Bathrooms <= y.Configuration.Bathrooms && x.Beds <= y.Configuration.Beds;
-
-        private Func<TripPattern, Host, bool> travelersMatch
-           = (x, y) => x.Adults <= y.Travelers.Adults && x.Babies <= y.Travelers.Babies && x.Childs <= y.Travelers.Childs;
+        public List<Host> GetHosts(TripPattern p) 
+            => new WellcomeContext().Hosts
+                .Where(h => h.Address.Latitude == p.Latitude && h.Address.Longitude == p.Longitude)
+                .Where(h => p.Rooms <= h.Configuration.Rooms && p.Bathrooms <= h.Configuration.Bathrooms && p.Beds <= h.Configuration.Beds)
+                .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
+                .ToList();
     }
 }
