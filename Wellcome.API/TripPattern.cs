@@ -12,11 +12,6 @@ namespace Wellcome.API
         public int Babies { get; set; }
         public int Pets { get; set; }
         public int Childs { get; set; }
-        public int Rooms { get; set; }
-        public int Beds { get; set; }
-        public int Bathrooms { get; set; }
-        public List<string> Equipments { get; set; }
-        public string Street { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string PostalCode { get; set; }
@@ -24,5 +19,4 @@ namespace Wellcome.API
         public double Latitude { get; set; }
     }
 
-    public enum Equipment { }
 }
