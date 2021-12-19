@@ -10,7 +10,7 @@ namespace Wellcome.Controllers
         [HttpGet]
         public List<DataModel.Host> GetHosts() => new HostsService().GetHosts();
 
-        [HttpGet("filter")]
+        [HttpPost("filter")]
         public List<DataModel.Host> GetHosts([FromBody] TripPattern pattern) => new HostsService().GetHosts(pattern);
     }
 }

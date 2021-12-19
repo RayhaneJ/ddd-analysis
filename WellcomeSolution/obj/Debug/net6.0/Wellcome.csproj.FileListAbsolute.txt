@@ -51,3 +51,4 @@ C:\Users\Rayhane\source\repos\WellcomeSolution\WellcomeSolution\obj\Debug\net6.0
 C:\Users\Rayhane\source\repos\WellcomeSolution\WellcomeSolution\obj\Debug\net6.0\ref\Wellcome.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\WellcomeSolution\obj\Debug\net6.0\Wellcome.pdb
 C:\Users\Rayhane\source\repos\WellcomeSolution\WellcomeSolution\obj\Debug\net6.0\Wellcome.genruntimeconfig.cache
+C:\Users\Rayhane\source\repos\WellcomeSolution\WellcomeSolution\bin\Debug\net6.0\Geolocation.dll

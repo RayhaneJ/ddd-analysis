@@ -12,9 +12,6 @@ namespace Wellcome.API
         public int Babies { get; set; }
         public int Pets { get; set; }
         public int Childs { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string PostalCode { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
     }

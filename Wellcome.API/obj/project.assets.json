@@ -24,6 +24,15 @@
           "buildTransitive/netcoreapp3.0/EntityFramework.targets": {}
         }
       },
+      "Geolocation/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Geolocation.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Geolocation.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
@@ -362,6 +371,22 @@
         "tools/netcoreapp3.0/any/ef6.dll",
         "tools/netcoreapp3.0/any/ef6.pdb",
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
+      ]
+    },
+    "Geolocation/1.2.1": {
+      "sha512": "qvdjGKWydk4hKmyGvIExkpNhJ0qoAk88f+wTsuQ6Bdb6Zl2MJccmQRKF2DLtAuuGSkeF9N99BbO2eKk4F932Mw==",
+      "type": "package",
+      "path": "geolocation/1.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "geolocation.1.2.1.nupkg.sha512",
+        "geolocation.nuspec",
+        "lib/net451/Geolocation.dll",
+        "lib/net451/Geolocation.pdb",
+        "lib/netstandard2.0/Geolocation.dll",
+        "lib/netstandard2.0/Geolocation.pdb"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -1055,6 +1080,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Geolocation >= 1.2.1",
       "Wellcome.Database >= 1.0.0"
     ]
   },
@@ -1100,6 +1126,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Geolocation": {
+            "target": "Package",
+            "version": "[1.2.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
