@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Wellcome.DataModel
+{
+    public class User
+    {
+        public int ID { get; set; }
+        public int ContactId { get; set; }
+        public virtual Contact Contact { get; set; }
+        public string Profession { get; set; }
+        public int Age { get; set; }
+        public Gender Gender { get; set; }
+        public List<string> Languages { get; set; }
+        public string Password { get; set; }
+        public int ImageId { get; set; }
+        public virtual Image Image { get; set; }
+        public List<int> FavoriteHostsIds { get; set; }
+        public virtual List<Feedback> Feedbacks { get; set; }
+        public virtual List<Host> Hosts { get; set; }
+    }
+
+    public enum Gender
+    {
+        Male, Female
+    }
+}

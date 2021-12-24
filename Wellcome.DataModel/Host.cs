@@ -9,11 +9,13 @@ namespace Wellcome.DataModel
         public string Description { get; set; }
         public int AddressID { get; set; }
         public virtual Address Address { get; set; }
-        public int ContactID { get; set; }
-        public virtual Contact Contact { get; set; }
-        public int ConfigurationID { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+        public int HostConfigurationID { get; set; }
         public virtual HostConfiguration Configuration { get; set; }
-        public int TravelersID { get; set; }
+        public int TravelersConfigurationID { get; set; }
         public virtual TravelersConfiguration Travelers { get; set; }
+        public int ImageId { get; set; }
+        public virtual Image Image { get; set; }
     }
 }

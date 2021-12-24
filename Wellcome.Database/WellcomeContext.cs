@@ -11,6 +11,9 @@ namespace Wellcome.Database
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<HostConfiguration> Configurations { get; set; }
         public DbSet<TravelersConfiguration> Travelers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

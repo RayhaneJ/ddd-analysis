@@ -49,8 +49,22 @@
             => new()
             { Bathrooms = 1, Beds = 2, Rooms = 3, Equipments = null };
 
-        private static Contact GetContact()
+        private static Contact GetContact1()
             => new()
-            { FirstName = "Rayhane", LastName = "JEBBARI", Mail = "FakeEmail@gmail.com", Phone = "0668319888" };
+            { FirstName = "Rayhane", LastName = "JEBBARI", Mail = "jebray@gmail.com", Phone = "0668319888" };
+
+        private static Contact GetContact2()
+            => new()
+            { FirstName = "Jialei", LastName = "SUN", Mail = "sunjia@gmail.com", Phone = "0668315554" };
+
+        private static Feedback GetFeedbacks(int userId)
+            => new()
+            { Notation = 4, Remark = "Good host !", TimeStamp = DateTime.Now, UserId = userId };
+
+        private static User GetUser(int contactId, int imageId)
+        {
+            return new User { Age = 31, ContactId = contactId, Gender = Gender.Male, Languages = new List<string> { "French" }, 
+             ImageId = imageId, Password = "password", Profession = "It Engineer", }
+        }
     }
 }
