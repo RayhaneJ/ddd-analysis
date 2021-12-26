@@ -15,7 +15,6 @@ namespace Wellcome.DataModel
         public virtual HostConfiguration Configuration { get; set; }
         public int TravelersConfigurationID { get; set; }
         public virtual TravelersConfiguration Travelers { get; set; }
-        public int ImageId { get; set; }
-        public virtual Image Image { get; set; }
+        public virtual HostPicture HostPicture { get; set; }
     }
 }

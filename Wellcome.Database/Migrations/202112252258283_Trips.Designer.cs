@@ -13,7 +13,7 @@ namespace Wellcome.Database.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202112172146327_Trips"; }
+            get { return "202112252258283_Trips"; }
         }
         
         string IMigrationMetadata.Source

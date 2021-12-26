@@ -16,11 +16,10 @@ namespace Wellcome.DataModel
         public Gender Gender { get; set; }
         public List<string> Languages { get; set; }
         public string Password { get; set; }
-        public int ImageId { get; set; }
-        public virtual Image Image { get; set; }
         public List<int> FavoriteHostsIds { get; set; }
         public virtual List<Feedback> Feedbacks { get; set; }
         public virtual List<Host> Hosts { get; set; }
+        public virtual ProfilePicture ProfilePicture { get; set; }
     }
 
     public enum Gender
