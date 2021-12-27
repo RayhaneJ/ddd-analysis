@@ -12,7 +12,7 @@ namespace Wellcome.API
         public string Country { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int PictureId { get; set; }
+        public string PictureUrl { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }

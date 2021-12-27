@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Wellcome.DataModel
 {
+    [Table("Host")]
     public class Host
     {
         public int ID { get; set; }

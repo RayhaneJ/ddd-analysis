@@ -1,5 +1,4 @@
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\bin\Debug\net6.0\Wellcome.API.deps.json
-C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\bin\Debug\net6.0\Wellcome.API.runtimeconfig.json
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\bin\Debug\net6.0\Wellcome.API.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\bin\Debug\net6.0\ref\Wellcome.API.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\bin\Debug\net6.0\Wellcome.API.pdb
@@ -16,4 +15,3 @@ C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\obj\Debug\net6.0\Wel
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\obj\Debug\net6.0\Wellcome.API.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\obj\Debug\net6.0\ref\Wellcome.API.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\obj\Debug\net6.0\Wellcome.API.pdb
-C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.API\obj\Debug\net6.0\Wellcome.API.genruntimeconfig.cache

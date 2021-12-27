@@ -7,31 +7,35 @@ namespace Wellcome.API
 {
     public class HostsService
     {
-        //public List<Host> GetHosts()
-        //{
-        //    return new WellcomeContext().Hosts.ToList();
-        //}
-
-        //public List<Host> GetHosts(TripPattern p)
-        //{
-        //    var hosts = new WellcomeContext().Hosts
-        //        .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
-        //        .ToList();
-
-        //    return hosts.Where(h =>
-        //    {
-        //        var perimeter = 10;
-        //        return GeoCalculator
-        //        .GetDistance(new Coordinate(p.Latitude, p.Longitude), new Coordinate(h.Address.Latitude, h.Address.Longitude), 1, DistanceUnit.Kilometers) <= perimeter;
-        //    }).ToList();
-        //}
-
-        public FileStream GetHostPicture(int id)
+        public HostDetails GetHostDetails(int id)
         {
             using var ctx = new WellcomeContext();
-            var path = ctx.HostPictures.Find(id).Path;
-            var fullPath = Path.Join(Environment.CurrentDirectory, path);
-            return File.OpenRead(fullPath);
+            var host = ctx.Hosts.Find(id);
+            return new HostDetails
+            {
+                Title = host.Title,
+                Description = host.Description,
+                Rooms = host.Configuration.Rooms,
+                Bathrooms = host.Configuration.Bathrooms,
+                Travelers = host.Travelers.Adults + host.Travelers.Childs + host.Travelers.Babies,
+                Address = new Address
+                {
+                    City = host.Address.City,
+                    Country = host.Address.Country,
+                    Latitude = host.Address.Latitude,
+                    Longitude = host.Address.Longitude,
+                    PostalCode = host.Address.PostalCode,
+                },
+                Hoster = new Hoster
+                {
+                    Description = host.User.Description,
+                    FirstName = host.User.Contact.FirstName, 
+                    LastName = host.User.Contact.LastName,
+                    Age = host.User.Age, 
+                    Gender = host.User.Gender.ToString(),
+                    Languages = host.User.Languages
+                }
+            };
         }
 
         public List<HostPresenter> GetHostsPresenters() 
@@ -44,7 +48,7 @@ namespace Wellcome.API
                     LastName = h.User.Contact.LastName,
                     Latitude = h.Address.Latitude,
                     Longitude = h.Address.Longitude,
-                    PictureId = h.HostPicture.ID
+                    PictureUrl = h.HostPicture.Path
                 }).ToList();
 
         public List<HostPresenter> GetHostsPresenters(TripPattern p)
@@ -59,7 +63,7 @@ namespace Wellcome.API
                     LastName = h.User.Contact.LastName,
                     Latitude = h.Address.Latitude,
                     Longitude = h.Address.Longitude,
-                    PictureId = h.HostPicture.ID
+                    PictureUrl = h.HostPicture.Path
                 }).ToList();
 
             return hosts.Where(h =>

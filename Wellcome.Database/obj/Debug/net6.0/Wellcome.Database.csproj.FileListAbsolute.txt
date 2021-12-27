@@ -1,5 +1,4 @@
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\Wellcome.Database.deps.json
-C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\Wellcome.Database.runtimeconfig.json
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\Wellcome.Database.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\ref\Wellcome.Database.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\Wellcome.Database.pdb
@@ -14,6 +13,5 @@ C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\Wellcome.Database.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\ref\Wellcome.Database.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\Wellcome.Database.pdb
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\bin\Debug\net6.0\Wellcome.Database.runtimeconfig.json
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\Wellcome.Database.genruntimeconfig.cache
-C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\Wellcome.Database.Migrations.Trips.resources
-C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.Database\obj\Debug\net6.0\Wellcome.Database.csproj.GenerateResource.cache

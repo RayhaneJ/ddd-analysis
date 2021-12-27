@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using Microsoft.EntityFrameworkCore;
 using Wellcome.DataModel;
 
 namespace Wellcome.Database
@@ -16,15 +15,45 @@ namespace Wellcome.Database
         public DbSet<HostPicture> HostPictures { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Entity<User>()
-                .HasOptional(s => s.ProfilePicture)
-                .WithRequired(ad => ad.User);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            OnHostCreating(modelBuilder);
+            OnUserCreating(modelBuilder);
+
+            modelBuilder.Seed();
+        }
+
+        private static void OnHostCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Host>()
-                .HasOptional(s => s.HostPicture)
-                .WithRequired(ad => ad.Host);
+                .HasOne(s => s.HostPicture)
+                .WithOne(ad => ad.Host)
+                .HasForeignKey<HostPicture>(p => p.HostId);
+        }
+
+        private static void OnUserCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                        .Property(e => e.Languages)
+                        .HasConversion(
+                            v => string.Join(',', v),
+                            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+            modelBuilder
+                .Entity<User>()
+                .Property(e => e.Gender)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Gender)Enum.Parse(typeof(Gender), v));
+
+            modelBuilder.Entity<User>()
+                .HasOne(s => s.ProfilePicture)
+                .WithOne(ad => ad.User)
+                .HasForeignKey<ProfilePicture>(p => p.UserId);
         }
     }
 }
