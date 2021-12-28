@@ -1,4 +1,5 @@
 ﻿using Geolocation;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Wellcome.Database;
 using Wellcome.DataModel;
@@ -14,9 +15,14 @@ namespace Wellcome.API
             ctx = context;
         }
 
-        public HostDetails GetHostDetails(int id)
+        public async Task<HostDetails> GetHostDetailsAsync(int id)
         {
-            var host = ctx.Hosts.Find(id);
+            var host = await ctx.Hosts
+                .Include(h => h.Address)
+                .Include(h => h.User)
+                .Include(h => h.Configuration)
+                .Include(h => h.Travelers)
+                .Include(h => h.User.Contact).FirstOrDefaultAsync(x => x.ID == id);
             return new HostDetails
             {
                 Title = host.Title,
@@ -44,8 +50,8 @@ namespace Wellcome.API
             };
         }
 
-        public List<HostPresenter> GetHostsPresenters() 
-            => ctx.Hosts
+        public async Task<List<HostPresenter>> GetHostsPresentersAsync() 
+            => await ctx.Hosts
                 .Select(h => new HostPresenter
                 {
                     City = h.Address.City,
@@ -54,12 +60,14 @@ namespace Wellcome.API
                     LastName = h.User.Contact.LastName,
                     Latitude = h.Address.Latitude,
                     Longitude = h.Address.Longitude,
-                    PictureUrl = h.HostPicture.Path
-                }).ToList();
+                    PictureUrl = h.HostPicture.Path,
+                    Id = h.ID,
+                    Title = h.Title
+                }).ToListAsync();
 
-        public List<HostPresenter> GetHostsPresenters(TripPattern p)
+        public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
         {
-            var hosts = ctx.Hosts
+            var hosts = await ctx.Hosts
                 .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
                 .Select(h => new HostPresenter
                 {
@@ -69,8 +77,10 @@ namespace Wellcome.API
                     LastName = h.User.Contact.LastName,
                     Latitude = h.Address.Latitude,
                     Longitude = h.Address.Longitude,
-                    PictureUrl = h.HostPicture.Path
-                }).ToList();
+                    PictureUrl = h.HostPicture.Path,
+                    Id = h.ID,
+                    Title = h.Title
+                }).ToListAsync();
 
             return hosts.Where(h =>
             {

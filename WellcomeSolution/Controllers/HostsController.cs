@@ -15,14 +15,14 @@ namespace Wellcome.Controllers
             ctx = context;
         }
 
-        [HttpPost("presenters")]
-        public List<HostPresenter> GetHosts() => new HostsService(ctx).GetHostsPresenters();
+        [HttpGet("presenters")]
+        public async Task<List<HostPresenter>> GetHostsAsync() => await new HostsService(ctx).GetHostsPresentersAsync();
 
         [HttpPost("presenters/filter")]
-        public List<HostPresenter> GetHosts([FromBody] TripPattern pattern) => new HostsService(ctx).GetHostsPresenters(pattern);
+        public async Task<List<HostPresenter>> GetHostsAsync([FromBody] TripPattern pattern) => await new HostsService(ctx).GetHostsPresentersAsync(pattern);
 
-        [HttpPost("details/{id}")]
-        public HostDetails GetHostPicture(int id) => new HostsService(ctx).GetHostDetails(id);
+        [HttpGet("details/{id}")]
+        public async Task<HostDetails> GetHostPictureAsync(int id) => await new HostsService(ctx).GetHostDetailsAsync(id);
 
     }
 }
