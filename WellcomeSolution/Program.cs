@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Wellcome.Database;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Configuration.AddJsonFile("appsettings.json", true, true);
+builder.Services.AddDbContext<WellcomeContext>(options => options.UseSqlServer(builder.Configuration["DefaultConnection:ConnectionString"]));
 
 builder.Services.AddDirectoryBrowser();
 

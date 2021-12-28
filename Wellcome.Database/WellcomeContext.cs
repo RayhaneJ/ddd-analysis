@@ -5,6 +5,9 @@ namespace Wellcome.Database
 {
     public class WellcomeContext : DbContext
     {
+        public WellcomeContext(DbContextOptions options) : base(options) { 
+        }
+
         public DbSet<Host> Hosts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
@@ -14,6 +17,7 @@ namespace Wellcome.Database
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<HostPicture> HostPictures { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
+        public DbSet<FavoriteHost> FavoriteHosts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,6 +27,7 @@ namespace Wellcome.Database
         {
             OnHostCreating(modelBuilder);
             OnUserCreating(modelBuilder);
+            OnHostConfigurationCreating(modelBuilder);
 
             modelBuilder.Seed();
         }
@@ -35,8 +40,31 @@ namespace Wellcome.Database
                 .HasForeignKey<HostPicture>(p => p.HostId);
         }
 
+        private static void OnHostConfigurationCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<HostConfiguration>()
+                        .Property(e => e.Equipments)
+                        .HasConversion(
+                            v => string.Join(',', v),
+                            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        }
+
         private static void OnUserCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<FavoriteHost>().HasKey(sc => new { sc.UserId, sc.HostId });
+
+            modelBuilder.Entity<FavoriteHost>()
+    .HasOne(sc => sc.User)
+    .WithMany(s => s.FavoriteHosts)
+    .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<FavoriteHost>()
+                .HasOne(sc => sc.Host)
+                .WithMany(s => s.FavoriteHosts)
+                .HasForeignKey(sc => sc.HostId).OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder
                 .Entity<User>()
                         .Property(e => e.Languages)

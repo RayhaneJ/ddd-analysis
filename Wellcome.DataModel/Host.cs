@@ -18,5 +18,6 @@ namespace Wellcome.DataModel
         public int TravelersConfigurationID { get; set; }
         public virtual TravelersConfiguration Travelers { get; set; }
         public virtual HostPicture HostPicture { get; set; }
+        public virtual List<FavoriteHost> FavoriteHosts { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace Wellcome.DataModel
         public int Rooms { get; set; }
         public int Beds { get; set; }
         public int Bathrooms { get; set; }
-        public virtual ICollection<Equipment>? Equipments { get; set; }
+        public string[] Equipments { get; set; }
     }
 }

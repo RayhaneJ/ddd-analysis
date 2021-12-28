@@ -7,9 +7,15 @@ namespace Wellcome.API
 {
     public class HostsService
     {
+        private readonly WellcomeContext ctx;
+
+        public HostsService(WellcomeContext context)
+        {
+            ctx = context;
+        }
+
         public HostDetails GetHostDetails(int id)
         {
-            using var ctx = new WellcomeContext();
             var host = ctx.Hosts.Find(id);
             return new HostDetails
             {
@@ -29,9 +35,9 @@ namespace Wellcome.API
                 Hoster = new Hoster
                 {
                     Description = host.User.Description,
-                    FirstName = host.User.Contact.FirstName, 
+                    FirstName = host.User.Contact.FirstName,
                     LastName = host.User.Contact.LastName,
-                    Age = host.User.Age, 
+                    Age = host.User.Age,
                     Gender = host.User.Gender.ToString(),
                     Languages = host.User.Languages
                 }
@@ -39,7 +45,7 @@ namespace Wellcome.API
         }
 
         public List<HostPresenter> GetHostsPresenters() 
-            => new WellcomeContext().Hosts
+            => ctx.Hosts
                 .Select(h => new HostPresenter
                 {
                     City = h.Address.City,
@@ -53,7 +59,7 @@ namespace Wellcome.API
 
         public List<HostPresenter> GetHostsPresenters(TripPattern p)
         {
-            var hosts = new WellcomeContext().Hosts
+            var hosts = ctx.Hosts
                 .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
                 .Select(h => new HostPresenter
                 {
