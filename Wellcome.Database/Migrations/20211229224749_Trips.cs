@@ -86,7 +86,7 @@ namespace Wellcome.Database.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Languages = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -254,13 +254,13 @@ namespace Wellcome.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Languages", "Password", "Profession" },
+                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession" },
                 values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer" });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
                 columns: new[] { "ID", "Notation", "Remark", "TimeStamp", "UserId" },
-                values: new object[] { 1, 4, "Good host !", new DateTime(2021, 12, 28, 19, 3, 43, 388, DateTimeKind.Local).AddTicks(9457), 1 });
+                values: new object[] { 1, 4, "Good host !", new DateTime(2021, 12, 29, 23, 47, 49, 376, DateTimeKind.Local).AddTicks(329), 1 });
 
             migrationBuilder.InsertData(
                 table: "Host",

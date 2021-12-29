@@ -171,7 +171,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2021, 12, 28, 19, 3, 43, 388, DateTimeKind.Local).AddTicks(9457),
+                            TimeStamp = new DateTime(2021, 12, 29, 23, 47, 49, 376, DateTimeKind.Local).AddTicks(329),
                             UserId = 1
                         });
                 });
@@ -384,7 +384,7 @@ namespace Wellcome.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Languages")
+                    b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -410,7 +410,7 @@ namespace Wellcome.Database.Migrations
                             ContactId = 1,
                             Description = "I like meet new people !",
                             Gender = "Male",
-                            Languages = "French",
+                            Language = "French",
                             Password = "password",
                             Profession = "It Engineer"
                         });

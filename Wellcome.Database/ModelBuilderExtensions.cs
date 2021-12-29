@@ -30,7 +30,7 @@ namespace Wellcome.Database
                );
 
             modelBuilder.Entity<User>().HasData(
-                new User { ID = 1, Age = 31, ContactId = 1, Gender = Gender.Male, Languages = new string[] { "French" }, Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
+                new User { ID = 1, Age = 31, ContactId = 1, Gender = Gender.Male, Language =  "French" , Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
                );
 
             modelBuilder.Entity<ProfilePicture>().HasData(

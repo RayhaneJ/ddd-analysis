@@ -44,8 +44,9 @@ namespace Wellcome.API
                     FirstName = host.User.Contact.FirstName,
                     LastName = host.User.Contact.LastName,
                     Age = host.User.Age,
+                    Profession = host.User.Profession,
                     Gender = host.User.Gender.ToString(),
-                    Languages = host.User.Languages
+                    Language = host.User.Language
                 }
             };
         }

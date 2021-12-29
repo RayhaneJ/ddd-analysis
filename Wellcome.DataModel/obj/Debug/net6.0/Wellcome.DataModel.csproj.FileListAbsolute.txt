@@ -9,3 +9,4 @@ C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\ref\Wellcome.DataModel.dll
 C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.pdb
+C:\Users\Rayhane\source\repos\WellcomeSolution\Wellcome.DataModel\obj\Debug\net6.0\Wellcome.DataModel.csproj.AssemblyReference.cache

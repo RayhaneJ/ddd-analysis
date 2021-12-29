@@ -67,12 +67,6 @@ namespace Wellcome.Database
 
             modelBuilder
                 .Entity<User>()
-                        .Property(e => e.Languages)
-                        .HasConversion(
-                            v => string.Join(',', v),
-                            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            modelBuilder
-                .Entity<User>()
                 .Property(e => e.Gender)
                 .HasConversion(
                     v => v.ToString(),
