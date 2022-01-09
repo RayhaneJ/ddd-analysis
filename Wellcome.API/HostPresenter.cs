@@ -17,5 +17,6 @@ namespace Wellcome.API
         public string PictureUrl { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public Boolean IsFavorite { get; set; }
     }
 }

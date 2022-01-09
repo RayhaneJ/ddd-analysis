@@ -15,14 +15,22 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task SetFavoriteHost(FavoriteRequest)
+        {
+
+        }
+
         public async Task<HostDetails> GetHostDetailsAsync(int id)
         {
             var host = await ctx.Hosts
                 .Include(h => h.Address)
                 .Include(h => h.User)
+                .ThenInclude(u => u.ProfilePicture)
+                .ThenInclude(u => u.User.Contact)
                 .Include(h => h.Configuration)
                 .Include(h => h.Travelers)
-                .Include(h => h.User.Contact).FirstOrDefaultAsync(x => x.ID == id);
+                .FirstOrDefaultAsync(x => x.ID == id);
+                
             return new HostDetails
             {
                 Title = host.Title,
@@ -46,25 +54,26 @@ namespace Wellcome.API
                     Age = host.User.Age,
                     Profession = host.User.Profession,
                     Gender = host.User.Gender.ToString(),
-                    Language = host.User.Language
+                    Language = host.User.Language, 
+                    PictureUrl = host.User.ProfilePicture.Path
                 }
             };
         }
 
-        public async Task<List<HostPresenter>> GetHostsPresentersAsync() 
-            => await ctx.Hosts
-                .Select(h => new HostPresenter
-                {
-                    City = h.Address.City,
-                    Country = h.Address.Country,
-                    FirstName = h.User.Contact.FirstName,
-                    LastName = h.User.Contact.LastName,
-                    Latitude = h.Address.Latitude,
-                    Longitude = h.Address.Longitude,
-                    PictureUrl = h.HostPicture.Path,
-                    Id = h.ID,
-                    Title = h.Title
-                }).ToListAsync();
+        public async Task<List<HostPresenter>> GetHostsPresentersAsync() => 
+            await ctx.Hosts
+                            .Select(h => new HostPresenter
+                            {
+                                City = h.Address.City,
+                                Country = h.Address.Country,
+                                FirstName = h.User.Contact.FirstName,
+                                LastName = h.User.Contact.LastName,
+                                Latitude = h.Address.Latitude,
+                                Longitude = h.Address.Longitude,
+                                PictureUrl = h.HostPicture.Path,
+                                Id = h.ID,
+                                Title = h.Title
+                            }).ToListAsync();
 
         public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
         {
@@ -83,12 +92,24 @@ namespace Wellcome.API
                     Title = h.Title
                 }).ToListAsync();
 
+            await SetFavorites(p.UserId, hosts);
+
             return hosts.Where(h =>
             {
                 var perimeter = 10;
                 return GeoCalculator
                 .GetDistance(new Coordinate(p.Latitude, p.Longitude), new Coordinate(h.Latitude, h.Longitude), 1, DistanceUnit.Kilometers) <= perimeter;
             }).ToList();
+        }
+
+        private async Task SetFavorites(int userId, List<HostPresenter> hostPresenters)
+        {
+            var favoriteHosts = await ctx.FavoriteHosts.Where(f => f.UserId == userId).ToListAsync();
+            hostPresenters.Join(favoriteHosts,
+                p => p.Id,
+                f => f.HostId,
+                (p, f) => p).ToList().ForEach(p => p.IsFavorite = true);
+            
         }
     }
 }
