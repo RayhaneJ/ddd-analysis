@@ -30,7 +30,7 @@ namespace Wellcome.Database
                );
 
             modelBuilder.Entity<User>().HasData(
-                new User { ID = 1, Age = 31, ContactId = 1, Gender = Gender.Male, Language =  "French" , Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
+                new User { ID = 1, Uuid = Guid.NewGuid().ToString(), Age = 31, ContactId = 1, Gender = Gender.Male, Language =  "French" , Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
                );
 
             modelBuilder.Entity<ProfilePicture>().HasData(
@@ -41,6 +41,7 @@ namespace Wellcome.Database
               new Host
               {
                   ID = 1,
+                  Uuid = Guid.NewGuid().ToString(),
                   Title = "Title",
                   AddressID = 1,
                   HostConfigurationID = 1,

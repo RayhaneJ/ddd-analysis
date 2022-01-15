@@ -8,7 +8,7 @@ namespace Wellcome.API
 {
     public class TripPattern
     {
-        public int UserId { get; set; }
+        public string Email { get; set; }
         public int Adults { get; set; }
         public int Babies { get; set; }
         public int Pets { get; set; }

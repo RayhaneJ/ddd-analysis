@@ -11,6 +11,7 @@ namespace Wellcome.DataModel
     public class User
     {
         public int ID { get; set; }
+        public string Uuid { get; set; }
         public int ContactId { get; set; }
         public virtual Contact Contact { get; set; }
         public string Profession { get; set; }

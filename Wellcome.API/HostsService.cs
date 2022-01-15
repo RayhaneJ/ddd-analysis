@@ -15,21 +15,33 @@ namespace Wellcome.API
             ctx = context;
         }
 
-        public async Task SetFavoriteHost(FavoriteRequest)
+        public async Task SetFavoriteHost(FavoriteRequest request)
         {
-
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == request.Email);
+            var host = await ctx.Hosts.SingleOrDefaultAsync(h => h.Uuid == request.HostUuid);
+            await ctx.FavoriteHosts.AddAsync(
+                new FavoriteHost { HostId = host.ID, UserId = user.ID });
         }
 
-        public async Task<HostDetails> GetHostDetailsAsync(int id)
+        public async Task RemoveFavoriteHost(FavoriteRequest request)
+        {
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == request.Email);
+            var host = await ctx.Hosts.SingleOrDefaultAsync(h => h.Uuid == request.HostUuid);
+            var favorite = await ctx.FavoriteHosts.FindAsync(user.ID, host.ID);
+            ctx.FavoriteHosts.Remove(favorite);
+        }
+
+        public async Task<HostDetails> GetHostDetailsAsync(string uuid)
         {
             var host = await ctx.Hosts
                 .Include(h => h.Address)
                 .Include(h => h.User)
-                .ThenInclude(u => u.ProfilePicture)
-                .ThenInclude(u => u.User.Contact)
+                    .ThenInclude(u => u.ProfilePicture)
+                .Include(h => h.User)
+                    .ThenInclude(u => u.Contact)
                 .Include(h => h.Configuration)
                 .Include(h => h.Travelers)
-                .FirstOrDefaultAsync(x => x.ID == id);
+                .FirstOrDefaultAsync(x => x.Uuid == uuid);
                 
             return new HostDetails
             {
@@ -77,24 +89,46 @@ namespace Wellcome.API
 
         public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
         {
+            List<FilteredHost> filteredHosts = await FilterHostByPattern(p);
+
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == p.Email);
+            List<FilteredHost> filteredHostByLocalisation = FilterHostByLocalisation(p, filteredHosts);
+
+            var filteredHostByFavorites = await SetFavorites(user.ID, filteredHostByLocalisation);
+
+            var res = await FillHostDetails(filteredHostByFavorites);
+            return res;
+        }
+
+        private async Task<List<HostPresenter>> FillHostDetails(List<FilteredHost> filteredHostByFavorites)
+        {
             var hosts = await ctx.Hosts
-                .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
-                .Select(h => new HostPresenter
-                {
-                    City = h.Address.City,
-                    Country = h.Address.Country,
-                    FirstName = h.User.Contact.FirstName,
-                    LastName = h.User.Contact.LastName,
-                    Latitude = h.Address.Latitude,
-                    Longitude = h.Address.Longitude,
-                    PictureUrl = h.HostPicture.Path,
-                    Id = h.ID,
-                    Title = h.Title
-                }).ToListAsync();
+                .Include(h => h.Address)
+                .Include(h => h.User.Contact)
+                .Include(h => h.HostPicture)
+                .ToListAsync();
+            var joinResult = hosts.Join(filteredHostByFavorites,
+                            h => h.ID,
+                            f => f.Id,
+                            (h, f) => new HostPresenter
+                            {
+                                IsFavorite = f.IsFavorite,
+                                City = h.Address.City,
+                                Country = h.Address.Country,
+                                FirstName = h.User.Contact.FirstName,
+                                LastName = h.User.Contact.LastName,
+                                Latitude = h.Address.Latitude,
+                                Longitude = h.Address.Longitude,
+                                PictureUrl = h.HostPicture.Path,
+                                Uuid = h.Uuid,
+                                Title = h.Title
+                            }).ToList();
+            return joinResult;
+        }
 
-            await SetFavorites(p.UserId, hosts);
-
-            return hosts.Where(h =>
+        private static List<FilteredHost> FilterHostByLocalisation(TripPattern p, List<FilteredHost> filteredHosts)
+        {
+            return filteredHosts.Where(h =>
             {
                 var perimeter = 10;
                 return GeoCalculator
@@ -102,14 +136,29 @@ namespace Wellcome.API
             }).ToList();
         }
 
-        private async Task SetFavorites(int userId, List<HostPresenter> hostPresenters)
+        private async Task<List<FilteredHost>> FilterHostByPattern(TripPattern p)
+        {
+            return await ctx.Hosts
+                            .Where(h => p.Adults <= h.Travelers.Adults && p.Babies <= h.Travelers.Babies && p.Childs <= h.Travelers.Childs)
+                            .Select(h => new FilteredHost
+                            {
+                                Id = h.ID,
+                                Latitude = h.Address.Latitude,
+                                Longitude = h.Address.Longitude,
+                                IsFavorite = false
+                            }).ToListAsync();
+        }
+
+        private async Task<List<FilteredHost>> SetFavorites(int userId, List<FilteredHost> filteredHosts)
         {
             var favoriteHosts = await ctx.FavoriteHosts.Where(f => f.UserId == userId).ToListAsync();
-            hostPresenters.Join(favoriteHosts,
+            filteredHosts.Join(favoriteHosts,
                 p => p.Id,
                 f => f.HostId,
-                (p, f) => p).ToList().ForEach(p => p.IsFavorite = true);
-            
+                (p, f) => p).ToList().ForEach(p => {
+                    p.IsFavorite = true;
+                    });
+            return filteredHosts;
         }
     }
 }

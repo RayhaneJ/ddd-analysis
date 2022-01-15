@@ -9,6 +9,8 @@ namespace Wellcome.Database.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
+
             migrationBuilder.CreateTable(
                 name: "Address",
                 columns: table => new
@@ -81,6 +83,7 @@ namespace Wellcome.Database.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Uuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactId = table.Column<int>(type: "int", nullable: false),
                     Profession = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -128,6 +131,7 @@ namespace Wellcome.Database.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Uuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressID = table.Column<int>(type: "int", nullable: false),
@@ -254,18 +258,18 @@ namespace Wellcome.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession" },
-                values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer" });
+                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession", "Uuid" },
+                values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "692d38ce-d062-4c1d-9ba9-179ee54a32e0" });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
                 columns: new[] { "ID", "Notation", "Remark", "TimeStamp", "UserId" },
-                values: new object[] { 1, 4, "Good host !", new DateTime(2021, 12, 29, 23, 47, 49, 376, DateTimeKind.Local).AddTicks(329), 1 });
+                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 1, 15, 18, 37, 44, 611, DateTimeKind.Local).AddTicks(7362), 1 });
 
             migrationBuilder.InsertData(
                 table: "Host",
-                columns: new[] { "ID", "AddressID", "Description", "HostConfigurationID", "Title", "TravelersConfigurationID", "UserId" },
-                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1 });
+                columns: new[] { "ID", "AddressID", "Description", "HostConfigurationID", "Title", "TravelersConfigurationID", "UserId", "Uuid" },
+                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "5a97bb5e-8214-40e0-be17-7d0a9be08a7c" });
 
             migrationBuilder.InsertData(
                 table: "ProfilePicture",

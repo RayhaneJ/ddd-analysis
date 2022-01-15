@@ -21,8 +21,14 @@ namespace Wellcome.Controllers
         [HttpPost("presenters/filter")]
         public async Task<List<HostPresenter>> GetHostsAsync([FromBody] TripPattern pattern) => await new HostsService(ctx).GetHostsPresentersAsync(pattern);
 
-        [HttpGet("details/{id}")]
-        public async Task<HostDetails> GetHostPictureAsync(int id) => await new HostsService(ctx).GetHostDetailsAsync(id);
+        [HttpGet("details/{uuid}")]
+        public async Task<HostDetails> GetHostDetailsAsync(string uuid) => await new HostsService(ctx).GetHostDetailsAsync(uuid);
+
+        [HttpPost("favorite/add")]
+        public async Task AddHostFavorite(FavoriteRequest request) => await new HostsService(ctx).SetFavoriteHost(request);
+
+        [HttpDelete("favorite/remove")]
+        public async Task RemoveHostFavorite(FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
 
     }
 }
