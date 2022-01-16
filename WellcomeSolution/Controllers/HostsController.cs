@@ -25,10 +25,10 @@ namespace Wellcome.Controllers
         public async Task<HostDetails> GetHostDetailsAsync(string uuid) => await new HostsService(ctx).GetHostDetailsAsync(uuid);
 
         [HttpPost("favorite/add")]
-        public async Task AddHostFavorite(FavoriteRequest request) => await new HostsService(ctx).SetFavoriteHost(request);
+        public async Task AddHostFavorite([FromBody] FavoriteRequest request) => await new HostsService(ctx).SetFavoriteHost(request);
 
         [HttpDelete("favorite/remove")]
-        public async Task RemoveHostFavorite(FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
+        public async Task RemoveHostFavorite([FromBody] FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
 
     }
 }

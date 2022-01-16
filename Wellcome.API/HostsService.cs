@@ -21,6 +21,7 @@ namespace Wellcome.API
             var host = await ctx.Hosts.SingleOrDefaultAsync(h => h.Uuid == request.HostUuid);
             await ctx.FavoriteHosts.AddAsync(
                 new FavoriteHost { HostId = host.ID, UserId = user.ID });
+            await ctx.SaveChangesAsync();
         }
 
         public async Task RemoveFavoriteHost(FavoriteRequest request)
@@ -29,6 +30,7 @@ namespace Wellcome.API
             var host = await ctx.Hosts.SingleOrDefaultAsync(h => h.Uuid == request.HostUuid);
             var favorite = await ctx.FavoriteHosts.FindAsync(user.ID, host.ID);
             ctx.FavoriteHosts.Remove(favorite);
+            await ctx.SaveChangesAsync();
         }
 
         public async Task<HostDetails> GetHostDetailsAsync(string uuid)
