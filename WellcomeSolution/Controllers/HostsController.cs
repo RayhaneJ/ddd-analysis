@@ -30,5 +30,16 @@ namespace Wellcome.Controllers
         [HttpDelete("favorite/remove")]
         public async Task RemoveHostFavorite([FromBody] FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
 
+        [HttpPost("image/upload")]
+        public async Task<IActionResult> UploadImage([FromForm] UploadForm form)
+        {
+            if(form.File.Length > 0)
+            {
+                var fileName = await new HostsService(ctx).UploadImage(form);
+                return Ok(fileName);
+            }
+            return BadRequest("file length invalid.");
+        }
+
     }
 }

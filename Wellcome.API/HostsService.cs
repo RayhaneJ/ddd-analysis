@@ -1,4 +1,5 @@
 ﻿using Geolocation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Wellcome.Database;
@@ -13,6 +14,23 @@ namespace Wellcome.API
         public HostsService(WellcomeContext context)
         {
             ctx = context;
+        }
+
+        public async Task<FileUploadResult> UploadImage(UploadForm form)
+        {
+            string fileName = GenerateUniqueFilename(form.File);
+            var filePath = Path.Combine(Environment.CurrentDirectory, "Images", fileName);
+            using var fileStream = new FileStream(filePath, FileMode.Create);
+            form.File.CopyTo(fileStream);
+            return new FileUploadResult { FileName = fileName };
+        }
+
+        private string GenerateUniqueFilename(IFormFile file)
+        {
+            var extension = Path.GetExtension(file.FileName);
+            var receipt = Guid.NewGuid().ToString();
+            var fileName = $"{receipt}{extension}";
+            return fileName;
         }
 
         public async Task SetFavoriteHost(FavoriteRequest request)
@@ -44,7 +62,7 @@ namespace Wellcome.API
                 .Include(h => h.Configuration)
                 .Include(h => h.Travelers)
                 .FirstOrDefaultAsync(x => x.Uuid == uuid);
-                
+
             return new HostDetails
             {
                 Title = host.Title,
@@ -68,13 +86,13 @@ namespace Wellcome.API
                     Age = host.User.Age,
                     Profession = host.User.Profession,
                     Gender = host.User.Gender.ToString(),
-                    Language = host.User.Language, 
+                    Language = host.User.Language,
                     PictureUrl = host.User.ProfilePicture.Path
                 }
             };
         }
 
-        public async Task<List<HostPresenter>> GetHostsPresentersAsync() => 
+        public async Task<List<HostPresenter>> GetHostsPresentersAsync() =>
             await ctx.Hosts
                             .Select(h => new HostPresenter
                             {
@@ -157,9 +175,10 @@ namespace Wellcome.API
             filteredHosts.Join(favoriteHosts,
                 p => p.Id,
                 f => f.HostId,
-                (p, f) => p).ToList().ForEach(p => {
+                (p, f) => p).ToList().ForEach(p =>
+                {
                     p.IsFavorite = true;
-                    });
+                });
             return filteredHosts;
         }
     }
