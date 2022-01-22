@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Geolocation" Version="1.2.1" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.13" />
   </ItemGroup>
 

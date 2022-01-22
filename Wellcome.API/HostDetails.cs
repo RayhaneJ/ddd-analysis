@@ -13,7 +13,7 @@ namespace Wellcome.API
         public int Rooms { get; set; }
         public int Bathrooms { get; set; }
         public string Description { get; set; }
-        public Address Address { get; set; }
+        public AddressDto Address { get; set; }
         public Hoster Hoster { get; set; }
     }
 }

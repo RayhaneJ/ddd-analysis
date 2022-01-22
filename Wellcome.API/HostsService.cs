@@ -1,4 +1,5 @@
 ﻿using Geolocation;
+using GoogleMaps.LocationServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -16,12 +17,84 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task<HostPresenter> CreateHost(HostRequest request)
+        {
+            using var transaction = ctx.Database.BeginTransaction();
+            
+            var point = GetCoordinates(request);
+            var address = new Address
+            {
+                City = request.Address.City,
+                Country = request.Address.Country,
+                PostalCode = request.Address.PostalCode,
+                Longitude = point.Longitude,
+                Latitude = point.Latitude,
+            };
+            ctx.Addresses.Add(address);
+            await ctx.SaveChangesAsync();
+
+            var hostConfiguration = new HostConfiguration
+            {
+                Bathrooms = request.HostConfiguration.Bathrooms,
+                Beds = request.HostConfiguration.Beds,
+                Rooms = request.HostConfiguration.Rooms,
+            };
+            ctx.Configurations.Add(hostConfiguration);
+            await ctx.SaveChangesAsync();
+
+            var travelersConfiguration = new TravelersConfiguration
+            {
+                Childs = request.TravelersConfiguration.Childs,
+                Adults = request.TravelersConfiguration.Adults,
+                Babies = request.TravelersConfiguration.Babies,
+                Pets = request.TravelersConfiguration.Pets,
+            };
+            ctx.Travelers.Add(travelersConfiguration);
+            await ctx.SaveChangesAsync();
+
+            var user = await ctx.Users
+                .SingleOrDefaultAsync(u => u.Contact.Mail == request.Email);
+
+            var host = new Host
+            {
+                UserId = user.ID,
+                Title = request.Title,
+                Description = request.Description,
+                AddressID = address.ID,
+                HostConfigurationID = hostConfiguration.ID,
+                TravelersConfigurationID = travelersConfiguration.ID,
+            };
+            ctx.Hosts.Add(host);
+            await ctx.SaveChangesAsync();
+
+            var hostPicture = new HostPicture
+            {
+                HostId = host.ID,
+                Path = Path.Combine(Environment.CurrentDirectory, "Images", request.PictureName),
+            };
+            ctx.HostPictures.Add(hostPicture);
+            await ctx.SaveChangesAsync();
+
+            transaction.Commit();
+
+            return await GetHostPresenter(host.ID);
+        }
+
+        private MapPoint GetCoordinates(HostRequest request) 
+            => new GoogleLocationService()
+                            .GetLatLongFromAddress(new AddressData
+                            {
+                                City = request.Address.City,
+                                Country = request.Address.Country,
+                                Zip = request.Address.PostalCode
+                            });
+
         public async Task<FileUploadResult> UploadImage(UploadForm form)
         {
             string fileName = GenerateUniqueFilename(form.File);
             var filePath = Path.Combine(Environment.CurrentDirectory, "Images", fileName);
             using var fileStream = new FileStream(filePath, FileMode.Create);
-            form.File.CopyTo(fileStream);
+            await form.File.CopyToAsync(fileStream);
             return new FileUploadResult { FileName = fileName };
         }
 
@@ -70,7 +143,7 @@ namespace Wellcome.API
                 Rooms = host.Configuration.Rooms,
                 Bathrooms = host.Configuration.Bathrooms,
                 Travelers = host.Travelers.Adults + host.Travelers.Childs + host.Travelers.Babies,
-                Address = new Address
+                Address = new AddressDto
                 {
                     City = host.Address.City,
                     Country = host.Address.Country,
@@ -107,7 +180,30 @@ namespace Wellcome.API
                                 Title = h.Title
                             }).ToListAsync();
 
-        public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
+        private async Task<HostPresenter> GetHostPresenter(int hostId)
+        {
+            var host = await ctx.Hosts
+                .Include(h => h.Address)
+                .Include(h => h.User.Contact)
+                .Include(h => h.HostPicture)
+                .SingleOrDefaultAsync(h => h.ID == hostId);
+
+            return new HostPresenter
+            {
+                City = host.Address.City,
+                Country = host.Address.Country,
+                FirstName = host.User.Contact.FirstName,
+                LastName = host.User.Contact.LastName,
+                Latitude = host.Address.Latitude,
+                Longitude = host.Address.Longitude,
+                PictureUrl = host.HostPicture.Path,
+                Id = host.ID,
+                Title = host.Title
+            };
+        }
+            
+
+    public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
         {
             List<FilteredHost> filteredHosts = await FilterHostByPattern(p);
 

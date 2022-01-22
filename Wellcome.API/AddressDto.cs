@@ -1,6 +1,6 @@
 ﻿namespace Wellcome.API
 {
-    public class Address
+    public class AddressDto
     {
         public string City { get; set; }
         public string Country { get; set; }

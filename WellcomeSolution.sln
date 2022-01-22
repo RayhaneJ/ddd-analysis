@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcome", "WellcomeSolution\Wellcome.csproj", "{61CC268B-3DD5-468A-AE9A-0499CC7661AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wellcome", "WellcomeSolution\Wellcome.csproj", "{61CC268B-3DD5-468A-AE9A-0499CC7661AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcome.API", "Wellcome.API\Wellcome.API.csproj", "{A9577D7B-58D6-4E39-BC8D-9CE37436204D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wellcome.API", "Wellcome.API\Wellcome.API.csproj", "{A9577D7B-58D6-4E39-BC8D-9CE37436204D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcome.Database", "Wellcome.Database\Wellcome.Database.csproj", "{962BE857-C6DD-4C2B-B9C7-8EEB21680D2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wellcome.Database", "Wellcome.Database\Wellcome.Database.csproj", "{962BE857-C6DD-4C2B-B9C7-8EEB21680D2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcome.DataModel", "Wellcome.DataModel\Wellcome.DataModel.csproj", "{91EE5148-62CF-460B-BE76-797F0F0EF92F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wellcome.DataModel", "Wellcome.DataModel\Wellcome.DataModel.csproj", "{91EE5148-62CF-460B-BE76-797F0F0EF92F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcome.UnitTests", "Wellcome.UnitTests\Wellcome.UnitTests.csproj", "{65E95B34-1061-439E-8631-034922859F86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{91EE5148-62CF-460B-BE76-797F0F0EF92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91EE5148-62CF-460B-BE76-797F0F0EF92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91EE5148-62CF-460B-BE76-797F0F0EF92F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E95B34-1061-439E-8631-034922859F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E95B34-1061-439E-8631-034922859F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E95B34-1061-439E-8631-034922859F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E95B34-1061-439E-8631-034922859F86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

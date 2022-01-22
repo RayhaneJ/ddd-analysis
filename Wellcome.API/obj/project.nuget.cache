@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ldVixKDDIIY7DzJgVmJJBDmPqISBiQ1xxXr52TB/SSedp8y1SUT5aPjjzsu70OnjFrTFgQZfY3tHOvKiD0ghBg==",
+  "dgSpecHash": "wXt02WZ7kqDks1RpAxMpLLWmwri8kc5Bde1pyjMboCBwji0lmRmp4pqWUQ07/iSIFxJ1if3mpq7daJlxhl/usw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rayhane\\source\\repos\\WellcomeSolution\\Wellcome.API\\Wellcome.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rayhane\\.nuget\\packages\\geolocation\\1.2.1\\geolocation.1.2.1.nupkg.sha512",
+    "C:\\Users\\Rayhane\\.nuget\\packages\\googlemaps.locationservices\\1.2.0.5\\googlemaps.locationservices.1.2.0.5.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.13\\microsoft.aspnetcore.http.features.5.0.13.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
