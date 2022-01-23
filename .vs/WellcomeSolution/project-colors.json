@@ -25,7 +25,12 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "65e95b34-1061-439e-8631-034922859f86": {
+      "ProjectGuid": "65e95b34-1061-439e-8631-034922859f86",
+      "DisplayName": "Wellcome.UnitTests",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 5
 }

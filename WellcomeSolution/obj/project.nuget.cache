@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "XjL3PTzR8amgGhhic08wYqmBzVOIIMX4lMgX8F7bcmr7eJ+k+Jsfat+bQ15JZQGf1FnzhS0BHCv0e0MUcyUAzQ==",
+  "dgSpecHash": "Jy3uV/ep+3e+myR6byYvJpHDOP8lni2NKY463Udkdfg2s0iVKPPv54qNimfVfeaY8wVtiWWNquJX+fd5w2lClA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rayhane\\source\\repos\\WellcomeSolution\\WellcomeSolution\\Wellcome.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Rayhane\\.nuget\\packages\\bingmapsresttoolkit\\1.1.4\\bingmapsresttoolkit.1.1.4.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\geolocation\\1.2.1\\geolocation.1.2.1.nupkg.sha512",
-    "C:\\Users\\Rayhane\\.nuget\\packages\\googlemaps.locationservices\\1.2.0.5\\googlemaps.locationservices.1.2.0.5.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.13\\microsoft.aspnetcore.http.features.5.0.13.nupkg.sha512",
     "C:\\Users\\Rayhane\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

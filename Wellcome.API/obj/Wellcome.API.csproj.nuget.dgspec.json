@@ -44,13 +44,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BingMapsRESTToolkit": {
+              "target": "Package",
+              "version": "[1.1.4, )"
+            },
             "Geolocation": {
               "target": "Package",
               "version": "[1.2.1, )"
-            },
-            "GoogleMaps.LocationServices": {
-              "target": "Package",
-              "version": "[1.2.0.5, )"
             },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",

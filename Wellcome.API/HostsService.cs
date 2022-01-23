@@ -1,8 +1,8 @@
 ﻿using Geolocation;
-using GoogleMaps.LocationServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Wellcome.API.Helpers;
 using Wellcome.Database;
 using Wellcome.DataModel;
 
@@ -20,15 +20,22 @@ namespace Wellcome.API
         public async Task<HostPresenter> CreateHost(HostRequest request)
         {
             using var transaction = ctx.Database.BeginTransaction();
-            
-            var point = GetCoordinates(request);
+
+            var (latitude, longitude) = GeolocalisationHelper.GetCoordinates(new BingMapsRESTToolkit.SimpleAddress
+            {
+                PostalCode = request.Address.PostalCode,
+                Locality = request.Address.City,
+                CountryRegion = request.Address.Country
+            });
+
             var address = new Address
             {
                 City = request.Address.City,
                 Country = request.Address.Country,
                 PostalCode = request.Address.PostalCode,
-                Longitude = point.Longitude,
-                Latitude = point.Latitude,
+                Longitude = latitude,
+                Latitude = longitude,
+                Street = string.Empty
             };
             ctx.Addresses.Add(address);
             await ctx.SaveChangesAsync();
@@ -38,6 +45,7 @@ namespace Wellcome.API
                 Bathrooms = request.HostConfiguration.Bathrooms,
                 Beds = request.HostConfiguration.Beds,
                 Rooms = request.HostConfiguration.Rooms,
+                Equipments = new string[0]
             };
             ctx.Configurations.Add(hostConfiguration);
             await ctx.SaveChangesAsync();
@@ -57,6 +65,7 @@ namespace Wellcome.API
 
             var host = new Host
             {
+                Uuid = Guid.NewGuid().ToString(),
                 UserId = user.ID,
                 Title = request.Title,
                 Description = request.Description,
@@ -79,15 +88,6 @@ namespace Wellcome.API
 
             return await GetHostPresenter(host.ID);
         }
-
-        private MapPoint GetCoordinates(HostRequest request) 
-            => new GoogleLocationService()
-                            .GetLatLongFromAddress(new AddressData
-                            {
-                                City = request.Address.City,
-                                Country = request.Address.Country,
-                                Zip = request.Address.PostalCode
-                            });
 
         public async Task<FileUploadResult> UploadImage(UploadForm form)
         {
@@ -247,8 +247,10 @@ namespace Wellcome.API
             return filteredHosts.Where(h =>
             {
                 var perimeter = 10;
-                return GeoCalculator
-                .GetDistance(new Coordinate(p.Latitude, p.Longitude), new Coordinate(h.Latitude, h.Longitude), 1, DistanceUnit.Kilometers) <= perimeter;
+                return GeolocalisationHelper.IsInPerimter(
+                    new Coordinate { Latitude = p.Latitude, Longitude = p.Longitude },
+                    new Coordinate { Latitude = h.Latitude, Longitude = h.Longitude },
+                    perimeter);
             }).ToList();
         }
 
