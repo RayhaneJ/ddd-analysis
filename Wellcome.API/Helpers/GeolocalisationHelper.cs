@@ -13,6 +13,7 @@ namespace Wellcome.API.Helpers
     {
         private static readonly string apiKey = "AqCH5EFH9aLsR-HC3nAd363RPiw1A3FodhQyOA4eREcXwBQbKMXBwS6Q8jlNJQhd";
 
+        //TODO : Handle null response
         public static (double latitude, double longitude) GetCoordinates(SimpleAddress address)
         {
             var request = new GeocodeRequest

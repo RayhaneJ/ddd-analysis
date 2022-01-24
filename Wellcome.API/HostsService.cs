@@ -176,7 +176,7 @@ namespace Wellcome.API
                                 Latitude = h.Address.Latitude,
                                 Longitude = h.Address.Longitude,
                                 PictureUrl = h.HostPicture.Path,
-                                Id = h.ID,
+                                Uuid = h.Uuid,
                                 Title = h.Title
                             }).ToListAsync();
 
@@ -197,7 +197,7 @@ namespace Wellcome.API
                 Latitude = host.Address.Latitude,
                 Longitude = host.Address.Longitude,
                 PictureUrl = host.HostPicture.Path,
-                Id = host.ID,
+                Uuid = host.Uuid,
                 Title = host.Title
             };
         }

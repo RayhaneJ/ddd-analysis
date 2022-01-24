@@ -16,7 +16,7 @@ namespace Wellcome.Controllers
         }
 
         [HttpPost]
-        public async Task<HostPresenter> CreateHostsAsync([FromBody] HostRequest request) => await new HostsService(ctx).CreateHost(request);
+        public async Task<HostPresenter> CreateHostsAsync([FromBody]HostRequest request) => await new HostsService(ctx).CreateHost(request);
 
         [HttpGet("presenters")]
         public async Task<List<HostPresenter>> GetHostsAsync() => await new HostsService(ctx).GetHostsPresentersAsync();
