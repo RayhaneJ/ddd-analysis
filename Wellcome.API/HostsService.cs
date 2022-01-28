@@ -17,6 +17,49 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task SaveHostReservation(string email, string hostUuid)
+        {
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);
+            var host = await ctx.Hosts.SingleOrDefaultAsync(u => u.Uuid == hostUuid);
+            await ctx.HostReservations.AddAsync(new HostReservation { HostId = host.ID, UserId = user.ID });
+            await ctx.SaveChangesAsync();
+        }
+
+        public async Task<List<HostPresenter>> GetPublishedHost(string email)
+        {
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);
+            return await ctx.Hosts
+                .Where(h => h.UserId == user.ID)
+                .Select(h => new HostPresenter
+                {
+                    PictureUrl = h.HostPicture.Path, 
+                    Title = h.Title
+                }).ToListAsync();
+        }
+
+        public async Task<List<HostPresenter>> GetFavorites(string email)
+        {
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);   
+            var presenters = await ctx.Hosts.Join(ctx.FavoriteHosts.Where(f => f.UserId == user.ID),
+                h => h.ID,
+                f => f.HostId,
+                (h, f) =>
+                    new HostPresenter
+                    {
+                        City = h.Address.City,
+                        Country = h.Address.Country,
+                        FirstName = h.User.Contact.FirstName,
+                        LastName = h.User.Contact.LastName,
+                        Latitude = h.Address.Latitude,
+                        Longitude = h.Address.Longitude,
+                        PictureUrl = h.HostPicture.Path,
+                        Uuid = h.Uuid,
+                        Title = h.Title,
+                        IsFavorite = true
+                    }).ToListAsync();
+            return presenters;
+        }
+
         public async Task<HostPresenter> CreateHost(HostRequest request)
         {
             using var transaction = ctx.Database.BeginTransaction();
@@ -201,9 +244,8 @@ namespace Wellcome.API
                 Title = host.Title
             };
         }
-            
 
-    public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
+        public async Task<List<HostPresenter>> GetHostsPresentersAsync(TripPattern p)
         {
             List<FilteredHost> filteredHosts = await FilterHostByPattern(p);
 

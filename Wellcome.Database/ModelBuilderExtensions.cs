@@ -30,7 +30,8 @@ namespace Wellcome.Database
                );
 
             modelBuilder.Entity<User>().HasData(
-                new User { ID = 1, Uuid = Guid.NewGuid().ToString(), Age = 31, ContactId = 1, Gender = Gender.Male, Language =  "French" , Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
+                new User { ID = 1, Uuid = Guid.NewGuid().ToString(), Age = 31, ContactId = 1, Gender = Gender.Male, Language =  "French" , Password = "password", Profession = "It Engineer", Description = "I like meet new people !" },
+                new User { ID = 2, Uuid = Guid.NewGuid().ToString(), Age = 31, ContactId = 2, Gender = Gender.Male, Language = "French", Password = "password", Profession = "It Engineer", Description = "I like meet new people !" }
                );
 
             modelBuilder.Entity<ProfilePicture>().HasData(
@@ -61,6 +62,10 @@ namespace Wellcome.Database
 
             modelBuilder.Entity<FavoriteHost>().HasData(
                new FavoriteHost { UserId = 1, HostId = 1 }
+            );
+
+            modelBuilder.Entity<HostReservation>().HasData(
+                new HostReservation { HostId = 1, UserId = 2, Message = "Hello, I want to stay !", Phone = "0668319800" }
             );
         }
     }

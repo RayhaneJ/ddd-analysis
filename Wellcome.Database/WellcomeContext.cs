@@ -18,6 +18,7 @@ namespace Wellcome.Database
         public DbSet<HostPicture> HostPictures { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
         public DbSet<FavoriteHost> FavoriteHosts { get; set; }
+        public DbSet<HostReservation> HostReservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,8 @@ namespace Wellcome.Database
             OnHostCreating(modelBuilder);
             OnUserCreating(modelBuilder);
             OnHostConfigurationCreating(modelBuilder);
+            OnFavoriteHostCreating(modelBuilder);
+            OnHostReservationCreating(modelBuilder);    
 
             modelBuilder.Seed();
         }
@@ -50,21 +53,34 @@ namespace Wellcome.Database
                             v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
 
-        private static void OnUserCreating(ModelBuilder modelBuilder)
+        private static void OnFavoriteHostCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FavoriteHost>().HasKey(sc => new { sc.UserId, sc.HostId });
 
             modelBuilder.Entity<FavoriteHost>()
-    .HasOne(sc => sc.User)
-    .WithMany(s => s.FavoriteHosts)
-    .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+                .HasOne(sc => sc.User)
+                .WithMany(s => s.FavoriteHosts)
+                .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
 
 
             modelBuilder.Entity<FavoriteHost>()
                 .HasOne(sc => sc.Host)
                 .WithMany(s => s.FavoriteHosts)
                 .HasForeignKey(sc => sc.HostId).OnDelete(DeleteBehavior.Restrict);
+        }
 
+        private static void OnHostReservationCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HostReservation>().HasKey(sc => new { sc.UserId, sc.HostId });
+
+            modelBuilder.Entity<HostReservation>()
+                .HasOne(sc => sc.User)
+                .WithMany(s => s.HostReservations)
+                .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void OnUserCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder
                 .Entity<User>()
                 .Property(e => e.Gender)

@@ -16,7 +16,10 @@ namespace Wellcome.Controllers
         }
 
         [HttpPost]
-        public async Task<HostPresenter> CreateHostsAsync([FromBody]HostRequest request) => await new HostsService(ctx).CreateHost(request);
+        public async Task<HostPresenter> CreateHostsAsync([FromBody] HostRequest request) => await new HostsService(ctx).CreateHost(request);
+
+        [HttpGet("{email}/published")]
+        public async Task<List<HostPresenter>> GetPublishedHostAsync(string email) => await new HostsService(ctx).GetPublishedHost(email);
 
         [HttpGet("presenters")]
         public async Task<List<HostPresenter>> GetHostsAsync() => await new HostsService(ctx).GetHostsPresentersAsync();
@@ -32,6 +35,9 @@ namespace Wellcome.Controllers
 
         [HttpDelete("favorite")]
         public async Task RemoveHostFavorite([FromBody] FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
+
+        [HttpGet("{email}/favorite")]
+        public async Task<List<HostPresenter>> GetFavorites(string email) => await new HostsService(ctx).GetFavorites(email);
 
         [HttpPost("image")]
         public async Task<IActionResult> UploadImage([FromForm] UploadForm form)

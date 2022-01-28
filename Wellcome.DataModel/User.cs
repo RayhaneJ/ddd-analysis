@@ -21,6 +21,7 @@ namespace Wellcome.DataModel
         public string Language { get; set; }
         public string Password { get; set; }
         public virtual List<FavoriteHost> FavoriteHosts { get; set; }
+        public virtual List<HostReservation> HostReservations { get; set; }
         public virtual List<Feedback> Feedbacks { get; set; }
         public virtual List<Host> Hosts { get; set; }
         public virtual ProfilePicture ProfilePicture { get; set; }
