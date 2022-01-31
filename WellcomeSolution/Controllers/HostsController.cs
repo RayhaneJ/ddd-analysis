@@ -14,6 +14,8 @@ namespace Wellcome.Controllers
         {
             ctx = context;
         }
+        [HttpPost("reservation/{email}/{hostUuid}")]
+        public async Task SaveHostReservationAsync(string email, string hostUuid) => await new HostsService(ctx).SaveHostReservation(email, hostUuid);
 
         [HttpPost]
         public async Task<HostPresenter> CreateHostsAsync([FromBody] HostRequest request) => await new HostsService(ctx).CreateHost(request);
@@ -36,7 +38,7 @@ namespace Wellcome.Controllers
         [HttpDelete("favorite")]
         public async Task RemoveHostFavorite([FromBody] FavoriteRequest request) => await new HostsService(ctx).RemoveFavoriteHost(request);
 
-        [HttpGet("{email}/favorite")]
+        [HttpGet("{email}/favorites")]
         public async Task<List<HostPresenter>> GetFavorites(string email) => await new HostsService(ctx).GetFavorites(email);
 
         [HttpPost("image")]

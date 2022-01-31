@@ -46,12 +46,6 @@ namespace Wellcome.API
                 (h, f) =>
                     new HostPresenter
                     {
-                        City = h.Address.City,
-                        Country = h.Address.Country,
-                        FirstName = h.User.Contact.FirstName,
-                        LastName = h.User.Contact.LastName,
-                        Latitude = h.Address.Latitude,
-                        Longitude = h.Address.Longitude,
                         PictureUrl = h.HostPicture.Path,
                         Uuid = h.Uuid,
                         Title = h.Title,
