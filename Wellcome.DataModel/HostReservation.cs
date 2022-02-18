@@ -1,5 +1,8 @@
-﻿namespace Wellcome.DataModel
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Wellcome.DataModel
 {
+    [Table("HostReservation")]
     public class HostReservation
     {
         public int UserId { get; set; }

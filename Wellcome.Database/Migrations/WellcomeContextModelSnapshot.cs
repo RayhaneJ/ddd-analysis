@@ -171,7 +171,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2022, 1, 15, 18, 37, 44, 611, DateTimeKind.Local).AddTicks(7362),
+                            TimeStamp = new DateTime(2022, 2, 8, 17, 48, 33, 82, DateTimeKind.Local).AddTicks(8099),
                             UserId = 1
                         });
                 });
@@ -230,7 +230,7 @@ namespace Wellcome.Database.Migrations
                             Title = "Title",
                             TravelersConfigurationID = 1,
                             UserId = 1,
-                            Uuid = "5a97bb5e-8214-40e0-be17-7d0a9be08a7c"
+                            Uuid = "a6b9e0f5-0155-485c-b5c3-a55f227ff053"
                         });
                 });
 
@@ -298,6 +298,38 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             HostId = 1,
                             Path = "/Images/corporate_housing_newyork1.jpg"
+                        });
+                });
+
+            modelBuilder.Entity("Wellcome.DataModel.HostReservation", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "HostId");
+
+                    b.HasIndex("HostId");
+
+                    b.ToTable("HostReservation");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 2,
+                            HostId = 1,
+                            Message = "Hello, I want to stay !",
+                            Phone = "0668319800"
                         });
                 });
 
@@ -422,7 +454,19 @@ namespace Wellcome.Database.Migrations
                             Language = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "692d38ce-d062-4c1d-9ba9-179ee54a32e0"
+                            Uuid = "2c02b8ef-8669-4a6b-9f40-8b3b3adc3843"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Age = 31,
+                            ContactId = 2,
+                            Description = "I like meet new people !",
+                            Gender = "Male",
+                            Language = "French",
+                            Password = "password",
+                            Profession = "It Engineer",
+                            Uuid = "36a159df-82d3-4236-8422-05cb6b38eb26"
                         });
                 });
 
@@ -502,6 +546,25 @@ namespace Wellcome.Database.Migrations
                     b.Navigation("Host");
                 });
 
+            modelBuilder.Entity("Wellcome.DataModel.HostReservation", b =>
+                {
+                    b.HasOne("Wellcome.DataModel.Host", "Host")
+                        .WithMany()
+                        .HasForeignKey("HostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wellcome.DataModel.User", "User")
+                        .WithMany("HostReservations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Host");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Wellcome.DataModel.ProfilePicture", b =>
                 {
                     b.HasOne("Wellcome.DataModel.User", "User")
@@ -537,6 +600,8 @@ namespace Wellcome.Database.Migrations
                     b.Navigation("FavoriteHosts");
 
                     b.Navigation("Feedbacks");
+
+                    b.Navigation("HostReservations");
 
                     b.Navigation("Hosts");
 

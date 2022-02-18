@@ -9,8 +9,6 @@ namespace Wellcome.Database.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-
             migrationBuilder.CreateTable(
                 name: "Address",
                 columns: table => new
@@ -232,6 +230,32 @@ namespace Wellcome.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "HostReservation",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    HostId = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HostReservation", x => new { x.UserId, x.HostId });
+                    table.ForeignKey(
+                        name: "FK_HostReservation_Host_HostId",
+                        column: x => x.HostId,
+                        principalTable: "Host",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HostReservation_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Address",
                 columns: new[] { "ID", "City", "Country", "Latitude", "Longitude", "PostalCode", "Street" },
@@ -259,17 +283,22 @@ namespace Wellcome.Database.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession", "Uuid" },
-                values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "692d38ce-d062-4c1d-9ba9-179ee54a32e0" });
+                values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "2c02b8ef-8669-4a6b-9f40-8b3b3adc3843" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession", "Uuid" },
+                values: new object[] { 2, 31, 2, "I like meet new people !", "Male", "French", "password", "It Engineer", "36a159df-82d3-4236-8422-05cb6b38eb26" });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
                 columns: new[] { "ID", "Notation", "Remark", "TimeStamp", "UserId" },
-                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 1, 15, 18, 37, 44, 611, DateTimeKind.Local).AddTicks(7362), 1 });
+                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 2, 8, 17, 48, 33, 82, DateTimeKind.Local).AddTicks(8099), 1 });
 
             migrationBuilder.InsertData(
                 table: "Host",
                 columns: new[] { "ID", "AddressID", "Description", "HostConfigurationID", "Title", "TravelersConfigurationID", "UserId", "Uuid" },
-                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "5a97bb5e-8214-40e0-be17-7d0a9be08a7c" });
+                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "a6b9e0f5-0155-485c-b5c3-a55f227ff053" });
 
             migrationBuilder.InsertData(
                 table: "ProfilePicture",
@@ -285,6 +314,11 @@ namespace Wellcome.Database.Migrations
                 table: "HostPicture",
                 columns: new[] { "ID", "HostId", "Path" },
                 values: new object[] { 1, 1, "/Images/corporate_housing_newyork1.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "HostReservation",
+                columns: new[] { "HostId", "UserId", "Message", "Phone" },
+                values: new object[] { 1, 2, "Hello, I want to stay !", "0668319800" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FavoriteHosts_HostId",
@@ -323,6 +357,11 @@ namespace Wellcome.Database.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_HostReservation_HostId",
+                table: "HostReservation",
+                column: "HostId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProfilePicture_UserId",
                 table: "ProfilePicture",
                 column: "UserId",
@@ -344,6 +383,9 @@ namespace Wellcome.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "HostPicture");
+
+            migrationBuilder.DropTable(
+                name: "HostReservation");
 
             migrationBuilder.DropTable(
                 name: "ProfilePicture");

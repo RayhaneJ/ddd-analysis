@@ -17,11 +17,16 @@ namespace Wellcome.API
             ctx = context;
         }
 
-        public async Task SaveHostReservation(string email, string hostUuid)
+        public async Task SaveHostReservation(HostReservationRequest request)
         {
-            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);
-            var host = await ctx.Hosts.SingleOrDefaultAsync(u => u.Uuid == hostUuid);
-            await ctx.HostReservations.AddAsync(new HostReservation { HostId = host.ID, UserId = user.ID });
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == request.Email);
+            var host = await ctx.Hosts.SingleOrDefaultAsync(u => u.Uuid == request.HostUuid);
+            await ctx.HostReservations.AddAsync(new HostReservation { 
+                HostId = host.ID, 
+                UserId = user.ID, 
+                Phone = request.Phone,
+                Message = request.Message 
+            });;
             await ctx.SaveChangesAsync();
         }
 
