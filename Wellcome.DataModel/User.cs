@@ -19,6 +19,7 @@ namespace Wellcome.DataModel
         public int Age { get; set; }
         public Gender Gender { get; set; }
         public string Language { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Password { get; set; }
         public virtual List<FavoriteHost> FavoriteHosts { get; set; }
         public virtual List<HostReservation> HostReservations { get; set; }

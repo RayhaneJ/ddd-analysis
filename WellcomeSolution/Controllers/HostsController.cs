@@ -16,7 +16,7 @@ namespace Wellcome.Controllers
         }
 
         [HttpPost("reservation")]
-        public async Task SaveHostReservationAsync([FromBody] HostReservationRequest request) => await new HostsService(ctx).SaveHostReservation(request);
+        public async Task<HostReservationDto> SaveHostReservationAsync([FromBody] HostReservationDto request) => await new HostsService(ctx).SaveHostReservation(request);
 
         [HttpPost]
         public async Task<HostPresenter> CreateHostsAsync([FromBody] HostRequest request) => await new HostsService(ctx).CreateHost(request);

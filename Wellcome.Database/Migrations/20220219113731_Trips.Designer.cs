@@ -12,7 +12,7 @@ using Wellcome.Database;
 namespace Wellcome.Database.Migrations
 {
     [DbContext(typeof(WellcomeContext))]
-    [Migration("20220208164833_Trips")]
+    [Migration("20220219113731_Trips")]
     partial class Trips
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,7 +173,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2022, 2, 8, 17, 48, 33, 82, DateTimeKind.Local).AddTicks(8099),
+                            TimeStamp = new DateTime(2022, 2, 19, 12, 37, 31, 143, DateTimeKind.Local).AddTicks(9985),
                             UserId = 1
                         });
                 });
@@ -232,7 +232,7 @@ namespace Wellcome.Database.Migrations
                             Title = "Title",
                             TravelersConfigurationID = 1,
                             UserId = 1,
-                            Uuid = "a6b9e0f5-0155-485c-b5c3-a55f227ff053"
+                            Uuid = "233afc51-ca6a-4f69-89a9-c8f0d2c61bf0"
                         });
                 });
 
@@ -319,6 +319,10 @@ namespace Wellcome.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Uuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId", "HostId");
 
                     b.HasIndex("HostId");
@@ -331,7 +335,8 @@ namespace Wellcome.Database.Migrations
                             UserId = 2,
                             HostId = 1,
                             Message = "Hello, I want to stay !",
-                            Phone = "0668319800"
+                            Phone = "0668319800",
+                            Uuid = "aeafd333-4d1f-4ee3-ba21-2cff612e8218"
                         });
                 });
 
@@ -456,7 +461,7 @@ namespace Wellcome.Database.Migrations
                             Language = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "2c02b8ef-8669-4a6b-9f40-8b3b3adc3843"
+                            Uuid = "275ae2c0-4722-4075-a5cd-5316a0cd83ca"
                         },
                         new
                         {
@@ -468,7 +473,7 @@ namespace Wellcome.Database.Migrations
                             Language = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "36a159df-82d3-4236-8422-05cb6b38eb26"
+                            Uuid = "691a3032-d122-49e1-b4c8-ee8dc786842b"
                         });
                 });
 

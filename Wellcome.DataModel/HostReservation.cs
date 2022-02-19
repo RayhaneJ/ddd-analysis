@@ -13,5 +13,7 @@ namespace Wellcome.DataModel
 
         public string Phone { get; set; }
         public string Message { get; set; }
+
+        public string Uuid { get; set; }
     }
 }
