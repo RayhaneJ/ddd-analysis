@@ -137,19 +137,8 @@ namespace Wellcome.API
 
         public async Task<FileUploadResult> UploadImage(UploadForm form)
         {
-            string fileName = GenerateUniqueFilename(form.File);
-            var filePath = Path.Combine(Environment.CurrentDirectory, "Images", fileName);
-            using var fileStream = new FileStream(filePath, FileMode.Create);
-            await form.File.CopyToAsync(fileStream);
+            var fileName = await FileUploadHelper.UploadFile(form);
             return new FileUploadResult { FileName = fileName };
-        }
-
-        private string GenerateUniqueFilename(IFormFile file)
-        {
-            var extension = Path.GetExtension(file.FileName);
-            var receipt = Guid.NewGuid().ToString();
-            var fileName = $"{receipt}{extension}";
-            return fileName;
         }
 
         public async Task SetFavoriteHost(FavoriteRequest request)

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Wellcome.API.Helpers;
 using Wellcome.Database;
 using Wellcome.DataModel;
 
@@ -59,6 +61,46 @@ namespace Wellcome.API
                 LastName = user.Contact.LastName,
                 Phone = user.Contact.Phone
             };
+        }
+
+        public async Task<FileUploadResult> UploadImage(UploadForm form, string userUuid)
+        {
+            var fileName = await FileUploadHelper.UploadFile(form);
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Uuid == userUuid);
+            
+            var profilePicture = await ctx.ProfilePictures.SingleOrDefaultAsync(p => p.UserId == user.ID);
+            profilePicture.Path = Path.Combine("/Images/", fileName);
+            await ctx.SaveChangesAsync();
+            
+            return new FileUploadResult { FileName = fileName };
+        }
+
+        public async Task UpdateAccount(AccountDto account, string userUuid)
+        {
+            var user = await ctx.Users
+                .Include(u => u.Contact)
+                .SingleOrDefaultAsync(u => u.Uuid == userUuid);
+
+            user.Contact.FirstName = account.FirstName;
+            user.Contact.LastName = account.LastName;
+            user.Contact.Phone = account.Phone; 
+            user.Contact.Mail = account.Email;
+            user.Gender = (Gender)Enum.Parse(typeof(Gender), account.Gender);
+
+            await ctx.SaveChangesAsync();
+        }
+
+        public async Task UpdateProfile(ProfileDto profile, string userUuid)
+        {
+            var user = await ctx.Users
+                .Include(u => u.Contact)
+                .SingleOrDefaultAsync(u => u.Uuid == userUuid);
+
+            user.Profession = profile.Profession;
+            user.Description = profile.AboutMe;
+            user.Languages = profile.Languages.ToArray();
+
+            await ctx.SaveChangesAsync();
         }
     }
 }

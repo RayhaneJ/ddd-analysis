@@ -16,8 +16,8 @@ namespace Wellcome.Controllers
             ctx = context;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] AccountDto account)
+        [HttpPost("{uuid}/register")]
+        public async Task<IActionResult> Register([FromBody] AccountDto account, string uuid)
         {
             try
             {
@@ -30,7 +30,10 @@ namespace Wellcome.Controllers
             }
         }
 
-        [HttpPost("login")]
-        public async Task<AccountDto> Login([FromBody] AccountDto account) => await new AccountService(ctx).LogIn(account);
+        [HttpPost("{uuid}/login")]
+        public async Task<AccountDto> Login([FromBody] AccountDto account, string uuid) => await new AccountService(ctx).LogIn(account);
+
+        [HttpPut("{uuid}/picture")]
+        public async Task<AccountDto> UploadImage([FromForm] UploadForm form, string uuid) => await new AccountService(ctx).UploadImage(form, uuid);
     }
 }

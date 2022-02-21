@@ -92,6 +92,13 @@ namespace Wellcome.Database
                 .HasOne(s => s.ProfilePicture)
                 .WithOne(ad => ad.User)
                 .HasForeignKey<ProfilePicture>(p => p.UserId);
+
+            modelBuilder
+               .Entity<User>()
+                       .Property(e => e.Languages)
+                       .HasConversion(
+                           v => string.Join(',', v),
+                           v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
     }
 }

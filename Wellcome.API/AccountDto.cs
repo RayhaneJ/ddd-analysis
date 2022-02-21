@@ -1,4 +1,6 @@
-﻿namespace Wellcome.API
+﻿using Wellcome.DataModel;
+
+namespace Wellcome.API
 {
     public class AccountDto
     {
@@ -8,5 +10,6 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
+        public string Gender { get; set; }
     }
 }
