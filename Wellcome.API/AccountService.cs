@@ -28,7 +28,8 @@ namespace Wellcome.API
             {
                 FirstName = account.FirstName,
                 LastName = account.LastName,
-                Mail = account.Email
+                Mail = account.Email,
+                Phone = account.Phone,
             };
 
             ctx.Contacts.Add(contact);
@@ -36,14 +37,30 @@ namespace Wellcome.API
 
             var user = new User
             {
-                BirthDate = DateTime.Parse(account.BirthDate),
+                BirthDate = DateTime.ParseExact(account.BirthDate, "dd/MM/yyyy", null),
                 ContactId = contact.ID,
-                Password = account.Password
+                Password = account.Password,
+                Uuid = Guid.NewGuid().ToString(),  
             };
             ctx.Users.Add(user);
             await ctx.SaveChangesAsync();
 
             transaction.Commit();
+        }
+
+        public async Task UpdateAccount(AccountDto account)
+        {
+            var user = await ctx
+                .Users
+                .Include(u => u.Contact)
+                .SingleOrDefaultAsync(u => u.Contact.Mail == account.Email);
+
+            user.Gender = (Gender)Enum.Parse(typeof(Gender), account.Gender);
+            user.Contact.FirstName = account.FirstName;
+            user.Contact.LastName = account.LastName;
+            user.Contact.Mail = account.Email;
+            user.Contact.Phone = account.Phone;
+            await ctx.SaveChangesAsync();
         }
 
         public async Task<AccountDto> LogIn(AccountDto account)
@@ -55,6 +72,7 @@ namespace Wellcome.API
 
             return new AccountDto
             {
+                Gender = user.Gender.ToString(),
                 BirthDate = user.BirthDate.ToString(),
                 Email = user.Contact.Mail,
                 FirstName = user.Contact.FirstName,

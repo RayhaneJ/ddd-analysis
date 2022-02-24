@@ -14,11 +14,11 @@ namespace Wellcome.DataModel
         public string Uuid { get; set; }
         public int ContactId { get; set; }
         public virtual Contact Contact { get; set; }
-        public string Profession { get; set; }
-        public string Description { get; set; }
-        public int Age { get; set; }
+        public string? Profession { get; set; }
+        public string? Description { get; set; }
+        public int? Age { get; set; }
         public Gender Gender { get; set; }
-        public string[] Languages { get; set; }
+        public string[]? Languages { get; set; }
         public DateTime BirthDate { get; set; }
         public string Password { get; set; }
         public virtual List<FavoriteHost> FavoriteHosts { get; set; }

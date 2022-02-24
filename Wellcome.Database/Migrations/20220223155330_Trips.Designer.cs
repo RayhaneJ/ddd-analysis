@@ -12,7 +12,7 @@ using Wellcome.Database;
 namespace Wellcome.Database.Migrations
 {
     [DbContext(typeof(WellcomeContext))]
-    [Migration("20220219113731_Trips")]
+    [Migration("20220223155330_Trips")]
     partial class Trips
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,7 +173,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2022, 2, 19, 12, 37, 31, 143, DateTimeKind.Local).AddTicks(9985),
+                            TimeStamp = new DateTime(2022, 2, 23, 16, 53, 30, 440, DateTimeKind.Local).AddTicks(4574),
                             UserId = 1
                         });
                 });
@@ -232,7 +232,7 @@ namespace Wellcome.Database.Migrations
                             Title = "Title",
                             TravelersConfigurationID = 1,
                             UserId = 1,
-                            Uuid = "233afc51-ca6a-4f69-89a9-c8f0d2c61bf0"
+                            Uuid = "b7c0c7ea-03e0-4390-9b6f-287577ffa8e2"
                         });
                 });
 
@@ -336,7 +336,7 @@ namespace Wellcome.Database.Migrations
                             HostId = 1,
                             Message = "Hello, I want to stay !",
                             Phone = "0668319800",
-                            Uuid = "aeafd333-4d1f-4ee3-ba21-2cff612e8218"
+                            Uuid = "fe8065df-6225-422c-aa29-06dc6feda123"
                         });
                 });
 
@@ -414,22 +414,23 @@ namespace Wellcome.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("Age")
+                    b.Property<int?>("Age")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ContactId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Language")
-                        .IsRequired()
+                    b.Property<string>("Languages")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -437,7 +438,6 @@ namespace Wellcome.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Profession")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Uuid")
@@ -455,25 +455,27 @@ namespace Wellcome.Database.Migrations
                         {
                             ID = 1,
                             Age = 31,
+                            BirthDate = new DateTime(2022, 2, 23, 15, 53, 30, 440, DateTimeKind.Utc).AddTicks(4504),
                             ContactId = 1,
                             Description = "I like meet new people !",
                             Gender = "Male",
-                            Language = "French",
+                            Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "275ae2c0-4722-4075-a5cd-5316a0cd83ca"
+                            Uuid = "a8abd6c8-0d40-4906-9c0c-ed7be5b1ae8a"
                         },
                         new
                         {
                             ID = 2,
                             Age = 31,
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ContactId = 2,
                             Description = "I like meet new people !",
                             Gender = "Male",
-                            Language = "French",
+                            Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "691a3032-d122-49e1-b4c8-ee8dc786842b"
+                            Uuid = "50e4e466-d831-4599-84c0-2115eb84c45f"
                         });
                 });
 

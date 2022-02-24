@@ -194,7 +194,7 @@ namespace Wellcome.API
                     Age = host.User.Age,
                     Profession = host.User.Profession,
                     Gender = host.User.Gender.ToString(),
-                    Language = host.User.Language,
+                    Languages = host.User.Languages,
                     PictureUrl = host.User.ProfilePicture.Path
                 }
             };

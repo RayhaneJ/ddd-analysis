@@ -83,11 +83,12 @@ namespace Wellcome.Database.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Uuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactId = table.Column<int>(type: "int", nullable: false),
-                    Profession = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
+                    Profession = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Languages = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -283,23 +284,23 @@ namespace Wellcome.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession", "Uuid" },
-                values: new object[] { 1, 31, 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "275ae2c0-4722-4075-a5cd-5316a0cd83ca" });
+                columns: new[] { "ID", "Age", "BirthDate", "ContactId", "Description", "Gender", "Languages", "Password", "Profession", "Uuid" },
+                values: new object[] { 1, 31, new DateTime(2022, 2, 23, 15, 53, 30, 440, DateTimeKind.Utc).AddTicks(4504), 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "a8abd6c8-0d40-4906-9c0c-ed7be5b1ae8a" });
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "ID", "Age", "ContactId", "Description", "Gender", "Language", "Password", "Profession", "Uuid" },
-                values: new object[] { 2, 31, 2, "I like meet new people !", "Male", "French", "password", "It Engineer", "691a3032-d122-49e1-b4c8-ee8dc786842b" });
+                columns: new[] { "ID", "Age", "BirthDate", "ContactId", "Description", "Gender", "Languages", "Password", "Profession", "Uuid" },
+                values: new object[] { 2, 31, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "I like meet new people !", "Male", "French", "password", "It Engineer", "50e4e466-d831-4599-84c0-2115eb84c45f" });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
                 columns: new[] { "ID", "Notation", "Remark", "TimeStamp", "UserId" },
-                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 2, 19, 12, 37, 31, 143, DateTimeKind.Local).AddTicks(9985), 1 });
+                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 2, 23, 16, 53, 30, 440, DateTimeKind.Local).AddTicks(4574), 1 });
 
             migrationBuilder.InsertData(
                 table: "Host",
                 columns: new[] { "ID", "AddressID", "Description", "HostConfigurationID", "Title", "TravelersConfigurationID", "UserId", "Uuid" },
-                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "233afc51-ca6a-4f69-89a9-c8f0d2c61bf0" });
+                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "b7c0c7ea-03e0-4390-9b6f-287577ffa8e2" });
 
             migrationBuilder.InsertData(
                 table: "ProfilePicture",
@@ -319,7 +320,7 @@ namespace Wellcome.Database.Migrations
             migrationBuilder.InsertData(
                 table: "HostReservation",
                 columns: new[] { "HostId", "UserId", "Message", "Phone", "Uuid" },
-                values: new object[] { 1, 2, "Hello, I want to stay !", "0668319800", "aeafd333-4d1f-4ee3-ba21-2cff612e8218" });
+                values: new object[] { 1, 2, "Hello, I want to stay !", "0668319800", "fe8065df-6225-422c-aa29-06dc6feda123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FavoriteHosts_HostId",

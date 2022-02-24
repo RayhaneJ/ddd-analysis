@@ -1,6 +1,7 @@
 using BingMapsRESTToolkit;
 using Geolocation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 using Wellcome.API.Helpers;
 using Coordinate = Geolocation.Coordinate;
@@ -10,6 +11,13 @@ namespace Wellcome.UnitTests
     [TestClass]
     public class TripsServicesTests
     {
+        [TestMethod]
+        public void DateTest()
+        {
+            var date = "25/02/2022";
+            var d = DateTime.ParseExact(date, "dd/MM/yyyy", null);
+        }
+
         [TestMethod]
         public void GetCoordinatesTest()
         {
