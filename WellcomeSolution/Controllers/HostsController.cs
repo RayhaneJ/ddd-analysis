@@ -15,6 +15,34 @@ namespace Wellcome.Controllers
             ctx = context;
         }
 
+        [HttpPut("{uuid}/reservation/accept")]
+        public async Task<IActionResult> AcceptHostReservationsAsync(string uuid)
+        {
+            try
+            {
+                await new HostsService(ctx).AcceptHostsReservation(uuid);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{uuid}/reservation/delete")]
+        public async Task<IActionResult> DeleteHostReservationsAsync(string uuid)
+        {
+            try
+            {
+                await new HostsService(ctx).DeleteHostsReservation(uuid);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message); 
+            }
+        }
+
         [HttpGet("{email}/reservation")]
         public async Task<List<HostReservationPresenterDto>> GetHostReservationsAsync(string email) => await new HostsService(ctx).GetHostsReservation(email);
 

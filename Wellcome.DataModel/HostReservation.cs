@@ -18,5 +18,12 @@ namespace Wellcome.DataModel
 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public Status Status { get; set; } = Status.Waiting;
+    }
+
+    public enum Status
+    {
+        Accepted, Waiting
     }
 }

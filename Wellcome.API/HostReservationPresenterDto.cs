@@ -8,5 +8,6 @@
         public string Description { get; set; }
         public string HostTitle { get; set; }
         public string ApplicantPhoto { get; set; }
+        public string Uuid { get; set; }
     }
 }

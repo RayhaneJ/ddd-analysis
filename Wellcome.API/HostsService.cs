@@ -17,6 +17,20 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task AcceptHostsReservation(string uuid)
+        {
+            var reservation = await ctx.HostReservations.SingleOrDefaultAsync(hR => hR.Uuid == uuid);
+            reservation.Status = Status.Accepted;
+            await ctx.SaveChangesAsync();
+        }
+
+        public async Task DeleteHostsReservation(string uuid)
+        {
+            var reservation = await ctx.HostReservations.SingleOrDefaultAsync(hR => hR.Uuid == uuid);
+            ctx.Remove(reservation);
+            await ctx.SaveChangesAsync();
+        }
+
         public async Task<List<HostReservationPresenterDto>> GetHostsReservation(string email)
         {
             var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);
@@ -38,7 +52,8 @@ namespace Wellcome.API
                     EndDate = r.EndDate.ToString(),
                     FirstName = applicant.Contact.FirstName,
                     HostTitle = host.Title,
-                    ApplicantPhoto = applicant.ProfilePicture.Path
+                    ApplicantPhoto = applicant.ProfilePicture.Path,
+                    Uuid = r.Uuid
                 };
             }).ToList();
 
@@ -66,6 +81,7 @@ namespace Wellcome.API
                 Phone = request.Phone,
                 Message = request.Message,
                 Uuid = Guid.NewGuid().ToString(),
+                Status = Status.Waiting
             };
             await ctx.HostReservations.AddAsync(hostReservation);
             await ctx.SaveChangesAsync();
