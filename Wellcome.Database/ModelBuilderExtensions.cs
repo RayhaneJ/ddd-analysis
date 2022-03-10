@@ -65,7 +65,7 @@ namespace Wellcome.Database
             );
 
             modelBuilder.Entity<HostReservation>().HasData(
-                new HostReservation { HostId = 1, UserId = 2, Message = "Hello, I want to stay !", Phone = "0668319800", Uuid = Guid.NewGuid().ToString() }
+                new HostReservation { HostId = 1, UserId = 2, Message = "Hello, I want to stay !", Phone = "0668319800", Uuid = Guid.NewGuid().ToString(), StartDate = DateTime.Parse("09/02/1999"), EndDate = DateTime.Parse("09/03/1999") }
             );
         }
     }

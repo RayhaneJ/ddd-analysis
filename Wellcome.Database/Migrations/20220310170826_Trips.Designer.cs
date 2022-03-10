@@ -12,7 +12,7 @@ using Wellcome.Database;
 namespace Wellcome.Database.Migrations
 {
     [DbContext(typeof(WellcomeContext))]
-    [Migration("20220223155330_Trips")]
+    [Migration("20220310170826_Trips")]
     partial class Trips
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,7 +173,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2022, 2, 23, 16, 53, 30, 440, DateTimeKind.Local).AddTicks(4574),
+                            TimeStamp = new DateTime(2022, 3, 10, 18, 8, 25, 813, DateTimeKind.Local).AddTicks(5140),
                             UserId = 1
                         });
                 });
@@ -232,7 +232,7 @@ namespace Wellcome.Database.Migrations
                             Title = "Title",
                             TravelersConfigurationID = 1,
                             UserId = 1,
-                            Uuid = "b7c0c7ea-03e0-4390-9b6f-287577ffa8e2"
+                            Uuid = "fd93644c-70f5-4e8c-b82c-7b0e9518d45b"
                         });
                 });
 
@@ -311,6 +311,9 @@ namespace Wellcome.Database.Migrations
                     b.Property<int>("HostId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -318,6 +321,9 @@ namespace Wellcome.Database.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Uuid")
                         .IsRequired()
@@ -334,9 +340,11 @@ namespace Wellcome.Database.Migrations
                         {
                             UserId = 2,
                             HostId = 1,
+                            EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Message = "Hello, I want to stay !",
                             Phone = "0668319800",
-                            Uuid = "fe8065df-6225-422c-aa29-06dc6feda123"
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Uuid = "a1943c08-fb38-47ce-aa48-f6928134f3b2"
                         });
                 });
 
@@ -455,14 +463,14 @@ namespace Wellcome.Database.Migrations
                         {
                             ID = 1,
                             Age = 31,
-                            BirthDate = new DateTime(2022, 2, 23, 15, 53, 30, 440, DateTimeKind.Utc).AddTicks(4504),
+                            BirthDate = new DateTime(2022, 3, 10, 17, 8, 25, 813, DateTimeKind.Utc).AddTicks(5080),
                             ContactId = 1,
                             Description = "I like meet new people !",
                             Gender = "Male",
                             Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "a8abd6c8-0d40-4906-9c0c-ed7be5b1ae8a"
+                            Uuid = "886e4d5f-10e0-4dad-94c5-4bfd4f196839"
                         },
                         new
                         {
@@ -475,7 +483,7 @@ namespace Wellcome.Database.Migrations
                             Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "50e4e466-d831-4599-84c0-2115eb84c45f"
+                            Uuid = "ad6c6585-822f-4a94-9f01-997db9633424"
                         });
                 });
 

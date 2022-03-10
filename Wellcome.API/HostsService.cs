@@ -17,6 +17,44 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task<List<HostReservationPresenterDto>> GetHostsReservation(string email)
+        {
+            var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == email);
+            var hosts = await ctx.Hosts.Where(h => h.UserId == user.ID).ToListAsync();
+            List<HostReservation> reservations = GetReservations(hosts);
+
+            var tasks = reservations.Select(async (r) =>
+            {
+                var applicant = await ctx.Users
+                    .Include(u => u.Contact)
+                    .Include(u => u.ProfilePicture)
+                    .SingleOrDefaultAsync(u => u.ID == r.UserId);
+                var host = await ctx.Hosts.SingleOrDefaultAsync(h => h.ID == r.HostId);
+
+                return new HostReservationPresenterDto
+                {
+                    Description = r.Message,
+                    StartDate = r.StartDate.ToString(),
+                    EndDate = r.EndDate.ToString(),
+                    FirstName = applicant.Contact.FirstName,
+                    HostTitle = host.Title,
+                    ApplicantPhoto = applicant.ProfilePicture.Path
+                };
+            }).ToList();
+
+            return (await Task.WhenAll(tasks)).ToList();
+        }
+
+        private List<HostReservation> GetReservations(List<Host> hosts)
+        {
+            var reservations = new List<HostReservation>();
+            hosts.ForEach(h =>
+            {
+                reservations.AddRange(ctx.HostReservations.Where(hR => hR.HostId == h.ID));
+            });
+            return reservations;
+        }
+
         public async Task<HostReservationDto> SaveHostReservation(HostReservationDto request)
         {
             var user = await ctx.Users.SingleOrDefaultAsync(u => u.Contact.Mail == request.Email);

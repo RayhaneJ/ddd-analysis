@@ -15,6 +15,9 @@ namespace Wellcome.Controllers
             ctx = context;
         }
 
+        [HttpGet("{email}/reservation")]
+        public async Task<List<HostReservationPresenterDto>> GetHostReservationsAsync(string email) => await new HostsService(ctx).GetHostsReservation(email);
+
         [HttpPost("reservation")]
         public async Task<HostReservationDto> SaveHostReservationAsync([FromBody] HostReservationDto request) => await new HostsService(ctx).SaveHostReservation(request);
 
