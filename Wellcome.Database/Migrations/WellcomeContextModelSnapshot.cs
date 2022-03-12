@@ -171,7 +171,7 @@ namespace Wellcome.Database.Migrations
                             ID = 1,
                             Notation = 4,
                             Remark = "Good host !",
-                            TimeStamp = new DateTime(2022, 3, 11, 0, 5, 44, 117, DateTimeKind.Local).AddTicks(997),
+                            TimeStamp = new DateTime(2022, 3, 12, 22, 46, 13, 59, DateTimeKind.Local).AddTicks(2025),
                             UserId = 1
                         });
                 });
@@ -230,7 +230,7 @@ namespace Wellcome.Database.Migrations
                             Title = "Title",
                             TravelersConfigurationID = 1,
                             UserId = 1,
-                            Uuid = "ec1359bc-5270-4319-9be9-35fe222a6d3a"
+                            Uuid = "fb916065-a77b-4ebb-8027-a771bd4914e3"
                         });
                 });
 
@@ -323,8 +323,9 @@ namespace Wellcome.Database.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Uuid")
                         .IsRequired()
@@ -345,8 +346,8 @@ namespace Wellcome.Database.Migrations
                             Message = "Hello, I want to stay !",
                             Phone = "0668319800",
                             StartDate = new DateTime(1999, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
-                            Uuid = "7207fef7-8262-4218-9a94-8194986318e0"
+                            Status = "Waiting",
+                            Uuid = "37b8367d-a817-475a-a1b0-ea9ad1b70e7d"
                         });
                 });
 
@@ -465,14 +466,14 @@ namespace Wellcome.Database.Migrations
                         {
                             ID = 1,
                             Age = 31,
-                            BirthDate = new DateTime(2022, 3, 10, 23, 5, 44, 117, DateTimeKind.Utc).AddTicks(935),
+                            BirthDate = new DateTime(2022, 3, 12, 21, 46, 13, 59, DateTimeKind.Utc).AddTicks(1930),
                             ContactId = 1,
                             Description = "I like meet new people !",
                             Gender = "Male",
                             Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "12b40bdb-cd8d-4a33-99d6-6fabcf9a46e4"
+                            Uuid = "7dd7dff5-077f-4c8a-b442-53755a0233e8"
                         },
                         new
                         {
@@ -485,7 +486,7 @@ namespace Wellcome.Database.Migrations
                             Languages = "French",
                             Password = "password",
                             Profession = "It Engineer",
-                            Uuid = "a96b30b4-ec2c-4432-a0da-38d6e58e056b"
+                            Uuid = "464562f8-1fd5-476d-88a9-0fc4ca394de5"
                         });
                 });
 

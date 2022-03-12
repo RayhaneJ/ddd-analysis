@@ -17,6 +17,37 @@ namespace Wellcome.API
             ctx = context;
         }
 
+        public async Task<List<IncomingTripDto>> GetIncomingReservation(string email)
+        {
+            var user = await ctx.Users
+                .Include(u => u.Contact)
+                .SingleOrDefaultAsync(u => u.Contact.Mail == email);
+            var reservations = await ctx.HostReservations.Where(hR => hR.UserId == user.ID && hR.Status == Status.Accepted)
+                                                    .ToListAsync();
+
+            var tripDtos = reservations.Select( (r) =>
+            {
+                var host = ctx.Hosts
+                    .Include(h => h.Address)
+                    .Include(h => h.HostPicture)
+                    .SingleOrDefault(h => h.ID == r.HostId);
+
+                return new IncomingTripDto
+                {
+                    HostTitle = host.Title,
+                    HostPhotoUrl = host.HostPicture.Path,
+                    Address = new AddressDto
+                    {
+                        City = host.Address.City,
+                        Country = host.Address.Country, 
+                        PostalCode = host.Address.PostalCode
+                    }
+                };
+            }).ToList();
+
+            return tripDtos;
+        }
+
         public async Task AcceptHostsReservation(string uuid)
         {
             var reservation = await ctx.HostReservations.SingleOrDefaultAsync(hR => hR.Uuid == uuid);
@@ -65,7 +96,8 @@ namespace Wellcome.API
             var reservations = new List<HostReservation>();
             hosts.ForEach(h =>
             {
-                reservations.AddRange(ctx.HostReservations.Where(hR => hR.HostId == h.ID));
+                reservations
+                    .AddRange(ctx.HostReservations.Where(hR => hR.HostId == h.ID && hR.Status == Status.Waiting));
             });
             return reservations;
         }

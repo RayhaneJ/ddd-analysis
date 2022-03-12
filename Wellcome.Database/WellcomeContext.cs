@@ -77,6 +77,13 @@ namespace Wellcome.Database
                 .HasOne(sc => sc.User)
                 .WithMany(s => s.HostReservations)
                 .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder
+                .Entity<HostReservation>()
+                .Property(e => e.Status)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Status)Enum.Parse(typeof(Status), v));
         }
 
         private static void OnUserCreating(ModelBuilder modelBuilder)

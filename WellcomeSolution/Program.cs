@@ -17,7 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Configuration.AddJsonFile("appsettings.json", true, true);
-builder.Services.AddDbContext<WellcomeContext>(options => options.UseSqlServer(builder.Configuration["DefaultConnection:ConnectionString"]));
+builder.Services.AddDbContext<WellcomeContext>(options => options.UseSqlServer(builder.Configuration["DefaultConnection:ConnectionString"]), ServiceLifetime.Transient);
 
 builder.Services.AddDirectoryBrowser();
 

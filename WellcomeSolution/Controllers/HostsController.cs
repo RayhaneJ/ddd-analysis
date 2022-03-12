@@ -15,6 +15,10 @@ namespace Wellcome.Controllers
             ctx = context;
         }
 
+        [HttpGet("{email}/reservation/incoming")]
+        public async Task<List<IncomingTripDto>> GetIncomingReservationsAsync(string email) 
+            => await new HostsService(ctx).GetIncomingReservation(email);
+
         [HttpPut("{uuid}/reservation/accept")]
         public async Task<IActionResult> AcceptHostReservationsAsync(string uuid)
         {

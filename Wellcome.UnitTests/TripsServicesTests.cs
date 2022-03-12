@@ -1,9 +1,11 @@
 using BingMapsRESTToolkit;
 using Geolocation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using Wellcome.API.Helpers;
+using Wellcome.Database;
 using Coordinate = Geolocation.Coordinate;
 
 namespace Wellcome.UnitTests
@@ -11,6 +13,13 @@ namespace Wellcome.UnitTests
     [TestClass]
     public class TripsServicesTests
     {
+        private WellcomeContext context;
+
+        public TripsServicesTests(WellcomeContext context)
+        {
+            this.context = context; 
+        }
+
         [TestMethod]
         public void DateTest()
         {
@@ -21,6 +30,7 @@ namespace Wellcome.UnitTests
         [TestMethod]
         public void GetCoordinatesTest()
         {
+            //var c = context.Hosts.ToList();
             var address = new SimpleAddress()
             {
                 CountryRegion = "France",

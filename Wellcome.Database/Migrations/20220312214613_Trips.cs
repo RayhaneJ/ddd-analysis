@@ -242,7 +242,7 @@ namespace Wellcome.Database.Migrations
                     Uuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -288,22 +288,22 @@ namespace Wellcome.Database.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "ID", "Age", "BirthDate", "ContactId", "Description", "Gender", "Languages", "Password", "Profession", "Uuid" },
-                values: new object[] { 1, 31, new DateTime(2022, 3, 10, 23, 5, 44, 117, DateTimeKind.Utc).AddTicks(935), 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "12b40bdb-cd8d-4a33-99d6-6fabcf9a46e4" });
+                values: new object[] { 1, 31, new DateTime(2022, 3, 12, 21, 46, 13, 59, DateTimeKind.Utc).AddTicks(1930), 1, "I like meet new people !", "Male", "French", "password", "It Engineer", "7dd7dff5-077f-4c8a-b442-53755a0233e8" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "ID", "Age", "BirthDate", "ContactId", "Description", "Gender", "Languages", "Password", "Profession", "Uuid" },
-                values: new object[] { 2, 31, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "I like meet new people !", "Male", "French", "password", "It Engineer", "a96b30b4-ec2c-4432-a0da-38d6e58e056b" });
+                values: new object[] { 2, 31, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "I like meet new people !", "Male", "French", "password", "It Engineer", "464562f8-1fd5-476d-88a9-0fc4ca394de5" });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
                 columns: new[] { "ID", "Notation", "Remark", "TimeStamp", "UserId" },
-                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 3, 11, 0, 5, 44, 117, DateTimeKind.Local).AddTicks(997), 1 });
+                values: new object[] { 1, 4, "Good host !", new DateTime(2022, 3, 12, 22, 46, 13, 59, DateTimeKind.Local).AddTicks(2025), 1 });
 
             migrationBuilder.InsertData(
                 table: "Host",
                 columns: new[] { "ID", "AddressID", "Description", "HostConfigurationID", "Title", "TravelersConfigurationID", "UserId", "Uuid" },
-                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "ec1359bc-5270-4319-9be9-35fe222a6d3a" });
+                values: new object[] { 1, 1, "Description", 1, "Title", 1, 1, "fb916065-a77b-4ebb-8027-a771bd4914e3" });
 
             migrationBuilder.InsertData(
                 table: "ProfilePicture",
@@ -323,7 +323,7 @@ namespace Wellcome.Database.Migrations
             migrationBuilder.InsertData(
                 table: "HostReservation",
                 columns: new[] { "HostId", "UserId", "EndDate", "Message", "Phone", "StartDate", "Status", "Uuid" },
-                values: new object[] { 1, 2, new DateTime(1999, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hello, I want to stay !", "0668319800", new DateTime(1999, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "7207fef7-8262-4218-9a94-8194986318e0" });
+                values: new object[] { 1, 2, new DateTime(1999, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hello, I want to stay !", "0668319800", new DateTime(1999, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting", "37b8367d-a817-475a-a1b0-ea9ad1b70e7d" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FavoriteHosts_HostId",
